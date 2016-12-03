@@ -145,6 +145,10 @@ public class ClassActivity extends AppCompatActivity {
                                 ClassData classData = new ClassData();
                                 classData.name = orgObj.getString("class_name");
                                 classData.subject = orgObj.getString("subject");
+
+                                if(orgObj.getString("division") != null && !orgObj.getString("division").isEmpty() && orgObj.getString("division") != "null") {
+                                    classData.division = orgObj.getString("division");
+                                }
                                 classData.image = R.drawable.class_circle;
                                 String id = orgObj.getString("id");
                                 classData.id = Integer.parseInt(id);
