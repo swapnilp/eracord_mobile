@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -11,53 +13,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="#ffffff"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="5dp"
-        card_view:cardUseCompatPadding="true">
+        card_view:cardElevation="0dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="62dp"
+            android:showDividers="end"
+            android:divider="@drawable/divider">
+
+        </LinearLayout>
+
+        <LinearLayout
             android:orientation="horizontal"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:tag="image_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/ic_photos"/>
+                android:layout_height="45dp"
+                android:src="@drawable/class_circle"
+                android:layout_weight="0.15"
+                android:layout_width="60dp"
+                android:layout_marginTop="8dp"
+                android:elevation="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textViewName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:textColor="@color/textcolor"
+                    android:textColor="@color/colorAccent"
                     android:text="SubjectName"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14sp"
+                    android:paddingTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:textAllCaps="false" />
 
                 <TextView
                     android:id="@+id/textViewVersion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/textcolor"
+                    android:textColor="@color/bb_inActiveBottomBarItemColor"
                     android:text="ClassName"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginLeft="10dp"
+                    android:paddingBottom="9dp"
+                    android:paddingRight="10dp"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp" />
                 <TextView
                     android:id="@+id/textViewid"
                     android:layout_width="wrap_content"
