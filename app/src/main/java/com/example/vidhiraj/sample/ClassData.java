@@ -4,22 +4,20 @@ package com.example.vidhiraj.sample;
  * Created by vidhiraj on 10-08-2016.
  */
 public class ClassData {
-   public String name;
+    public String name;
     public String subject;
-   public  int image;
+    public String division;
+    public  int image;
     public int id;
 
-
-
     public ClassData()
-    {
+    { }
 
-
-    }
-    public ClassData(String name, String subject,int image,int id) {
+    public ClassData(String name, String subject,int image,int id, String division) {
         this.name = name;
         this.subject = subject;
         this.image=image;
+        this.division = division;
         this.id=id;
     }
 
@@ -52,4 +50,10 @@ public class ClassData {
         this.id = id;
     }
 
+    public String getDivision() {
+        return division;
+    }
+    public void setDivision(String division) {
+        this.division = division;
+    }
 }

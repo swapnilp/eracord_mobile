@@ -22,6 +22,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         TextView textViewName;
         TextView textViewVersion;
+        TextView division;
         ImageView imageViewIcon;
         private Context context = null;
 
@@ -30,6 +31,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             context = itemView.getContext();
             this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);
             this.textViewVersion = (TextView) itemView.findViewById(R.id.textViewVersion);
+            this.division = (TextView) itemView.findViewById(R.id.division);
             this.imageViewIcon = (ImageView) itemView.findViewById(R.id.imageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,10 +62,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         TextView textViewName = holder.textViewName;
         TextView textViewVersion = holder.textViewVersion;
+        TextView division = holder.division;
         ImageView imageView = holder.imageViewIcon;
 
         textViewName.setText(dataSet.get(position).getName());
         textViewVersion.setText(dataSet.get(position).getSubject());
+        division.setText(dataSet.get(position).getDivision());
         imageView.setImageResource(dataSet.get(position).getImage());
     }
 
