@@ -87,7 +87,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         createCatalog = (Button) findViewById(R.id.buttonCreate);
-        cancelCatalog = (Button) findViewById(R.id.buttonCancel);
+        //cancelCatalog = (Button) findViewById(R.id.buttonCancel);
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
@@ -161,13 +161,13 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
             }
         };
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
-        cancelCatalog.setOnClickListener(new View.OnClickListener() {
+        /*cancelCatalog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(DailyTeachingActivity.this, ClassActivity.class);
                 startActivity(intent1);
             }
-        });
+        });*/
         createCatalog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
