@@ -43,6 +43,16 @@ import java.util.Map;
 
 import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
 
+import java.util.Calendar;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Calendar;
+
 public class DailyTeachingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     List<Integer> chapter_array = new ArrayList<Integer>();
@@ -52,7 +62,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     Integer chapter_id = null;
     RecyclerView mRecyclerView;
     ProgressDialog mProgress;
-    TextView date_selected;
+    //TextView date_selected;
     int day, month, year;
     String TITLES[] = {"Home", "Daily Catalog", "Students", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
@@ -66,6 +76,23 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     ActionBarDrawerToggle mDrawerToggle;
     String url_icon;
     private GoogleApiClient client;
+    EditText dateText;
+
+    private DatePicker datePicker;
+    private Calendar calendar;
+
+    private DatePickerDialog.OnDateSetListener myDateListener = new
+            DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker arg0,
+                                      int arg1, int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                    // arg1 = year
+                    // arg2 = month
+                    // arg3 = day
+                    showDate(arg1, arg2 + 1, arg3);
+                }
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +103,26 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
-        date_selected = (TextView) findViewById(R.id.selected_date);
-        final Intent intent = getIntent();
-        classid = intent.getStringExtra("teachId");
-        day = intent.getIntExtra("day", 0);
-        month = intent.getIntExtra("month", 0);
-        year = intent.getIntExtra("year", 0);
-        date_selected.setText(day + " / " + (month + 1) + " / " + year);
+
+        /* DateWidget */
+        dateText = (EditText) findViewById(R.id.edit_date_picker);
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        showDate(year, month + 1, day);
+        /* end DateWidget */
+
+        //date_selected = (TextView) findViewById(R.id.selected_date);
+        Intent intent = getIntent();
+        classid = intent.getStringExtra("teach_id");
+        intent.putExtra("day", day);
+        intent.putExtra("month", month);
+        intent.putExtra("year", year);
+        intent.putExtra("teachId", classid);
+
+        //date_selected.setText(day + " / " + (month + 1) + " / " + year);
         Log.e("getchap", String.valueOf(classid));
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
@@ -140,18 +180,18 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                 }
             }
         },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.statusCode == 401) {
-                            Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Log.e("Volley", "Error");
-                        }
-                    }
-                }) {
+        new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null && networkResponse.statusCode == 401) {
+                    Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
+                    startActivity(intent);
+                } else {
+                    Log.e("Volley", "Error");
+                }
+            }
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -214,21 +254,20 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                             String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                             Log.e("sdcard-err2:", err);
                         }
-
                     }
                 },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                NetworkResponse networkResponse = error.networkResponse;
-                                if (networkResponse != null && networkResponse.statusCode == 401) {
-                                    Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getBaseContext(), "Daily Catalog Not Saved", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }) {
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        NetworkResponse networkResponse = error.networkResponse;
+                        if (networkResponse != null && networkResponse.statusCode == 401) {
+                            Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getBaseContext(), "Daily Catalog Not Saved", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }) {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         HashMap<String, String> headers = new HashMap<String, String>();
@@ -324,12 +363,12 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
 
             }
         },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley", "Error");
-                    }
-                }) {
+        new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", "Error");
+            }
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -343,5 +382,32 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
+        /*Toast.makeText(getApplicationContext(), "ca",
+                Toast.LENGTH_SHORT)
+                .show();*/
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        // TODO Auto-generated method stub
+        if (id == 999) {
+            return new DatePickerDialog(this,
+                    myDateListener, year, month, day);
+        }
+        return null;
+    }
+
+    public void showChapters(View view) {
+
+
+    }
+    private void showDate(int year, int month, int day) {
+        dateText.setText(new StringBuilder().append(day).append("/")
+                .append(month).append("/").append(year));
     }
 }

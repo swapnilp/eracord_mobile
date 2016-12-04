@@ -44,7 +44,7 @@ public class CatalogSchedule extends AppCompatActivity {
         setContentView(R.layout.calendar_activity);
         Intent intent = getIntent();
         final String teachId = intent.getStringExtra("teach_id");
-        calender = (CalendarView) findViewById(R.id.calendarView);
+        //calender = (CalendarView) findViewById(R.id.calendarView);
 
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
@@ -76,7 +76,7 @@ public class CatalogSchedule extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        /*calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
@@ -87,7 +87,7 @@ public class CatalogSchedule extends AppCompatActivity {
                 intent.putExtra("teachId", teachId);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }
 

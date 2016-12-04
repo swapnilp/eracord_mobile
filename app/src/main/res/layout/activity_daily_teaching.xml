@@ -29,16 +29,46 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:background="?android:attr/colorAccent" />
-            <TextView
-                android:id="@+id/selected_date"
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:textColor="@android:color/black"
-                android:layout_gravity="center"
-                android:gravity="center"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:text="Select Date"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/select_date"
+                    android:layout_weight="1"
+                    android:elevation="1dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/textcolor"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:fontFamily="serif" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:id="@+id/edit_date_picker"
+                    android:layout_weight="1"
+                    android:onClick="setDate"
+                    android:text="Todays Date"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:keepScreenOn="false"
+                    android:labelFor="@+id/select_date"
+                    android:singleLine="true"
+                    android:textAlignment="textStart"
+                    android:fontFamily="sans-serif"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
 
 
             <!--<CalendarView-->
@@ -153,7 +183,8 @@
                     android:layout_marginRight="20dp"
                     android:background="@color/colorAccent"
                     android:textStyle="normal|bold"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="20dp" />
 
             </LinearLayout>
         </LinearLayout>

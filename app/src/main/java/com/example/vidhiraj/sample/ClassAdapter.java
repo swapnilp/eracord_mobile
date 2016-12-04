@@ -42,7 +42,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
                 public void onClick(View v) {
                     String id = textViewId.getText().toString();
                     String token = ApiKeyConstant.authToken;
-                    Intent intent = new Intent(context, CatalogSchedule.class);
+                    Intent intent = new Intent(context, DailyTeachingActivity.class);
                     intent.putExtra("teach_id", id);
                     context.startActivity(intent);
                 }
