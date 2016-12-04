@@ -253,6 +253,17 @@ public class StudentListActivity extends AppCompatActivity {
                     }
                 }
 
+                /*if (dailyTeach.size() > 10) {
+                    mRecyclerView.setHasFixedSize(false);
+                    mRecyclerView.getLayoutParams().height = 1360;
+                    load.setVisibility(View.VISIBLE);
+                }
+                else {
+                    mRecyclerView.setHasFixedSize(false);
+                    mRecyclerView.getLayoutParams().height = 1300;
+                    load.setVisibility(View.INVISIBLE);
+                }*/
+                mRecyclerView.setHasFixedSize(true);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(StudentListActivity.this));
                 mAdapter = new StudentCatalogAdapter(filteredList, StudentListActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
@@ -312,16 +323,21 @@ public class StudentListActivity extends AppCompatActivity {
                                         Log.e("data is", String.valueOf(dailyTeach));
                                         mAdapter.notifyItemInserted(dailyTeach.size());
                                     }
-                                    scrollview.post(new Runnable() {
+                                    scrollview.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
                                             int x=0,y=10;
-                                            scrollview.scrollTo(x,y);
+                                            scrollview.scrollTo(x,0);
+                                            scrollview.fullScroll(View.FOCUS_DOWN);
+                                            scrollview.fullScroll(scrollview.FOCUS_RIGHT);
                                         }
-                                    });
+                                    },1000);
+
                                     if (arrayLength == 0) {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
+                                        mRecyclerView.setHasFixedSize(false);
+                                        mRecyclerView.getLayoutParams().height = 1360;
                                         Toast.makeText(getApplicationContext(), "No More Data to laod", Toast.LENGTH_LONG).show();
                                     }
                                 }
@@ -343,6 +359,8 @@ public class StudentListActivity extends AppCompatActivity {
                                     } else {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
+                                        mRecyclerView.setHasFixedSize(false);
+                                        mRecyclerView.getLayoutParams().height = 1360;
                                         Toast.makeText(getApplicationContext(), "No More Data to laod", Toast.LENGTH_LONG).show();
                                      //   Log.e("Poonam", error.getMessage());
                                     }

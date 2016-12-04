@@ -93,14 +93,18 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
 
             ((StudentViewHolder) holder).textViewName.setText(singleStudent.getStud_name());
 
-            ((StudentViewHolder) holder).textViewClass.setText(singleStudent.getStud_class_name());
+            if(singleStudent.getStud_class_name() == "" || singleStudent.getStud_class_name().isEmpty()) {
+                ((StudentViewHolder) holder).textViewClass.setText("Class not assigned yet");
+            } else {
+                ((StudentViewHolder) holder).textViewClass.setText(singleStudent.getStud_class_name());
+            }
 
             ((StudentViewHolder) holder).student = singleStudent;
             boolean hostel = singleStudent.stud_hostel;
             if (hostel) {
-                ((StudentViewHolder) holder).textViewHostel.setText("yes");
+                ((StudentViewHolder) holder).textViewHostel.setText("Hostel allocated");
             } else {
-                ((StudentViewHolder) holder).textViewHostel.setText("no");
+                ((StudentViewHolder) holder).textViewHostel.setText("No hostel allocated");
             }
 
 
