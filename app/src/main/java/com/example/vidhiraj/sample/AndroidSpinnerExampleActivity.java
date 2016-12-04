@@ -122,9 +122,18 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
 
                         } else {
                             TextView org_name = (TextView) findViewById(R.id.org_id);
-                            org_name.setVisibility(View.VISIBLE);
-                            org_name.setText(orgNameText);
-                            spinner.setVisibility(View.GONE);
+                            multiorg = false;
+                            Log.e("flag org is", String.valueOf(multiorg));
+                            spinner.setVisibility(View.VISIBLE);
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, organisation);
+                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinner.setAdapter(dataAdapter);
+                            spinner.setEnabled(false);
+                            spinner.setClickable(false);
+
+                            //org_name.setVisibility(View.VISIBLE);
+                            //org_name.setText(orgNameText);
+                            //spinner.setVisibility(View.GONE);
                         }
                     } else {
                         mProgress.dismiss();
