@@ -338,8 +338,8 @@ public class StudentListActivity extends AppCompatActivity {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
                                         mRecyclerView.setHasFixedSize(false);
-                                        mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);;
-                                        scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);;
+                                        /*mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);
+                                        scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);*/
                                         Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
                                     }
                                 }
@@ -362,8 +362,8 @@ public class StudentListActivity extends AppCompatActivity {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
                                         mRecyclerView.setHasFixedSize(false);
-                                        scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);;
-                                        mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);;
+                                        /*scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);
+                                        mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);*/
                                         Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
                                      //   Log.e("Poonam", error.getMessage());
                                     }

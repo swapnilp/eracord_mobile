@@ -103,7 +103,9 @@
                     android:layout_gravity="left"
                     android:scrollbars="vertical"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp">
+                    android:paddingTop="10dp"
+                    android:scrollbarThumbVertical="@color/colorWhite"
+                    android:scrollbarThumbHorizontal="@color/colorWhite">
 
                 </android.support.v7.widget.RecyclerView>
                 <!--<TextView-->

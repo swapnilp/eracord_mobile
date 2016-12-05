@@ -15,15 +15,16 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/nodata"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="no data available"
-            android:visibility="gone"
-            android:textColor="@android:color/black"
-            android:layout_gravity="center"/>
 
+
+            <TextView
+                android:id="@+id/nodata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="no data available"
+                android:visibility="gone"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"/>
 
             <include
                 android:id="@+id/tool_bar"
@@ -33,9 +34,9 @@
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh"
-                android:layout_height="515dp"
                 android:layout_width="match_parent"
-                android:layout_marginTop="55dp">
+                android:layout_marginTop="50dp"
+                android:layout_height="278dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/my_recycler_view"
