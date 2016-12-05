@@ -323,15 +323,16 @@ public class StudentListActivity extends AppCompatActivity {
                                         Log.e("data is", String.valueOf(dailyTeach));
                                         mAdapter.notifyItemInserted(dailyTeach.size());
                                     }
-                                    scrollview.postDelayed(new Runnable() {
+
+                                    scrollview.setSmoothScrollingEnabled(true);
+                                    scrollview.postOnAnimationDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            int x=0,y=10;
-                                            scrollview.scrollTo(x,0);
+                                            int x=0,y=mRecyclerView.getHeight();;
+                                            scrollview.scrollTo(x, y);
                                             scrollview.fullScroll(View.FOCUS_DOWN);
-                                            scrollview.fullScroll(scrollview.FOCUS_RIGHT);
                                         }
-                                    },1000);
+                                    }, 10);
 
                                     if (arrayLength == 0) {
                                         load.setVisibility(View.GONE);
