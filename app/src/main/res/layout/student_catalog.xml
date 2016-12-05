@@ -6,85 +6,80 @@
     android:elevation="7dp"
     android:background="@color/colorWhite">
 
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scrollView"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll">
+        android:layout_height="wrap_content">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
+            android:layout_weight="1"></include>
 
-            <include
-                android:id="@+id/tool_bar"
-                layout="@layout/tool_bar"
-                android:layout_weight="1"
-                android:layout_width="match_parent"></include>
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Search by class"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@color/colorWhite" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/colorWhite"
-                android:animateLayoutChanges="false">
+                android:layout_height="match_parent"
+                android:scrollbarFadeDuration="150"
+                android:scrollbarDefaultDelayBeforeFade="100">
 
-                <EditText
-                    android:id="@+id/search"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/my_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Search by class"
-                    android:textColor="#000"
+                    android:layout_height="420dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/nodata"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="No Data Available"
+                    android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:layout_weight="1"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingTop="10dp"
-                    android:background="@color/colorWhite" />
-
+                    android:visibility="gone"
+                    android:textStyle="normal|bold" />
             </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/my_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="415dp"
-                android:layout_weight="3.33" />
+        <Button
+            android:id="@+id/loadmore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Load more"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:background="@color/colorAccent"
+            android:textAllCaps="false"
+            android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/nodata"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="No Data Available"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:visibility="gone" />
-
-
-            <Button
-                android:id="@+id/loadmore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Load more"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp"
-                android:visibility="visible"
-                android:textStyle="normal|bold"
-                android:textAlignment="center"
-                android:background="@color/colorAccent"
-                android:textAllCaps="false" />
-
-
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerView"
