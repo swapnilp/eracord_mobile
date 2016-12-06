@@ -4,4 +4,6 @@
     <string name="drawer_close">open</string>
     <string name="chapter">Select Chapters</string>
     <string name="org">Select Organization</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
