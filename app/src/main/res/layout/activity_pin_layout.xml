@@ -10,70 +10,82 @@
             layout="@layout/tool_bar">
         </include>
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Generate mPin"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="?attr/colorAccent"
-            android:textSize="24sp"
-            android:textStyle="normal|bold"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp"></TextView>
+            android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="20dp">
-
-            <EditText
-                android:id="@+id/userpin"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Pin"
-                android:textColor="@color/textcolor"
-                android:inputType="numberPassword"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-        </android.support.design.widget.TextInputLayout>
+                android:orientation="vertical" >
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/inputconfirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/generate_mpin"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="24sp"
+                    android:textStyle="normal|bold"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"></TextView>
 
-            <EditText
-                android:id="@+id/confirmuserpin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Confirm Pin"
-                android:textColor="@color/textcolor"
-                android:inputType="numberPassword"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="20dp">
 
-        <Button
-            android:id="@+id/loginuser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:background="@color/colorAccent"
-            android:clickable="true"
-            android:text="Generate mPin"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textStyle="normal|bold"
-            android:textSize="18sp" />
+                    <EditText
+                        android:id="@+id/userpin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_pin"
+                        android:textColor="@color/textcolor"
+                        android:inputType="numberPassword"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+                </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/inputconfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="20dp">
+
+                    <EditText
+                        android:id="@+id/confirmuserpin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/confirm_pin"
+                        android:textColor="@color/textcolor"
+                        android:inputType="numberPassword"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/loginuser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:background="@color/colorAccent"
+                    android:clickable="true"
+                    android:text="@string/generate_mpin"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="20dp" />
+            </LinearLayout>
+        </ScrollView>
+
+</LinearLayout>
 
