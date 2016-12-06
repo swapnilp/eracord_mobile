@@ -22,4 +22,7 @@
 
     <!-- activity_class -->
     <string name="no_data">No data available</string>
+
+    <!-- Student_catalog -->
+    <string name="load_more">Load more</string>
 </resources>
