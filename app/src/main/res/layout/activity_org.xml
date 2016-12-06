@@ -13,11 +13,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="email"
+        android:text="@string/email"
         android:textStyle="bold"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:id="@+id/useremail"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
-            android:text="Choose organization "
+            android:text="@string/choose_organization"
             android:textStyle="bold"
             android:layout_marginRight="20dp"
             android:textColor="@color/textcolor"
@@ -54,17 +54,18 @@
 
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:id="@+id/org_id"
                 android:visibility="gone"
                 android:layout_marginLeft="10dp"
-                android:text="Nilesh"
+                android:text=""
                 android:textSize="18sp"
                 android:textColor="@color/textcolor"
                 android:layout_marginBottom="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                tools:ignore="RtlHardcoded" />
 
             <Spinner
                 android:id="@+id/spinner"
@@ -92,7 +93,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/textcolor"
-            android:hint="4 digit Pin"
+            android:hint="@string/pin_label"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp" />
 
@@ -109,7 +110,7 @@
         android:clickable="true"
         android:layout_marginBottom="10dp"
         android:padding="12dp"
-        android:text="Login"
+        android:text="@string/login"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textStyle="normal|bold"
@@ -123,7 +124,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/textcolor"
-        android:text="Sign in With Different User?"
+        android:text="@string/hint_login_user"
         android:clickable="true"
         android:textAlignment="center" />
 
