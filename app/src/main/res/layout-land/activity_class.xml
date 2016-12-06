@@ -12,41 +12,52 @@
         android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <FrameLayout
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textStyle="normal|bold"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:text="@string/no_data"
+            android:layout_width="match_parent">
+        </include>
+
+        <TextView
+            android:id="@+id/nodata"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="no data available"
+            android:visibility="gone"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/nodata"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="no data available"
-                android:visibility="gone"
-                android:textColor="@android:color/black"
-                android:layout_gravity="center"/>
-
-            <include
-                android:id="@+id/tool_bar"
-                layout="@layout/tool_bar"
-                android:layout_height="91dp">
-            </include>
-
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="50dp"
-                android:layout_height="278dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/my_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
-                </android.support.v7.widget.RecyclerView>
-            </android.support.v4.widget.SwipeRefreshLayout>
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
 
-        </FrameLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/my_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </android.support.v7.widget.RecyclerView>
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
@@ -63,19 +74,3 @@
 
 
 </android.support.v4.widget.DrawerLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

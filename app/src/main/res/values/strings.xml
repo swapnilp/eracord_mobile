@@ -19,4 +19,7 @@
     <string name="enter_pin">Enter Pin</string>
     <string name="confirm_pin">Confirm Pin</string>
     <string name="generate_mpin">Generate mPin</string>
+
+    <!-- activity_class -->
+    <string name="no_data">No data available</string>
 </resources>
