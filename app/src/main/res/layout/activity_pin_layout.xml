@@ -17,9 +17,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="?attr/colorAccent"
-            android:layout_marginTop="40dp"
-            android:textSize="30dp"
+            android:textSize="24sp"
             android:textStyle="normal|bold"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"></TextView>
 
         <android.support.design.widget.TextInputLayout
