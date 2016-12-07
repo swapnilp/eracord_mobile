@@ -109,7 +109,7 @@ public class StudentListActivity extends AppCompatActivity {
 
         mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
 
-        mDrawerAdapter = new EraMyAdapter(StudentListActivity.this, TITLES, ICONS, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
+        mDrawerAdapter = new EraMyAdapter(StudentListActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
         // And passing the titles,icons,header view name, header view email,
         // and header view profile picture
 

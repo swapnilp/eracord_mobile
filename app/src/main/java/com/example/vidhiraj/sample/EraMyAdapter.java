@@ -20,7 +20,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
     private static final int TYPE_ITEM = 1;
     private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
-    private String email;
+    private String email, org_t_name;
     String url_icon;
     static Context context;
 
@@ -28,7 +28,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
         int Holderid;
         TextView textView;
         ImageView profile;
-        TextView email;
+        TextView email, org_t_name;
 
         public ViewHolder(View itemView, int ViewType) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
             super(itemView);
@@ -60,6 +60,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                     }
                 });
             } else {
+                org_t_name = (TextView) itemView.findViewById(R.id.org_name);
                 email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
                 profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
                 Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
@@ -67,10 +68,11 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
         }
     }
 
-    EraMyAdapter(Context context, String Titles[], int Icons[], String Email, String url) { // MyAdapter Constructor with titles and icons parameter
+    EraMyAdapter(Context context, String Titles[], int Icons[], String ORG_NAME, String Email, String url) { // MyAdapter Constructor with titles and icons parameter
         mNavTitles = Titles;                //have seen earlier
         mIcons = Icons;
         email = Email;
+        org_t_name = ORG_NAME;
         url_icon = url;
         this.context = context;
     }
@@ -99,6 +101,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holder.profile);
+            holder.org_t_name.setText(org_t_name);
             holder.email.setText(email);
         }
     }

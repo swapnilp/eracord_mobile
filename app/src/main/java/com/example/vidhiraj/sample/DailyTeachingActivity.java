@@ -138,7 +138,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         getSupportActionBar().setTitle(org);
         mDrawerRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
         mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mDrawerAdapter = new EraMyAdapter(DailyTeachingActivity.this, TITLES, ICONS, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
+        mDrawerAdapter = new EraMyAdapter(DailyTeachingActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
         mDrawerRecyclerView.setAdapter(mDrawerAdapter);                              // Setting the adapter to RecyclerView
         mLayoutManagers = new LinearLayoutManager(this);                 // Creating a layout Manager
         mDrawerRecyclerView.setLayoutManager(mLayoutManagers);                 // Setting the layout Manager
