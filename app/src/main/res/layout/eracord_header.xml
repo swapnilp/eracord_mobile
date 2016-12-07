@@ -41,7 +41,8 @@
             android:textColorHighlight="@null"
             android:textColorHint="@null"
             android:textColorLink="@null"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:autoText="true" />
 
         <TextView
             android:id="@+id/email"

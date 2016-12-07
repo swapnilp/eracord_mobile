@@ -32,4 +32,15 @@
     <string name="today_date">Todays Date</string>
     <string name="create">Create</string>
     <string name="points">Points</string>
+
+    <!-- Daily_fill_catalog -->
+    <string name="daily_teaches">Daily Teaches</string>
+
+    <!-- Daily_fill_catalog -->
+    <string name="date">Date</string>
+    <string name="chapter_text">Chapter</string>
+    <string name="standard">Standard</string>
+    <string name="dailyid">dailyid</string>
+
+
 </resources>
