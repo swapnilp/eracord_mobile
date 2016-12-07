@@ -19,16 +19,15 @@
             android:layout_weight="1"></include>
 
         <EditText
-            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/search"
             android:hint="Search by class"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/textcolor"
             android:background="@color/colorWhite"
-            android:focusable="false" />
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -77,7 +76,7 @@
             android:textAlignment="center"
             android:background="@color/colorAccent"
             android:textAllCaps="false"
-            android:layout_weight="1" />
+            android:layout_weight="1" />-->
 
     </LinearLayout>
 
