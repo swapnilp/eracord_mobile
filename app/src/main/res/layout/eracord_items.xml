@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:orientation="vertical">
@@ -16,17 +14,19 @@
         <!--android:src="@drawable/ic_photos"/>-->
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="12dp"
-        android:paddingTop="4dp"
+        android:paddingTop="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/rowText"
         android:textAllCaps="false"
         android:background="@color/colorWhite"
         android:fontFamily="sans-serif"
-        android:textColor="@color/textcolor"
-        android:textSize="14sp" />
+        android:textColor="@drawable/left_links"
+        android:textSize="14sp"
+        android:paddingBottom="10dp"
+        android:cursorVisible="true" />
 
 </LinearLayout>
