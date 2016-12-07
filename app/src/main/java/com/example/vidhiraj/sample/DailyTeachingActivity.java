@@ -60,7 +60,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     Button createCatalog, cancelCatalog;
     LinearLayout linearpoints;
     Integer chapter_id = null;
-    RecyclerView mRecyclerView;
+    RecyclerView m_points_RecyclerView;
     ProgressDialog mProgress;
     //TextView date_selected;
     int day, month, year;
@@ -351,11 +351,11 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                             Log.e("points are", String.valueOf(pointsList));
                         }
                     }
-                    mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-                    mRecyclerView.setHasFixedSize(true);
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(DailyTeachingActivity.this));
+                    m_points_RecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+                    m_points_RecyclerView.setHasFixedSize(true);
+                    m_points_RecyclerView.setLayoutManager(new LinearLayoutManager(DailyTeachingActivity.this));
                     mAdapter = new PointsAdapter(pointsList);
-                    mRecyclerView.setAdapter(mAdapter);
+                    m_points_RecyclerView.setAdapter(mAdapter);
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                     Log.e("sdcard-err2:", err);
@@ -396,7 +396,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     protected Dialog onCreateDialog(int id) {
         // TODO Auto-generated method stub
         if (id == 999) {
-            return new DatePickerDialog(this,
+            return new DatePickerDialog(this, R.style.DialogTheme,
                     myDateListener, year, month, day);
         }
         return null;
