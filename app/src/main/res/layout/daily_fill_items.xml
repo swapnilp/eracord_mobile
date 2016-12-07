@@ -23,29 +23,29 @@
 
         <TextView
             android:id="@+id/chapter"
-            android:layout_width="100dp"
-            android:textColor="@color/colorAccent"
-            android:textSize="14sp"
-            android:layout_weight="0.41"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/chapter_text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="right"
-            android:textAlignment="viewStart"
-            android:fontFamily="sans-serif"
+            android:paddingTop="4dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
             android:textStyle="normal|bold"
-            android:paddingTop="4dp" />
+            android:layout_weight="0.01" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="50dp"
-            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:textColor="@color/bb_inActiveBottomBarItemColor"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="13dp"
             android:layout_height="wrap_content"
             android:text="@string/date"
             android:layout_gravity="left"
-            android:layout_weight="0.10"
+            android:layout_weight="0.01"
             android:textAlignment="textEnd"
-            android:paddingTop="4dp" />
+            android:paddingTop="8dp" />
 
     </LinearLayout>
     <LinearLayout
@@ -58,14 +58,14 @@
         <TextView
             android:id="@+id/points"
             android:layout_width="0dp"
-            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:textColor="@color/bb_inActiveBottomBarItemColor"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="13dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/points"
             android:layout_gravity="right"
-            android:fontFamily="serif"
-            android:paddingTop="2dp" />
+            android:fontFamily="sans-serif" />
 
         <TextView
             android:id="@+id/dailyid"
@@ -88,17 +88,18 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/standard"
             android:layout_width="match_parent"
             android:textSize="13dp"
-            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:textColor="@color/bb_inActiveBottomBarItemColor"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_height="wrap_content"
             android:text="@string/standard"
             android:layout_gravity="left"
-            android:fontFamily="serif" />
+            android:fontFamily="sans-serif" />
     </LinearLayout>
 
 </LinearLayout>
