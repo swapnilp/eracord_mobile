@@ -60,7 +60,7 @@ public class PresentyCatalog extends AppCompatActivity {
     private static RecyclerView.Adapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<PresentyData> data = null;
-    Button savePresenty, cancelPresenty;
+    Button savePresenty;
     TextView dataAvailabiliy, totalPresent, totalAbsent;
     String url_icon = null;
     int countPresent = 0;
@@ -80,7 +80,6 @@ public class PresentyCatalog extends AppCompatActivity {
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
         savePresenty = (Button) findViewById(R.id.savepresenty);
-        cancelPresenty = (Button) findViewById(R.id.button);
         dataAvailabiliy = (TextView) findViewById(R.id.nodata);
         totalPresent = (TextView) findViewById(R.id.totalpresent);
         totalAbsent = (TextView) findViewById(R.id.totalabsent);
@@ -140,7 +139,6 @@ public class PresentyCatalog extends AppCompatActivity {
                     if (success) {
                         mProgress.dismiss();
                         savePresenty.setVisibility(View.VISIBLE);
-                        cancelPresenty.setVisibility(View.VISIBLE);
                         JSONArray jsonArray = response.getJSONArray("class_catlogs");
                         if (jsonArray.length() != 0) {
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -162,7 +160,6 @@ public class PresentyCatalog extends AppCompatActivity {
 
                         } else {
                             savePresenty.setVisibility(View.GONE);
-                            cancelPresenty.setVisibility(View.GONE);
                             dataAvailabiliy.setVisibility(View.VISIBLE);
                         }
                     }
@@ -204,15 +201,6 @@ public class PresentyCatalog extends AppCompatActivity {
             }
         };
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
-
-        cancelPresenty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(PresentyCatalog.this, DailyCatalogActivity.class);
-                startActivity(intent1);
-            }
-        });
-
 
         savePresenty.setOnClickListener(new View.OnClickListener() {
             @Override
