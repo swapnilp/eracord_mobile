@@ -41,18 +41,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/stud_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorAccent"
                     android:text="StudentName"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:paddingTop="5dp"
                     android:fontFamily="sans-serif"
                     android:textAllCaps="false" />
@@ -75,7 +74,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/stud_hostel"
-                    android:layout_marginTop="2dp" />
+                    android:layout_marginTop="2dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/bb_inActiveBottomBarItemColor"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="14sp"
+                    android:textAlignment="textStart"/>
 
                 <TextView
                     android:id="@+id/textViewid"
