@@ -8,49 +8,64 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"
+            android:layout_height="match_parent"></include>
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="@string/daily_teaches"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/colorAccent"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif" />
 
-            <include
-                android:id="@+id/tool_bar"
-                layout="@layout/tool_bar"></include>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/daily_teaches"
-                android:textSize="18sp"
-                android:textColor="@color/colorWhite"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@color/colorAccent"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif" />
-
-        </LinearLayout>
-
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_weight="1">
 
-            <LinearLayout
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/loadmore"
+                android:background="@drawable/round_button"
+                android:layout_marginRight="10dp"
+                android:drawableTop="@drawable/down_arrow"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:minHeight="43dp"
+                android:elevation="1dp"
+                android:layout_centerHorizontal="false"
+                android:paddingTop="6dp"
+                android:visibility="visible"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal" />
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="1"
+                    android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/noData"
+                        android:id="@+id/nodata"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -66,26 +81,14 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/my_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent">
 
-                    <Button
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/loadmore"
-                        android:background="@drawable/round_button"
-                        android:layout_marginRight="20dp"
-                        android:drawableTop="@drawable/down_arrow"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:minHeight="43dp"
-                        android:elevation="1dp"
-                        android:layout_centerHorizontal="true"
-                        android:paddingTop="6dp"
-                        android:layout_marginBottom="20dp" />
-                </RelativeLayout>
-            </LinearLayout>
-        </ScrollView>
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -99,20 +102,3 @@
 
     </android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.DrawerLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
