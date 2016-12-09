@@ -62,7 +62,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/my_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="510dp">
+                        android:layout_height="match_parent">
 
                     </android.support.v7.widget.RecyclerView>
 
@@ -72,8 +72,6 @@
                         android:id="@+id/loadmore"
                         android:background="@drawable/round_button"
                         android:layout_marginRight="20dp"
-                        android:textStyle="normal|bold"
-                        android:textColor="@color/colorWhite"
                         android:drawableTop="@drawable/down_arrow"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"

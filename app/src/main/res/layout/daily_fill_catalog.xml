@@ -45,37 +45,47 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/my_recycler_view"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/noData"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/no_data"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:visibility="gone"
-                    android:textStyle="normal|bold"
-                    android:textAllCaps="true"
-                    android:textAlignment="center" />
+                    <TextView
+                        android:id="@+id/noData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/no_data"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        android:textStyle="normal|bold"
+                        android:textAllCaps="true"
+                        android:textAlignment="center" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/my_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/loadmore"
+                        android:background="@drawable/round_button"
+                        android:layout_marginRight="20dp"
+                        android:drawableTop="@drawable/down_arrow"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:minHeight="43dp"
+                        android:elevation="1dp"
+                        android:layout_centerHorizontal="true"
+                        android:paddingTop="6dp"
+                        android:layout_marginBottom="20dp" />
+                </RelativeLayout>
             </LinearLayout>
         </ScrollView>
-
-        <Button
-            android:id="@+id/loadmore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/button_shape"
-            android:gravity="center"
-            android:text="Load More"
-            android:visibility="gone"
-            android:textColor="@color/textcolor" />
 
     </LinearLayout>
 
