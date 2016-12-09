@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,66 +19,80 @@
             android:layout_weight="1"></include>
 
         <EditText
-            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/search"
             android:hint="Search by class"
-            android:textColor="#000"
-            android:textSize="20sp"
+            android:textSize="20dp"
+            android:textColor="@color/textcolor"
+            android:background="@color/colorWhite"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:background="@color/colorWhite" />
+            android:paddingRight="20dp"/>
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:stackFromBottom="true"
-            android:transcriptMode="normal">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbarFadeDuration="150"
-                android:scrollbarDefaultDelayBeforeFade="100">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/my_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp">
-
-                </android.support.v7.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/nodata"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="No Data Available"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:visibility="gone"
-                    android:textStyle="normal|bold" />
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-
-        <Button
-            android:id="@+id/loadmore"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Load more"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:textStyle="normal|bold"
-            android:textAlignment="center"
-            android:background="@color/colorAccent"
-            android:textAllCaps="false"
-            android:layout_weight="1" />
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/loadmore"
+                android:background="@drawable/round_button"
+                android:layout_marginRight="10dp"
+                android:drawableTop="@drawable/down_arrow"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:minHeight="43dp"
+                android:elevation="1dp"
+                android:layout_centerHorizontal="false"
+                android:paddingTop="6dp"
+                android:visibility="visible"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal" />
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:descendantFocusability="blocksDescendants"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/nodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/no_data"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        android:textStyle="normal|bold"
+                        android:textAllCaps="true"
+                        android:textAlignment="center" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/my_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:descendantFocusability="blocksDescendants">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -86,7 +101,7 @@
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:background="#ffffff"
+        android:background="@color/colorWhite"
         android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>

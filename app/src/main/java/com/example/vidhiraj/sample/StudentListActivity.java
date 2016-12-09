@@ -328,8 +328,11 @@ public class StudentListActivity extends AppCompatActivity {
                                     scrollview.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            int x=0,y=10;
-                                            scrollview.scrollTo(x, y);
+                                            //int x=0,y=30;
+                                            //scrollview.scrollTo(x, y);
+                                            scrollview.fullScroll(NestedScrollView.FOCUS_DOWN);
+                                            scrollview.scrollTo(0, scrollview.getBottom());
+                                            //Footer.requestFocus();
                                         }
                                     });
 
