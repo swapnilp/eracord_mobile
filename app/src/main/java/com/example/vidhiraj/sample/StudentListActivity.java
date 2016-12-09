@@ -325,15 +325,13 @@ public class StudentListActivity extends AppCompatActivity {
                                         mAdapter.notifyItemInserted(dailyTeach.size());
                                     }
 
-                                    scrollview.setSmoothScrollingEnabled(true);
-                                    scrollview.postOnAnimationDelayed(new Runnable() {
+                                    scrollview.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            int x=0,y=mRecyclerView.getHeight();;
+                                            int x=0,y=10;
                                             scrollview.scrollTo(x, y);
-                                            scrollview.fullScroll(View.FOCUS_DOWN);
                                         }
-                                    }, 10);
+                                    });
 
                                     if (arrayLength == 0) {
                                         load.setVisibility(View.GONE);
