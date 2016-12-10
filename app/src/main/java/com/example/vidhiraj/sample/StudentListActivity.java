@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.NestedScrollView;
+import android.widget.ScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -69,6 +69,7 @@ public class StudentListActivity extends AppCompatActivity {
     private static List<StudentData> dailyTeach;
     private int current_page = 1;
     Button load;
+    int counter = 9;
     EditText search;
     ProgressDialog pDialog;
     TextView dataAvailability;
@@ -78,7 +79,7 @@ public class StudentListActivity extends AppCompatActivity {
 
     String url = ApiKeyConstant.apiUrl + "/api/v1/students";
     protected Handler handler;
-    NestedScrollView scrollview;
+    ScrollView scrollview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +89,7 @@ public class StudentListActivity extends AppCompatActivity {
         // tvEmptyView = (TextView) findViewById(R.id.empty_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         dataAvailability = (TextView) findViewById(R.id.nodata);
-        scrollview = ((NestedScrollView) findViewById(R.id.scrollView));
+        scrollview = ((ScrollView) findViewById(R.id.scrollView));
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");
@@ -178,7 +179,7 @@ public class StudentListActivity extends AppCompatActivity {
                         }
                     }
 
-                    mRecyclerView.setHasFixedSize(true);
+                    mRecyclerView.setHasFixedSize(false);
                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     mRecyclerView.setLayoutManager(mLayoutManager);
                     mAdapter = new StudentCatalogAdapter(dailyTeach, getApplicationContext());
@@ -330,13 +331,13 @@ public class StudentListActivity extends AppCompatActivity {
                                         public void run() {
                                             //int x=0,y=30;
                                             //scrollview.scrollTo(x, y);
-                                            scrollview.fullScroll(NestedScrollView.FOCUS_DOWN);
-                                            scrollview.scrollTo(0, scrollview.getBottom());
-                                            //Footer.requestFocus();
+                                            counter = counter + scrollview.getBottom()+1180;
+                                            scrollview.scrollTo(0, counter);
+                                            mRecyclerView.scrollToPosition(counter);
                                         }
                                     });
 
-                                    if (arrayLength == 0) {
+                                    if (arrayLength < 10) {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
                                         mRecyclerView.setHasFixedSize(false);
@@ -381,7 +382,6 @@ public class StudentListActivity extends AppCompatActivity {
                     };
 
                     VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
-
                 }
             });
 

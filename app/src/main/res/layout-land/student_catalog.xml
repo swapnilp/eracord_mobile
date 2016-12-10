@@ -52,25 +52,23 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal" />
 
-            <android.support.v4.widget.NestedScrollView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/scrollView"
-                android:focusable="true"
-                android:focusableInTouchMode="true">
+                android:orientation="vertical"
+                android:fillViewport="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:descendantFocusability="blocksDescendants"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true">
+                    android:id="@+id/scrollLayout">
 
                     <TextView
                         android:id="@+id/nodata"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/no_data"
@@ -84,13 +82,15 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/my_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:descendantFocusability="blocksDescendants">
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants"
+                        app:reverseLayout="true"
+                        app:stackFromEnd="true">
 
                     </android.support.v7.widget.RecyclerView>
 
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </ScrollView>
 
         </RelativeLayout>
 
