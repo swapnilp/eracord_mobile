@@ -58,8 +58,12 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, TimeTableActivity.class);
                             context.startActivity(intent1);
+                        } else if(pos == 5) {
+                            textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
+                            intent1 = new Intent(context, OffClassesActivity.class);
+                            context.startActivity(intent1);
                         }
-                        else if (pos == 5) {
+                        else if (pos == 6) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, AndroidSpinnerExampleActivity.class);
                             context.startActivity(intent1);

@@ -47,7 +47,7 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  */
 public class StudentListActivity extends AppCompatActivity {
 
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     //String NAME = "Eracord";
     String org = null;

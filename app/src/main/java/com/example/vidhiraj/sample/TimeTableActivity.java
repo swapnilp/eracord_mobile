@@ -60,14 +60,17 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
     TextView date_selected;
     int day, month, year;
     ArrayList<String> weekDays;
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     RecyclerView mDrawerRecyclerView;                           // Declaring RecyclerView
-    RecyclerView.Adapter mDrawerAdapter;                        // Declaring Adapter For Recycler View
-    RecyclerView.LayoutManager mLayoutManagers;         // Declaring Layout Manager as a linear layout manager
+    RecyclerView.Adapter mDrawerAdapter;
+    // Declaring Adapter For Recycler View
+    RecyclerView.LayoutManager mLayoutManagers;
+    private LinearLayoutManager mLayoutManager;
+    // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;
     String url_icon;
@@ -85,15 +88,18 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         spinner.setOnItemSelectedListener(this);
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
+        org = prefs.getString("specificorg", null);
+        url_icon = prefs.getString("org_icon", null);
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(org);
-        mDrawerRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-        mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mDrawerAdapter = new EraMyAdapter(TimeTableActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        mDrawerRecyclerView.setAdapter(mDrawerAdapter);                              // Setting the adapter to RecyclerView        mLayoutManagers = new LinearLayoutManager(this);                 // Creating a layout Manager
-        mDrawerRecyclerView.setLayoutManager(mLayoutManagers);                 // Setting the layout Manager
+        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
+        mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
+        mAdapter = new EraMyAdapter(TimeTableActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
+        mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
+        mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
+        mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
         mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -107,11 +113,9 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         }; // Drawer Toggle Object Made
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-
-
-
         weekDays = new ArrayList<>();
         weekDays.add("Monday");
         weekDays.add("Tuesday");
