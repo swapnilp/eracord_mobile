@@ -24,6 +24,8 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
     String url_icon;
     static Context context;
 
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         int Holderid;
         TextView textView;
@@ -52,7 +54,12 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, StudentListActivity.class);
                             context.startActivity(intent1);
-                        } else if (pos == 4) {
+                         } else if(pos == 4){
+                            textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
+                            intent1 = new Intent(context, TimeTableActivity.class);
+                            context.startActivity(intent1);
+                        }
+                        else if (pos == 5) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, AndroidSpinnerExampleActivity.class);
                             context.startActivity(intent1);

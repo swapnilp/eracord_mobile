@@ -64,7 +64,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     ProgressDialog mProgress;
     //TextView date_selected;
     int day, month, year;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;
