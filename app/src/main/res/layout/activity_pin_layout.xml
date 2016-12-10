@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -23,13 +24,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/generate_mpin"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorWhite"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColor="?attr/colorAccent"
-                    android:textSize="24sp"
-                    android:textStyle="normal|bold"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="20dp"></TextView>
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="@color/colorAccent"
+                    android:textAllCaps="true"
+                    android:fontFamily="sans-serif" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
