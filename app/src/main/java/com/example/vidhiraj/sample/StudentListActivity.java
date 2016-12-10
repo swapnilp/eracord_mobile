@@ -179,6 +179,9 @@ public class StudentListActivity extends AppCompatActivity {
                         }
                     }
 
+                    if (getResources().getConfiguration().orientation == 2) {
+                        counter = 2;
+                    }
                     mRecyclerView.setHasFixedSize(false);
                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     mRecyclerView.setLayoutManager(mLayoutManager);

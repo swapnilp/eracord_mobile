@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,17 +54,20 @@ public class DailyCatalogActivity extends AppCompatActivity {
     private LinearLayoutManager mLayoutManager;
     private static ArrayList<DailyTeachData> dailyTeach = null;
     int current_page = 1;
+    int counter = 9;
     Button load;
     ProgressDialog pDialog, mProgress;
     TextView dataAvailability;
     String url_icon;
     String url = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs";
+    ScrollView scrollview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily_fill_catalog);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        scrollview = ((ScrollView) findViewById(R.id.scrollView));
         dataAvailability = (TextView) findViewById(R.id.nodata);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
@@ -130,6 +134,10 @@ public class DailyCatalogActivity extends AppCompatActivity {
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
                         }
+                    }
+
+                    if (getResources().getConfiguration().orientation == 2) {
+                        counter = 2;
                     }
                     recyclerView.setHasFixedSize(true);
                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -219,6 +227,25 @@ public class DailyCatalogActivity extends AppCompatActivity {
                                         dailyData.id = orgObj.getInt("id");
                                         dailyTeach.add(dailyData);
                                         adapter.notifyItemInserted(dailyTeach.size());
+                                    }
+
+                                    scrollview.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //int x=0,y=30;
+                                            //scrollview.scrollTo(x, y);
+                                            counter = counter + scrollview.getBottom()+1180;
+                                            scrollview.scrollTo(0, counter);
+                                            mRecyclerView.scrollToPosition(counter);
+                                        }
+                                    });
+                                    if (arrayLength < 10) {
+                                        load.setVisibility(View.GONE);
+                                        mProgress.dismiss();
+                                        mRecyclerView.setHasFixedSize(false);
+                                        /*mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);
+                                        scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);*/
+                                        Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             } catch (JSONException e) {

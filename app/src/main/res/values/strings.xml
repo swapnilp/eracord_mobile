@@ -41,6 +41,7 @@
     <string name="chapter_text">Chapter</string>
     <string name="standard">Standard</string>
     <string name="dailyid">dailyid</string>
+    <string name="no_more_data_to_load">No more data to load</string>
 
 
 </resources>
