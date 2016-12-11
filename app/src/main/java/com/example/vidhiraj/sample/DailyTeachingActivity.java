@@ -123,7 +123,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         intent.putExtra("month", month);
         intent.putExtra("year", year);
         intent.putExtra("teachId", classid);
-
+        selected_date = day + "-" + (month) + "-" + year;
         //date_selected.setText(day + " / " + (month + 1) + " / " + year);
         Log.e("getchap", String.valueOf(classid));
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);

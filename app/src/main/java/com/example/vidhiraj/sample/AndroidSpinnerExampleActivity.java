@@ -182,8 +182,8 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                 boolean signdiffflag = true;
                 Intent intent = new Intent(AndroidSpinnerExampleActivity.this, MainActivity.class);
                 intent.putExtra("diffflag", signdiffflag);
-                finish();
                 startActivity(intent);
+                finish();
 
             }
         });

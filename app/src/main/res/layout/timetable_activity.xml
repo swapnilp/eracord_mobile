@@ -29,6 +29,13 @@ android:elevation="7dp">
         android:textAllCaps="true"
         android:fontFamily="sans-serif" />
 
+    <TextView
+        android:id="@+id/time_nodata"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Data Available"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

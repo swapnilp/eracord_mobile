@@ -60,7 +60,7 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
     TextView date_selected;
     int day, month, year;
     ArrayList<String> weekDays;
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;
@@ -77,9 +77,11 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
     String weekDay;
     private GoogleApiClient client;
     List<TimeTableData> timeTableDatas = new ArrayList<>();
-    static JSONObject timetableObj=null;
+    static JSONObject timetableObj = null;
     JSONArray timeTableArray;
-    JSONObject arrrrr=new JSONObject();
+    JSONObject arrrrr = new JSONObject();
+    TextView timetableData;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,7 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
         url_icon = prefs.getString("org_icon", null);
+        timetableData = (TextView) findViewById(R.id.time_nodata);
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -143,26 +146,29 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                     if (success) {
                         Log.e("ssss", "sss");
                         timetableObj = response.getJSONObject("timetable");
-                        timeTableArray=timetableObj.getJSONArray(weekDay);
                         setJsonArray(timetableObj);
+                        timeTableArray = timetableObj.getJSONArray(weekDay);
+                        if (timeTableArray.length() == 0) {
+                            timetableData.setVisibility(View.VISIBLE);
+                        } else {
+                            timetableData.setVisibility(View.GONE);
+                            Log.e("timearray is", String.valueOf(timeTableArray));
+                            for (int i = 0; i < timeTableArray.length(); i++) {
+                                JSONObject dayDataObj = timeTableArray.getJSONObject(i);
+                                TimeTableData timeTable = new TimeTableData(dayDataObj.getString("name"), dayDataObj.getString("start_time"), dayDataObj.getString("end_time"), dayDataObj.getString("class_room"), dayDataObj.getString("subject"));
+                                timeTableDatas.add(timeTable);
+                            }
 
-                        Log.e("timearray is", String.valueOf(timeTableArray));
-                        for (int i = 0; i < timeTableArray.length(); i++) {
-                            JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                            TimeTableData timeTable = new TimeTableData(dayDataObj.getString("name"),dayDataObj.getString("start_time"),dayDataObj.getString("end_time"),dayDataObj.getString("class_room"),dayDataObj.getString("subject"));
-                            timeTableDatas.add(timeTable);
+
+                            mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+                            mRecyclerView.setHasFixedSize(true);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
+                            mAdapter = new TimeTableAdapter(timeTableDatas);
+                            mRecyclerView.setAdapter(mAdapter);
+                            mAdapter.notifyDataSetChanged();
+                            mRecyclerView.invalidate();
                         }
-
-
-                        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-                        mRecyclerView.setHasFixedSize(true);
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
-                        mAdapter = new TimeTableAdapter(timeTableDatas);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mAdapter.notifyDataSetChanged();
-                        mRecyclerView.invalidate();
-//
-                   }
+                    }
 
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
@@ -195,31 +201,37 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
     }
 
-    public void setJsonArray(JSONObject jsonObject)
-    {
-        arrrrr=jsonObject;
+    public void setJsonArray(JSONObject jsonObject) {
+        arrrrr = jsonObject;
     }
-public JSONObject getJsonArray(){
-    return arrrrr;
-}
+
+    public JSONObject getJsonArray() {
+        return arrrrr;
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String timedayyyy = null;
         for (int j = position; j <= position; j++) {
-            timedayyyy= weekDays.get(j);
+            timedayyyy = weekDays.get(j);
             Log.e("for chap_id", String.valueOf(timedayyyy));
         }
-        timeTableDatas = new ArrayList<>();
         try {
-            timetableObj=getJsonArray();
-            timeTableArray = timetableObj.getJSONArray(timedayyyy);
-            Log.e("obj", String.valueOf(timetableObj));
-            Log.e("timearray is", String.valueOf(timeTableArray));
-            for (int i = 0; i < timeTableArray.length(); i++) {
-                JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                TimeTableData timeTable = new TimeTableData(dayDataObj.getString("class_name"),dayDataObj.getString("start_time"),dayDataObj.getString("end_time"),dayDataObj.getString("sub_class_name"),dayDataObj.getString("subject"));
-                timeTableDatas.add(timeTable);
+            timeTableDatas = new ArrayList<>();
+            timetableObj = getJsonArray();
+            if (timetableObj.has(timedayyyy)) {
+                timetableData.setVisibility(View.GONE);
+                timeTableArray = timetableObj.getJSONArray(timedayyyy);
+                Log.e("obj", String.valueOf(timetableObj));
+                Log.e("timearray is", String.valueOf(timeTableArray));
+                for (int i = 0; i < timeTableArray.length(); i++) {
+                    JSONObject dayDataObj = timeTableArray.getJSONObject(i);
+                    TimeTableData timeTable = new TimeTableData(dayDataObj.getString("class_name"), dayDataObj.getString("start_time"), dayDataObj.getString("end_time"), dayDataObj.getString("sub_class_name"), dayDataObj.getString("subject"));
+                    timeTableDatas.add(timeTable);
+                }
+            }
+            else {
+                timetableData.setVisibility(View.VISIBLE);
             }
             mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
             mRecyclerView.setHasFixedSize(true);
@@ -228,7 +240,6 @@ public JSONObject getJsonArray(){
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
             mRecyclerView.invalidate();
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

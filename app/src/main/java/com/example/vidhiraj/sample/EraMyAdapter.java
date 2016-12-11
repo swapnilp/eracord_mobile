@@ -1,5 +1,6 @@
 package com.example.vidhiraj.sample;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -46,27 +47,33 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, ClassActivity.class);
                             context.startActivity(intent1);
+                            ((Activity)(context)).finish();
                         } else if (pos == 2) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, DailyCatalogActivity.class);
                             context.startActivity(intent1);
+                            ((Activity)(context)).finish();
                         } else if (pos == 3) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, StudentListActivity.class);
                             context.startActivity(intent1);
+                            ((Activity)(context)).finish();
                          } else if(pos == 4){
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, TimeTableActivity.class);
                             context.startActivity(intent1);
+                            ((Activity)(context)).finish();
                         } else if(pos == 5) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, OffClassesActivity.class);
                             context.startActivity(intent1);
+                            ((Activity)(context)).finish();
                         }
                         else if (pos == 6) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, AndroidSpinnerExampleActivity.class);
                             context.startActivity(intent1);
+                            ((Activity)(context)).finish();
                         }
                     }
                 });

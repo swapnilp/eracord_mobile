@@ -11,12 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by androiddev on 8/12/16.
  */
 public class SplashScreen extends AppCompatActivity {
-    ImageView eracod_image;
+    TextView eracod_load;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,12 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-        eracod_image = (ImageView) findViewById(R.id.eracord_pic);
+        eracod_load = (TextView) findViewById(R.id.era_load);
         Thread timer = new Thread() {
             public void run() {
                 try {
                     Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);
-                    eracod_image.startAnimation(animation);
+                    eracod_load.startAnimation(animation);
                     sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

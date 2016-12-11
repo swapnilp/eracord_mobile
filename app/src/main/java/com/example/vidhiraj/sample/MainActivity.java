@@ -43,14 +43,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     SQLiteOpenHelper dbHelper;
     UserDB userDB;
     Button next;
+    boolean signflag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent1 = getIntent();
-        boolean signflag = intent1.getBooleanExtra("diffflag", false);
+        signflag = intent1.getBooleanExtra("diffflag", false);
         Log.e("flag is", String.valueOf(signflag));
-        Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, null, null, null);
+        cursor = getContentResolver().query(User.CONTENT_URI, null, null, null, null);
         Log.e("record is", String.valueOf(cursor.getCount()));
         if (cursor.getCount() != 0 && signflag == false) {
             Intent intent = new Intent(MainActivity.this, AndroidSpinnerExampleActivity.class);
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     new ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getBaseContext(),error.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                             mProgress.dismiss();
                         }
                     }
@@ -176,6 +177,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onBackPressed() {
-        finish();
+        if (cursor.getCount() != 0 && signflag == false) {
+            Intent intent = new Intent(MainActivity.this, AndroidSpinnerExampleActivity.class);
+            startActivity(intent);
+        } else {
+            finish();
+        }
+
     }
 }

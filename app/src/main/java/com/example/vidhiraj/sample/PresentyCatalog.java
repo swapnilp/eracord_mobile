@@ -66,9 +66,9 @@ public class PresentyCatalog extends AppCompatActivity {
     int countPresent = 0;
     int countAbsent = 0;
     ProgressDialog mProgress;
-
+    StringBuilder buff = new StringBuilder();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.presenty_catalog);
         final Intent intent = getIntent();
@@ -79,7 +79,7 @@ public class PresentyCatalog extends AppCompatActivity {
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
-        savePresenty = (Button) findViewById(R.id.savepresenty);
+        savePresenty = (Button) findViewById(R.id.updatepresenty);
         dataAvailabiliy = (TextView) findViewById(R.id.noPrData);
         totalPresent = (TextView) findViewById(R.id.totalpresent);
         totalAbsent = (TextView) findViewById(R.id.totalabsent);
@@ -205,22 +205,25 @@ public class PresentyCatalog extends AppCompatActivity {
         savePresenty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StringBuilder buff = new StringBuilder();
+
                 String sep = "";
                 List<PresentyData> stList = ((PresentyAdapter) adapter)
                         .getStudentist();
+                Log.e("list is", String.valueOf(stList));
                 for (int i = 0; i < stList.size(); i++) {
-                    PresentyData singleStudent = stList.get(i);
-                    if (singleStudent.isSelected() == false) {
+                    Log.e("point is", String.valueOf(stList.get(i).getPointId()));
+                    Log.e("selection is", String.valueOf(stList.get(i).isSelected()));
+//                    PresentyData singleStudent = stList.get(i);
+                    if (stList.get(i).isSelected() == false) {
                         buff.append(sep);
-                        buff.append(singleStudent.getPointId());
+                        buff.append(stList.get(i).getPointId());
                         sep = ",";
-                        Log.e("buff is", String.valueOf(buff));
-
-                    }
+                        Log.e("inside b", String.valueOf(buff));
+//
+                   }
                 }
-
-                Log.e("buff is", String.valueOf(buff));
+//
+                Log.e("outside b", String.valueOf(buff));
                 JSONObject daily_teaching = new JSONObject();
                 JSONObject daily_teaching_point = new JSONObject();
 

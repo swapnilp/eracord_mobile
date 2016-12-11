@@ -35,14 +35,15 @@ public class PresentyAdapter extends
 
         final int pos = position;
         viewHolder.tvName.setText(stList.get(position).getName());
-        viewHolder.chkSelected.setOnCheckedChangeListener(null);
         viewHolder.chkSelected.setChecked(stList.get(position).isSelected());
-        viewHolder.chkSelected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                } else {
-                }
+
+        viewHolder.chkSelected.setTag(stList.get(position));
+        viewHolder.chkSelected.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CheckBox cb = (CheckBox) v;
+                PresentyData contact = (PresentyData) cb.getTag();
+                contact.setSelected(cb.isChecked());
+                stList.get(pos).setSelected(cb.isChecked());
             }
         });
 
@@ -74,7 +75,6 @@ public class PresentyAdapter extends
         }
 
     }
-
     // method to access in activity after updating selection
     public List<PresentyData> getStudentist() {
         return stList;

@@ -104,10 +104,10 @@
 
         </LinearLayout>
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/my_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:scrollbars="vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -145,9 +145,10 @@
                     android:layout_height="wrap_content"
                     android:text="UPDATE"
                     android:visibility="gone"
+                    android:clickable="true"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:id="@+id/savepresenty"
+                    android:id="@+id/updatepresenty"
                     android:textColor="@color/colorWhite"
                     android:background="@color/colorAccent"
                     android:textStyle="normal|bold"
@@ -155,7 +156,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp" />
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
 
     </LinearLayout>
 
