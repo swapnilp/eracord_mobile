@@ -75,7 +75,7 @@ public class OffClassesActivity extends AppCompatActivity {
         setContentView(R.layout.off_class_activity);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         scrollview = ((ScrollView) findViewById(R.id.scrollView));
-        dataAvailability = (TextView) findViewById(R.id.nodata);
+        dataAvailability = (TextView) findViewById(R.id.noOffData);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");
