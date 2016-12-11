@@ -25,7 +25,7 @@
         </include>
 
         <TextView
-            android:id="@+id/nodata"
+            android:id="@+id/noStData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="no data available"

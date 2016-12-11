@@ -69,7 +69,7 @@ public class ClassActivity extends AppCompatActivity {
         org = prefs.getString("specificorg", null);
         url_icon = prefs.getString("org_icon", null);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        dataAvailability = (TextView) findViewById(R.id.nodata);
+        dataAvailability = (TextView) findViewById(R.id.noStData);
         fetchClassData();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -137,6 +137,7 @@ public class ClassActivity extends AppCompatActivity {
                 try {
                     boolean success = response.getBoolean("success");
                     if (success) {
+                        Log.e("ssss","class data");
                         swipeRefreshLayout.setRefreshing(false);
                         JSONArray jsonArray = response.getJSONArray("time_table_classes");
                         if (jsonArray.length() != 0) {
@@ -145,7 +146,6 @@ public class ClassActivity extends AppCompatActivity {
                                 ClassData classData = new ClassData();
                                 classData.name = orgObj.getString("class_name");
                                 classData.subject = orgObj.getString("subject");
-
                                 if(orgObj.getString("division") != null && !orgObj.getString("division").isEmpty() && orgObj.getString("division") != "null") {
                                     classData.division = orgObj.getString("division");
                                 }
@@ -153,6 +153,7 @@ public class ClassActivity extends AppCompatActivity {
                                 String id = orgObj.getString("id");
                                 classData.id = Integer.parseInt(id);
                                 data.add(classData);
+                                Log.e("class data is", String.valueOf(data));
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
