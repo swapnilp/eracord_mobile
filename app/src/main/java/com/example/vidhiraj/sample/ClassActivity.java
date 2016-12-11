@@ -69,7 +69,7 @@ public class ClassActivity extends AppCompatActivity {
         org = prefs.getString("specificorg", null);
         url_icon = prefs.getString("org_icon", null);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        dataAvailability = (TextView) findViewById(R.id.nodata);
+        dataAvailability = (TextView) findViewById(R.id.noStData);
         fetchClassData();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
