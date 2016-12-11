@@ -60,12 +60,12 @@ public class OffClassesActivity extends AppCompatActivity {
     private static RecyclerView recyclerView;
     private LinearLayoutManager mLayoutManager;
     private static ArrayList<OffClassesData> dailyTeach = null;
-    int current_page = 1;
     int counter = 9;
     Button load;
     ProgressDialog pDialog, mProgress;
     TextView dataAvailability;
     String url_icon;
+    int current_page = 1;
     String url = ApiKeyConstant.apiUrl +"/api/v1/off_classes.json";
     ScrollView scrollview;
 
@@ -176,7 +176,12 @@ public class OffClassesActivity extends AppCompatActivity {
         };
 
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
-
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new loadMoreListView().execute();
+            }
+        });
     }
 
     @Override
@@ -185,5 +190,104 @@ public class OffClassesActivity extends AppCompatActivity {
         startActivity(new Intent(OffClassesActivity.this, ClassActivity.class));
         finish();
     }
+
+
+    private class loadMoreListView extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            // Showing progress dialog before sending http request
+            pDialog = new ProgressDialog(
+                    OffClassesActivity.this);
+            pDialog.setMessage("Please wait..");
+            pDialog.setIndeterminate(true);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected Void doInBackground(final Void... unused) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    current_page += 1;
+                    String url = ApiKeyConstant.apiUrl +"/api/v1/off_classes.json?page=" + current_page;
+                    Log.e("=============", "================");
+                    Log.e("URL is", url);
+                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                boolean success = response.getBoolean("success");
+                                if (success) {
+                                    mProgress.dismiss();
+                                    JSONArray jsonArray = response.getJSONArray("off_classes");
+                                    int arrayLength = jsonArray.length();
+                                    Log.e("array length is", String.valueOf(arrayLength));
+
+                                    if (jsonArray.length() != 0) {
+                                        for (int i = 0; i < jsonArray.length(); i++) {
+                                            JSONObject orgObj = jsonArray.getJSONObject(i);
+                                            OffClassesData offClassData = new OffClassesData();
+                                            offClassData.name = orgObj.getString("name");
+                                            offClassData.date = orgObj.getString("date");
+                                            offClassData.teacher_name = orgObj.getString("teacher_name");
+                                            dailyTeach.add(offClassData);
+                                            adapter.notifyItemInserted(dailyTeach.size());
+                                        }
+                                    } else {
+                                        load.setVisibility(View.GONE);
+                                        Toast.makeText(getApplicationContext(), "No More Data to laod", Toast.LENGTH_LONG).show();
+                                    }
+                                    scrollview.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //int x=0,y=30;
+                                            //scrollview.scrollTo(x, y);
+                                            counter = counter + scrollview.getBottom()+1180;
+                                            scrollview.scrollTo(0, counter);
+                                            mRecyclerView.scrollToPosition(counter);
+                                        }
+                                    });
+
+                                }
+                            } catch (JSONException e) {
+                                String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
+                                Log.e("sdcard-err2:", err);
+                            }
+                        }
+                    },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    NetworkResponse networkResponse = error.networkResponse;
+                                    if (networkResponse != null && networkResponse.statusCode == 401) {
+                                        Intent intent = new Intent(OffClassesActivity.this, AndroidSpinnerExampleActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        load.setVisibility(View.GONE);
+                                        Toast.makeText(getApplicationContext(), "No More Data to laod", Toast.LENGTH_LONG).show();
+                                        Log.e("Poonam", "Error");
+                                    }
+                                }
+                            }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            HashMap<String, String> headers = new HashMap<String, String>();
+                            headers.put("Content-Type", "application/json; charset=utf-8");
+                            headers.put("Authorization", ApiKeyConstant.authToken);
+                            return headers;
+                        }
+                    };
+                    VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+                }
+            });
+            return (null);
+        }
+
+        protected void onPostExecute(Void unused) {
+            pDialog.dismiss();
+        }
+    }
+
+
+
 
 }
