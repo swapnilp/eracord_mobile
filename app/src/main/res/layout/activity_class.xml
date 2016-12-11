@@ -47,8 +47,7 @@
                     android:visibility="gone"
                     android:textStyle="normal|bold"
                     android:textAllCaps="true"
-                    android:textAlignment="center"
-                    android:layout_marginTop="40dp" />
+                    android:textAlignment="center" />
 
                 <android.support.v4.widget.SwipeRefreshLayout
                     android:id="@+id/swipe_refresh"

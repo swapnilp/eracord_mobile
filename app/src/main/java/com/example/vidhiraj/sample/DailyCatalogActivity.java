@@ -68,7 +68,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
         setContentView(R.layout.daily_fill_catalog);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         scrollview = ((ScrollView) findViewById(R.id.dailyTeachSView));
-        dataAvailability = (TextView) findViewById(R.id.nodata);
+        dataAvailability = (TextView) findViewById(R.id.noDailyTeachData);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");
