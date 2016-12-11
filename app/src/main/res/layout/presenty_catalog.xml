@@ -116,9 +116,9 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/nodata"
+                    android:id="@+id/noPrData"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@android:color/black"
                     android:text="No Student Available"
                     android:layout_marginTop="80dp"
@@ -127,7 +127,8 @@
                     android:visibility="gone"
                     android:textSize="18sp"
                     android:textStyle="normal|bold"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textAllCaps="true" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/my_recycler_view"
