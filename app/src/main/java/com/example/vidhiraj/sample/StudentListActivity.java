@@ -88,7 +88,7 @@ public class StudentListActivity extends AppCompatActivity {
         //  toolbar = (Toolbar) findViewById(R.id.toolbar);
         // tvEmptyView = (TextView) findViewById(R.id.empty_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        dataAvailability = (TextView) findViewById(R.id.nodata);
+        dataAvailability = (TextView) findViewById(R.id.noSdData);
         scrollview = ((ScrollView) findViewById(R.id.scrollView));
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
@@ -169,7 +169,11 @@ public class StudentListActivity extends AppCompatActivity {
                                 StudentData dailyData = new StudentData();
                                 dailyData.stud_name = orgObj.getString("name");
                                 dailyData.stud_class_name = orgObj.getString("class_names");
-                                dailyData.stud_hostel = orgObj.getBoolean("has_hostel");
+                                try {
+                                    dailyData.stud_hostel = orgObj.getInt("hostel_id");
+                                } catch(Exception e) {
+                                    dailyData.stud_hostel = 0;
+                                }
                                 dailyTeach.add(dailyData);
                                 Log.e("data is", String.valueOf(dailyTeach));
                                 // mAdapter.notifyItemInserted(dailyTeach.size());
@@ -323,7 +327,11 @@ public class StudentListActivity extends AppCompatActivity {
                                         StudentData dailyData = new StudentData();
                                         dailyData.stud_name = orgObj.getString("name");
                                         dailyData.stud_class_name = orgObj.getString("class_names");
-                                        dailyData.stud_hostel = orgObj.getBoolean("has_hostel");
+                                        try {
+                                            dailyData.stud_hostel = orgObj.getInt("hostel_id");
+                                        } catch(Exception e) {
+                                            dailyData.stud_hostel = 0;
+                                        }
                                         dailyTeach.add(dailyData);
                                         Log.e("data is", String.valueOf(dailyTeach));
                                         mAdapter.notifyItemInserted(dailyTeach.size());

@@ -77,6 +77,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     String url_icon;
     private GoogleApiClient client;
     EditText dateText;
+    String selected_date;
 
     private DatePicker datePicker;
     private Calendar calendar;
@@ -90,6 +91,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                     // arg1 = year
                     // arg2 = month
                     // arg3 = day
+                    selected_date = arg1 + "-" + (arg2+1) + "-" + arg3;
                     showDate(arg1, arg2 + 1, arg3);
                 }
             };
@@ -229,7 +231,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                 try {
                     daily_teaching_point.put("chapter_id", chapter_id);
                     daily_teaching_point.put("chapters_point_id", buff);
-                    daily_teaching_point.put("date", new Date());
+                    daily_teaching_point.put("date", selected_date);
                     userObj.put("daily_teaching_point", daily_teaching_point);
                     Log.e("daily_teach", String.valueOf(daily_teaching_point));
                 } catch (JSONException e) {

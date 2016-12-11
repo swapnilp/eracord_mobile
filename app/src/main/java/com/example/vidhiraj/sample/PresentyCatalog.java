@@ -80,7 +80,7 @@ public class PresentyCatalog extends AppCompatActivity {
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
         savePresenty = (Button) findViewById(R.id.savepresenty);
-        dataAvailabiliy = (TextView) findViewById(R.id.nodata);
+        dataAvailabiliy = (TextView) findViewById(R.id.noPrData);
         totalPresent = (TextView) findViewById(R.id.totalpresent);
         totalAbsent = (TextView) findViewById(R.id.totalabsent);
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
