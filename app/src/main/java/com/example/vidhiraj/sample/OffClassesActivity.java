@@ -75,6 +75,7 @@ public class OffClassesActivity extends AppCompatActivity {
         setContentView(R.layout.off_class_activity);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         scrollview = ((ScrollView) findViewById(R.id.scrollView));
+        load= (Button) findViewById(R.id.loadmore_offclasses);
         dataAvailability = (TextView) findViewById(R.id.noOffData);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
@@ -135,6 +136,7 @@ public class OffClassesActivity extends AppCompatActivity {
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
+                            load.setVisibility(View.GONE);
                         }
                     }
 

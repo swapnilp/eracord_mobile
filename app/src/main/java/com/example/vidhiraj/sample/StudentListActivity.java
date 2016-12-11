@@ -139,7 +139,7 @@ public class StudentListActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        load = (Button) findViewById(R.id.loadmore);
+        load = (Button) findViewById(R.id.more_student);
         dailyTeach = new ArrayList<StudentData>();
         handler = new Handler();
         //  loadData();
@@ -180,6 +180,7 @@ public class StudentListActivity extends AppCompatActivity {
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
+                            load.setVisibility(View.GONE);
                         }
                     }
 

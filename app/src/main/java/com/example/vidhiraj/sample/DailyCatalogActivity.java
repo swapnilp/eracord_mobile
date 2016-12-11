@@ -104,7 +104,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        load = (Button) findViewById(R.id.loadmore);
+        load = (Button) findViewById(R.id.loadmore_dailyteach);
         dailyTeach = new ArrayList<>();
         mProgress.show();
         Log.e("=============", "================");
@@ -135,6 +135,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
+                            load.setVisibility(View.GONE);
                         }
                     }
 

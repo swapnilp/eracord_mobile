@@ -31,13 +31,13 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/loadmore"
+                android:id="@+id/loadmore_dailyteach"
                 android:background="@drawable/round_button"
                 android:layout_marginRight="10dp"
                 android:drawableTop="@drawable/down_arrow"
@@ -48,14 +48,14 @@
                 android:elevation="1dp"
                 android:layout_centerHorizontal="false"
                 android:paddingTop="6dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal" />
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
+                android:layout_height="wrap_content"
+                android:fillViewport="false"
                 android:id="@+id/scrollView">
 
                 <LinearLayout

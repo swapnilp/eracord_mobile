@@ -37,7 +37,7 @@
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/loadmore"
+                android:id="@+id/loadmore_dailyteach"
                 android:background="@drawable/round_button"
                 android:layout_marginRight="10dp"
                 android:drawableTop="@drawable/down_arrow"
@@ -46,6 +46,7 @@
                 android:layout_alignParentEnd="true"
                 android:minHeight="43dp"
                 android:elevation="1dp"
+                android:clickable="true"
                 android:layout_centerHorizontal="false"
                 android:paddingTop="6dp"
                 android:visibility="visible"
@@ -55,7 +56,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fillViewport="true"
+                android:fillViewport="false"
                 android:id="@+id/dailyTeachSView">
 
                 <LinearLayout
