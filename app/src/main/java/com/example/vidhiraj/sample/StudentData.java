@@ -5,12 +5,12 @@ package com.example.vidhiraj.sample;
  */
 public class StudentData {
     public String stud_name;
-    public boolean stud_hostel;
-public StudentData()
+    public int stud_hostel;
+    public StudentData()
 {
 
 }
-    public StudentData(String stud_name, boolean stud_hostel, String stud_class_name) {
+    public StudentData(String stud_name, int stud_hostel, String stud_class_name) {
         this.stud_name = stud_name;
         this.stud_hostel = stud_hostel;
         this.stud_class_name = stud_class_name;
@@ -24,11 +24,11 @@ public StudentData()
         this.stud_name = stud_name;
     }
 
-    public boolean isStud_hostel() {
+    public int isStud_hostel() {
         return stud_hostel;
     }
 
-    public void setStud_hostel(boolean stud_hostel) {
+    public void setStud_hostel(int stud_hostel) {
         this.stud_hostel = stud_hostel;
     }
 

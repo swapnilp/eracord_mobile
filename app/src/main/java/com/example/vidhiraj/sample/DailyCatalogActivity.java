@@ -67,7 +67,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily_fill_catalog);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        scrollview = ((ScrollView) findViewById(R.id.scrollView));
+        scrollview = ((ScrollView) findViewById(R.id.dailyTeachSView));
         dataAvailability = (TextView) findViewById(R.id.nodata);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
@@ -107,6 +107,8 @@ public class DailyCatalogActivity extends AppCompatActivity {
         load = (Button) findViewById(R.id.loadmore);
         dailyTeach = new ArrayList<>();
         mProgress.show();
+        Log.e("=============", "================");
+        Log.e("URL is", url);
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -139,7 +141,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
                     if (getResources().getConfiguration().orientation == 2) {
                         counter = 2;
                     }
-                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setHasFixedSize(false);
                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(mLayoutManager);
                     adapter = new DailyCatalogAdapter(getApplicationContext(), dailyTeach, recyclerView);
@@ -203,7 +205,9 @@ public class DailyCatalogActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     current_page += 1;
-                    String url = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs&page=" + current_page;
+                    String url = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs?page=" + current_page;
+                    Log.e("=============", "================");
+                    Log.e("URL is", url);
                     JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {

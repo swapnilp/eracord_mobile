@@ -100,8 +100,8 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
             }
 
             ((StudentViewHolder) holder).student = singleStudent;
-            boolean hostel = singleStudent.stud_hostel;
-            if (hostel) {
+            int hostel = singleStudent.stud_hostel;
+            if (hostel != 0) {
                 ((StudentViewHolder) holder).textViewHostel.setText("Hostel allocated");
             } else {
                 ((StudentViewHolder) holder).textViewHostel.setText("No hostel allocated");
