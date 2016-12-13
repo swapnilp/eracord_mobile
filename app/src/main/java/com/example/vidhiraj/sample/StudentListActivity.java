@@ -159,6 +159,7 @@ public class StudentListActivity extends AppCompatActivity {
                         int arrayLength = jsonArray.length();
                         Log.e("array length is", String.valueOf(arrayLength));
                         if (arrayLength >= 10) {
+                            load.bringToFront();
                             load.setVisibility(View.VISIBLE);
                         }
                         if (jsonArray.length() != 0) {
@@ -176,6 +177,7 @@ public class StudentListActivity extends AppCompatActivity {
                                 }
                                 dailyTeach.add(dailyData);
                                 Log.e("data is", String.valueOf(dailyTeach));
+                                load.bringToFront();
                                 // mAdapter.notifyItemInserted(dailyTeach.size());
                             }
                         } else {
@@ -317,6 +319,7 @@ public class StudentListActivity extends AppCompatActivity {
                                     int arrayLength = jsonArray.length();
                                     Log.e("array length is", String.valueOf(arrayLength));
                                     if (arrayLength >= 10) {
+                                        load.bringToFront();
                                         load.setVisibility(View.VISIBLE);
                                     }
 
@@ -371,6 +374,7 @@ public class StudentListActivity extends AppCompatActivity {
                                 public void onErrorResponse(VolleyError error) {
                                     NetworkResponse networkResponse = error.networkResponse;
                                     if (networkResponse != null && networkResponse.statusCode == 401) {
+                                        load.bringToFront();
                                         Intent intent = new Intent(StudentListActivity.this, AndroidSpinnerExampleActivity.class);
                                         startActivity(intent);
                                     } else {

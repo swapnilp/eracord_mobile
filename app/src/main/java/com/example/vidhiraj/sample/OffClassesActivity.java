@@ -133,6 +133,7 @@ public class OffClassesActivity extends AppCompatActivity {
                                 offClassData.date = orgObj.getString("date");
                                 offClassData.teacher_name = orgObj.getString("teacher_name");
                                 dailyTeach.add(offClassData);
+                                load.bringToFront();
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
@@ -229,6 +230,7 @@ public class OffClassesActivity extends AppCompatActivity {
                                             offClassData.teacher_name = orgObj.getString("teacher_name");
                                             dailyTeach.add(offClassData);
                                             adapter.notifyItemInserted(dailyTeach.size());
+                                            load.bringToFront();
                                         }
                                     } else {
                                         load.setVisibility(View.GONE);
@@ -259,6 +261,7 @@ public class OffClassesActivity extends AppCompatActivity {
                                     if (networkResponse != null && networkResponse.statusCode == 401) {
                                         Intent intent = new Intent(OffClassesActivity.this, AndroidSpinnerExampleActivity.class);
                                         startActivity(intent);
+                                        load.bringToFront();
                                     } else {
                                         load.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(), "No More Data to laod", Toast.LENGTH_LONG).show();
