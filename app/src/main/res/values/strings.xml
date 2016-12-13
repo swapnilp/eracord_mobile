@@ -21,6 +21,7 @@
     <string name="generate_mpin">Generate mPin</string>
 
     <!-- activity_class -->
+    <string name="no_data">No Data Available</string>
     <string name="no_subject">No Subject</string>
     <string name="no_daily_teaches">No Daily Teaches</string>
     <string name="no_off_classes">No Off Classes</string>
