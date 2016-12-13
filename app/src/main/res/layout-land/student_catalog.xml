@@ -37,8 +37,8 @@
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/more_student"
                 android:clickable="true"
+                android:id="@+id/more_student"
                 android:background="@drawable/round_button"
                 android:layout_marginRight="10dp"
                 android:drawableTop="@drawable/down_arrow"
@@ -49,16 +49,14 @@
                 android:elevation="1dp"
                 android:layout_centerHorizontal="false"
                 android:paddingTop="6dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal" />
 
-            <ScrollView
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/scrollView"
-                android:orientation="vertical"
-                android:fillViewport="false">
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView_st_catalog">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -69,29 +67,29 @@
                     <TextView
                         android:id="@+id/noSdData"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="@string/no_data"
+                        android:text="@string/no_tt"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:visibility="gone"
                         android:textStyle="normal|bold"
                         android:textAllCaps="true"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:layout_marginTop="40dp" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/my_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:descendantFocusability="blocksDescendants"
                         app:reverseLayout="true"
                         app:stackFromEnd="true">
 
                     </android.support.v7.widget.RecyclerView>
-
                 </LinearLayout>
-            </ScrollView>
+            </android.support.v4.widget.NestedScrollView>
 
         </RelativeLayout>
 
