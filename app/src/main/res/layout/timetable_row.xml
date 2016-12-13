@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/start_time"
                 android:layout_width="wrap_content"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@android:color/holo_red_light"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
@@ -51,13 +51,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/hyphen"
                 android:paddingTop="6dp"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@android:color/holo_red_light"
                 android:textAlignment="viewEnd" />
 
             <TextView
                 android:id="@+id/end_time"
                 android:layout_width="wrap_content"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@android:color/holo_red_light"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
