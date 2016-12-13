@@ -245,6 +245,9 @@ public class DailyCatalogActivity extends AppCompatActivity {
                                             counter = counter + scrollview.getBottom()+1180;
                                             scrollview.scrollTo(0, counter);
                                             mRecyclerView.scrollToPosition(counter);
+                                            mRecyclerView.smoothScrollBy(0, counter);
+                                            mRecyclerView.smoothScrollToPosition(counter);
+                                            scrollview.smoothScrollTo(0, counter);
                                         }
                                     });
                                     if (arrayLength < 10) {
