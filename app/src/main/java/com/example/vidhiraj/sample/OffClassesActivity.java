@@ -209,8 +209,6 @@ public class OffClassesActivity extends AppCompatActivity {
                 public void run() {
                     current_page += 1;
                     String url = ApiKeyConstant.apiUrl +"/api/v1/off_classes.json?page=" + current_page;
-                    Log.e("=============", "================");
-                    Log.e("URL is", url);
                     JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
