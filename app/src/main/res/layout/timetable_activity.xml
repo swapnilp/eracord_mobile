@@ -29,81 +29,69 @@ android:elevation="7dp">
         android:textAllCaps="true"
         android:fontFamily="sans-serif" />
 
-    <TextView
-        android:id="@+id/time_nodata"
-        android:visibility="gone"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Data Available"/>
+        android:background="@color/colorWhite"
+        android:layout_margin="10dp">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:padding="10dp" />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/loadmore"
-            android:background="@drawable/round_button"
-            android:layout_marginRight="10dp"
-            android:drawableTop="@drawable/down_arrow"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:minHeight="43dp"
-            android:elevation="1dp"
-            android:layout_centerHorizontal="false"
-            android:paddingTop="6dp"
-            android:visibility="visible"
-            android:layout_marginBottom="10dp"
-            android:gravity="center_horizontal" />
-
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:id="@+id/scrollView">
+            android:id="@+id/scrollView_tt">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="1"
-                android:layout_weight="1">
+                android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/noTTData"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/no_data"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
+                    android:id="@+id/time_nodata"
                     android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Timetable"
+                    android:textSize="18sp"
                     android:textStyle="normal|bold"
                     android:textAllCaps="true"
-                    android:textAlignment="center" />
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:spinnerMode="dialog" />
+                    android:textAlignment="center"
+                    android:textColor="@color/bb_darkBackgroundColor"
+                    android:layout_marginTop="40dp" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/my_recycler_view"
+                    android:id="@+id/tt_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                 </android.support.v7.widget.RecyclerView>
-
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
 
     </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
 

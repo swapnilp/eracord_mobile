@@ -89,7 +89,7 @@ public class StudentListActivity extends AppCompatActivity {
         // tvEmptyView = (TextView) findViewById(R.id.empty_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         dataAvailability = (TextView) findViewById(R.id.noSdData);
-        scrollview = ((ScrollView) findViewById(R.id.scrollView));
+        scrollview = ((ScrollView) findViewById(R.id.scrollView_st_catalog));
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");
@@ -159,6 +159,7 @@ public class StudentListActivity extends AppCompatActivity {
                         int arrayLength = jsonArray.length();
                         Log.e("array length is", String.valueOf(arrayLength));
                         if (arrayLength >= 10) {
+                            load.bringToFront();
                             load.setVisibility(View.VISIBLE);
                         }
                         if (jsonArray.length() != 0) {
@@ -176,6 +177,7 @@ public class StudentListActivity extends AppCompatActivity {
                                 }
                                 dailyTeach.add(dailyData);
                                 Log.e("data is", String.valueOf(dailyTeach));
+                                load.bringToFront();
                                 // mAdapter.notifyItemInserted(dailyTeach.size());
                             }
                         } else {
@@ -317,6 +319,7 @@ public class StudentListActivity extends AppCompatActivity {
                                     int arrayLength = jsonArray.length();
                                     Log.e("array length is", String.valueOf(arrayLength));
                                     if (arrayLength >= 10) {
+                                        load.bringToFront();
                                         load.setVisibility(View.VISIBLE);
                                     }
 
@@ -346,6 +349,9 @@ public class StudentListActivity extends AppCompatActivity {
                                             counter = counter + scrollview.getBottom()+1180;
                                             scrollview.scrollTo(0, counter);
                                             mRecyclerView.scrollToPosition(counter);
+                                            mRecyclerView.smoothScrollBy(0, counter);
+                                            mRecyclerView.smoothScrollToPosition(counter);
+                                            scrollview.smoothScrollTo(0, counter);
                                         }
                                     });
 
@@ -371,6 +377,7 @@ public class StudentListActivity extends AppCompatActivity {
                                 public void onErrorResponse(VolleyError error) {
                                     NetworkResponse networkResponse = error.networkResponse;
                                     if (networkResponse != null && networkResponse.statusCode == 401) {
+                                        load.bringToFront();
                                         Intent intent = new Intent(StudentListActivity.this, AndroidSpinnerExampleActivity.class);
                                         startActivity(intent);
                                     } else {

@@ -155,12 +155,15 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                             Log.e("timearray is", String.valueOf(timeTableArray));
                             for (int i = 0; i < timeTableArray.length(); i++) {
                                 JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                                TimeTableData timeTable = new TimeTableData(dayDataObj.getString("name"), dayDataObj.getString("start_time"), dayDataObj.getString("end_time"), dayDataObj.getString("class_room"), dayDataObj.getString("subject"));
+                                TimeTableData timeTable = new TimeTableData(dayDataObj.getString("name"),
+                                                                            dayDataObj.getString("subject"),
+                                                                            dayDataObj.getString("class_room"),
+                                                                            dayDataObj.getString("start_time"),
+                                                                            dayDataObj.getString("end_time"));
                                 timeTableDatas.add(timeTable);
                             }
 
-
-                            mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+                            mRecyclerView = (RecyclerView) findViewById(R.id.tt_recycler_view);
                             mRecyclerView.setHasFixedSize(true);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
                             mAdapter = new TimeTableAdapter(timeTableDatas);
@@ -226,14 +229,18 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                 Log.e("timearray is", String.valueOf(timeTableArray));
                 for (int i = 0; i < timeTableArray.length(); i++) {
                     JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                    TimeTableData timeTable = new TimeTableData(dayDataObj.getString("class_name"), dayDataObj.getString("start_time"), dayDataObj.getString("end_time"), dayDataObj.getString("sub_class_name"), dayDataObj.getString("subject"));
+                    TimeTableData timeTable = new TimeTableData(dayDataObj.getString("class_name"),
+                                                                dayDataObj.getString("subject"),
+                                                                dayDataObj.getString("sub_class_name"),
+                                                                dayDataObj.getString("start_time"),
+                                                                dayDataObj.getString("end_time"));
                     timeTableDatas.add(timeTable);
                 }
             }
             else {
                 timetableData.setVisibility(View.VISIBLE);
             }
-            mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+            mRecyclerView = (RecyclerView) findViewById(R.id.tt_recycler_view);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
             mAdapter = new TimeTableAdapter(timeTableDatas);

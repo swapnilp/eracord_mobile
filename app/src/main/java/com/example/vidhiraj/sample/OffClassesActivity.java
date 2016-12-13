@@ -13,9 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +33,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
@@ -45,37 +42,37 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  */
 
 public class OffClassesActivity extends AppCompatActivity {
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Logout"};
+    private static OffClassesAdapter adapter;
+    private static RecyclerView recyclerView;
+    private static ArrayList<OffClassesData> dailyTeach = null;
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;
-    private Toolbar toolbar;                              // Declaring the Toolbar Object
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManagers;         // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;
-    private GoogleApiClient client;
-    private static OffClassesAdapter adapter;
-    private static RecyclerView recyclerView;
-    private LinearLayoutManager mLayoutManager;
-    private static ArrayList<OffClassesData> dailyTeach = null;
     int counter = 9;
     Button load;
     ProgressDialog pDialog, mProgress;
     TextView dataAvailability;
     String url_icon;
     int current_page = 1;
-    String url = ApiKeyConstant.apiUrl +"/api/v1/off_classes.json";
+    String url = ApiKeyConstant.apiUrl + "/api/v1/off_classes.json";
     ScrollView scrollview;
+    private Toolbar toolbar;                              // Declaring the Toolbar Object
+    private GoogleApiClient client;
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.off_class_activity);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        scrollview = ((ScrollView) findViewById(R.id.scrollView));
-        load= (Button) findViewById(R.id.loadmore_offclasses);
+        scrollview = ((ScrollView) findViewById(R.id.scrollView_offclass));
+        load = (Button) findViewById(R.id.loadmore_offclasses);
         dataAvailability = (TextView) findViewById(R.id.noOffData);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
@@ -133,6 +130,7 @@ public class OffClassesActivity extends AppCompatActivity {
                                 offClassData.date = orgObj.getString("date");
                                 offClassData.teacher_name = orgObj.getString("teacher_name");
                                 dailyTeach.add(offClassData);
+                                load.bringToFront();
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
@@ -146,7 +144,7 @@ public class OffClassesActivity extends AppCompatActivity {
                     recyclerView.setHasFixedSize(true);
                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     recyclerView.setLayoutManager(mLayoutManager);
-                    adapter = new OffClassesAdapter(getApplicationContext(),dailyTeach);
+                    adapter = new OffClassesAdapter(getApplicationContext(), dailyTeach);
                     recyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
@@ -208,9 +206,7 @@ public class OffClassesActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     current_page += 1;
-                    String url = ApiKeyConstant.apiUrl +"/api/v1/off_classes.json?page=" + current_page;
-                    Log.e("=============", "================");
-                    Log.e("URL is", url);
+                    String url = ApiKeyConstant.apiUrl + "/api/v1/off_classes.json?page=" + current_page;
                     JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -231,6 +227,7 @@ public class OffClassesActivity extends AppCompatActivity {
                                             offClassData.teacher_name = orgObj.getString("teacher_name");
                                             dailyTeach.add(offClassData);
                                             adapter.notifyItemInserted(dailyTeach.size());
+                                            load.bringToFront();
                                         }
                                     } else {
                                         load.setVisibility(View.GONE);
@@ -241,9 +238,12 @@ public class OffClassesActivity extends AppCompatActivity {
                                         public void run() {
                                             //int x=0,y=30;
                                             //scrollview.scrollTo(x, y);
-                                            counter = counter + scrollview.getBottom()+1180;
+                                            counter = counter + scrollview.getBottom() + 1180;
                                             scrollview.scrollTo(0, counter);
                                             mRecyclerView.scrollToPosition(counter);
+                                            mRecyclerView.smoothScrollBy(0, counter);
+                                            mRecyclerView.smoothScrollToPosition(counter);
+                                            scrollview.smoothScrollTo(0, counter);
                                         }
                                     });
 
@@ -261,6 +261,7 @@ public class OffClassesActivity extends AppCompatActivity {
                                     if (networkResponse != null && networkResponse.statusCode == 401) {
                                         Intent intent = new Intent(OffClassesActivity.this, AndroidSpinnerExampleActivity.class);
                                         startActivity(intent);
+                                        load.bringToFront();
                                     } else {
                                         load.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(), "No More Data to laod", Toast.LENGTH_LONG).show();
@@ -286,8 +287,6 @@ public class OffClassesActivity extends AppCompatActivity {
             pDialog.dismiss();
         }
     }
-
-
 
 
 }

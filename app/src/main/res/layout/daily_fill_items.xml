@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/date"
             android:layout_width="50dp"
-            android:textColor="@color/bb_inActiveBottomBarItemColor"
+            android:textColor="@android:color/holo_red_light"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="14sp"
             android:layout_height="wrap_content"

@@ -11,12 +11,12 @@ public class TimeTableData {
     private String className;
     private String subject;
 
-    public TimeTableData(String classDivision, String subject, String className, String endTime, String startTime) {
-        this.classDivision = classDivision;
-        this.subject = subject;
+    public TimeTableData(String className, String subject, String classDivision, String startTime, String endTime) {
         this.className = className;
-        this.endTime = endTime;
+        this.subject = subject;
+        this.classDivision = classDivision;
         this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public String getClassDivision() {

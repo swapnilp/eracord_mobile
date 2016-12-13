@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:src="@drawable/eracord"/>
+            android:src="@drawable/eracord"
+            android:contentDescription="eracord_logo"/>
         <TextView
             android:id="@+id/era_load"
             android:layout_width="match_parent"

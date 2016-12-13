@@ -4,7 +4,8 @@
     android:id="@+id/DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="7dp">
+    android:elevation="7dp"
+    tools:ignore="UnusedAttribute">
 
     <LinearLayout
         android:orientation="vertical"
@@ -122,8 +123,9 @@
         </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
-        android:layout_height="match_parent"
-            android:paddingTop="10dp">
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:id="@+id/scrollView_dailyTeach">
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -166,7 +168,8 @@
                              android:layout_marginLeft="20dp"
                              android:layout_marginRight="20dp"
                              android:layout_marginTop="5dp"
-                             android:layout_weight="3.70">
+                             android:layout_weight="3.70"
+                             tools:ignore="InefficientWeight">
 
                          </android.support.v7.widget.RecyclerView>
                      </LinearLayout>

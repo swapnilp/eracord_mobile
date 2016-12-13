@@ -67,7 +67,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily_fill_catalog);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        scrollview = ((ScrollView) findViewById(R.id.dailyTeachSView));
+        scrollview = ((ScrollView) findViewById(R.id.scrollView_dailyTeach));
         dataAvailability = (TextView) findViewById(R.id.noDailyTeachData);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
@@ -120,6 +120,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
                         int arrayLength = jsonArray.length();
                         Log.e("array length is", String.valueOf(arrayLength));
                         if (arrayLength >= 10) {
+                            load.bringToFront();
                             load.setVisibility(View.VISIBLE);
                         }
                         if (jsonArray.length() != 0) {
@@ -132,6 +133,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
                                 dailyData.points = orgObj.getString("points");
                                 dailyData.id = orgObj.getInt("id");
                                 dailyTeach.add(dailyData);
+                                load.bringToFront();
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
@@ -220,6 +222,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
                                     int arrayLength = jsonArray.length();
                                     Log.e("array length is", String.valueOf(arrayLength));
                                     if (arrayLength >= 10) {
+                                        load.bringToFront();
                                         load.setVisibility(View.VISIBLE);
                                     }
                                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -242,6 +245,9 @@ public class DailyCatalogActivity extends AppCompatActivity {
                                             counter = counter + scrollview.getBottom()+1180;
                                             scrollview.scrollTo(0, counter);
                                             mRecyclerView.scrollToPosition(counter);
+                                            mRecyclerView.smoothScrollBy(0, counter);
+                                            mRecyclerView.smoothScrollToPosition(counter);
+                                            scrollview.smoothScrollTo(0, counter);
                                         }
                                     });
                                     if (arrayLength < 10) {
@@ -264,6 +270,7 @@ public class DailyCatalogActivity extends AppCompatActivity {
                                 public void onErrorResponse(VolleyError error) {
                                     NetworkResponse networkResponse = error.networkResponse;
                                     if (networkResponse != null && networkResponse.statusCode == 401) {
+                                        load.bringToFront();
                                         Intent intent = new Intent(DailyCatalogActivity.this, AndroidSpinnerExampleActivity.class);
                                         startActivity(intent);
                                     } else {
