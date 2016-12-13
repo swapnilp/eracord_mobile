@@ -23,6 +23,9 @@
     <!-- activity_class -->
     <string name="no_subject">No Subject</string>
     <string name="no_daily_teaches">No Daily Teaches</string>
+    <string name="no_off_classes">No Off Classes</string>
+    <string name="no_students">No Students</string>
+    <string name="no_tt">No Timetable</string>
 
     <!-- Student_catalog -->
     <string name="load_more">Load more</string>

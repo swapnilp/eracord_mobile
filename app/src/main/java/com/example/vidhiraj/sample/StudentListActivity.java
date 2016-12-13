@@ -89,7 +89,7 @@ public class StudentListActivity extends AppCompatActivity {
         // tvEmptyView = (TextView) findViewById(R.id.empty_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         dataAvailability = (TextView) findViewById(R.id.noSdData);
-        scrollview = ((ScrollView) findViewById(R.id.scrollView));
+        scrollview = ((ScrollView) findViewById(R.id.scrollView_st_catalog));
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");

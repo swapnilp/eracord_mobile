@@ -52,18 +52,15 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal" />
 
-            <ScrollView
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fillViewport="true"
-                android:id="@+id/scrollView">
+                android:id="@+id/scrollView_offclass">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="1"
-                    android:layout_weight="1">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/noOffData"
@@ -71,23 +68,29 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="@string/no_data"
+                        android:text="@string/no_off_classes"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:visibility="gone"
                         android:textStyle="normal|bold"
                         android:textAllCaps="true"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:layout_marginTop="40dp" />
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/my_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <android.support.v4.widget.SwipeRefreshLayout
+                        android:id="@+id/swipe_refresh"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/my_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                    </android.support.v7.widget.RecyclerView>
+                        </android.support.v7.widget.RecyclerView>
+                    </android.support.v4.widget.SwipeRefreshLayout>
 
                 </LinearLayout>
-            </ScrollView>
+            </android.support.v4.widget.NestedScrollView>
 
         </RelativeLayout>
 
