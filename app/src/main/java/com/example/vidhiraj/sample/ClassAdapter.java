@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
         TextView textViewId;
         TextView textViewVersion;
         TextView division;
+        LinearLayout clickLayoutEvent;
         ImageView imageViewIcon;
         private Context context = null;
 
@@ -37,16 +39,26 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
             this.textViewVersion = (TextView) itemView.findViewById(R.id.textViewVersion);
             this.division = (TextView) itemView.findViewById(R.id.division);
             this.imageViewIcon = (ImageView) itemView.findViewById(R.id.imageView);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            this.clickLayoutEvent=(LinearLayout)itemView.findViewById(R.id.clickLayout);
+            clickLayoutEvent.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     String id = textViewId.getText().toString();
-                    String token = ApiKeyConstant.authToken;
                     Intent intent = new Intent(context, DailyTeachingActivity.class);
                     intent.putExtra("teach_id", id);
                     context.startActivity(intent);
                 }
             });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    String id = textViewId.getText().toString();
+//                    String token = ApiKeyConstant.authToken;
+//                    Intent intent = new Intent(context, DailyTeachingActivity.class);
+//                    intent.putExtra("teach_id", id);
+//                    context.startActivity(intent);
+//                }
+//            });
         }
     }
 

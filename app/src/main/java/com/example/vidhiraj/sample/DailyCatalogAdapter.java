@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -117,6 +118,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
         TextView textViewDate;
         TextView textViewPoints;
         TextView textViewId;
+        LinearLayout dailyitem_click;
         private Context context = null;
         public StudentData student;
 
@@ -129,17 +131,24 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
             this.textViewDate = (TextView) itemView.findViewById(R.id.date);
             this.textViewPoints = (TextView) itemView.findViewById(R.id.points);
             this.textViewId = (TextView) itemView.findViewById(R.id.dailyid);
-
-            v.setOnClickListener(new View.OnClickListener() {
-
+            this.dailyitem_click=(LinearLayout)itemView.findViewById(R.id.dailyitem_click);
+            dailyitem_click.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     String id=textViewId.getText().toString();
                     Intent intent=new Intent(context,PresentyCatalog.class);
                     intent.putExtra("dtp_id",id);
                     context.startActivity(intent);
                 }
             });
+
+//            v.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//            });
         }
     }
 

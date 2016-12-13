@@ -2,31 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
     android:orientation="vertical">
-
-
-    <!--<ImageView-->
-        <!--android:layout_width="25dp"-->
-        <!--android:layout_height="25dp"-->
-        <!--android:id="@+id/rowIcon"-->
-        <!--android:paddingLeft="16dp"-->
-        <!--android:src="@drawable/ic_photos"/>-->
-
     <TextView
+        android:id="@+id/rowText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:cursorVisible="true"
+        android:fontFamily="sans-serif"
+        android:paddingBottom="10dp"
         android:paddingLeft="12dp"
         android:paddingTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@drawable/draweritem_select"
+        android:clickable="true"
         android:text="Medium Text"
-        android:id="@+id/rowText"
         android:textAllCaps="false"
-        android:background="@color/colorWhite"
-        android:fontFamily="sans-serif"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@drawable/left_links"
-        android:textSize="14sp"
-        android:paddingBottom="10dp"
-        android:cursorVisible="true" />
+        android:textSize="14sp" />
 
 </LinearLayout>

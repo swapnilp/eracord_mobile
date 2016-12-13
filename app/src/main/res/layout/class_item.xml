@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:tag="cards main container">
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:divider="@drawable/divider"
-            android:showDividers="beginning|middle|end"
+            android:clickable="true"
+            android:id="@+id/clickLayout"
+            android:background="@drawable/draweritem_select"
             android:elevation="2dp">
 
             <ImageView
