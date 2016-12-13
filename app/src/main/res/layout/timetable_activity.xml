@@ -32,32 +32,17 @@ android:elevation="7dp">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_margin="10dp">
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:spinnerMode="dialog"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:drawable/btn_dropdown"
             android:padding="10dp" />
 
-        <TextView
-            android:id="@+id/time_nodata"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No Data Available"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
-            android:textAllCaps="true"
-            android:textAlignment="center"
-            android:textColor="@color/bb_darkBackgroundColor"
-            android:layout_marginTop="40dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -74,6 +59,19 @@ android:elevation="7dp">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/time_nodata"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Timetable"
+                    android:textSize="18sp"
+                    android:textStyle="normal|bold"
+                    android:textAllCaps="true"
+                    android:textAlignment="center"
+                    android:textColor="@color/bb_darkBackgroundColor"
+                    android:layout_marginTop="40dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/tt_recycler_view"

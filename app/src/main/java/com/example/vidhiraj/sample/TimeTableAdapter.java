@@ -28,7 +28,7 @@ public TimeTableAdapter(List<TimeTableData> timeTableDatas){
 public ViewHolder onCreateViewHolder(ViewGroup parent,
         int viewType){
         View itemLayoutView= LayoutInflater.from(parent.getContext()).inflate(
-        R.layout.timetable_row,null);
+        R.layout.timetable_row, parent, false);
         ViewHolder viewHolder=new ViewHolder(itemLayoutView);
         return viewHolder;
         }
