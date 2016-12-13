@@ -10,7 +10,7 @@
             layout="@layout/tool_bar">
         </include>
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -23,7 +23,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/generate_mpin"
-                    android:textSize="18sp"
+                    android:textSize="24sp"
                     android:textColor="@color/colorWhite"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -31,7 +31,8 @@
                     android:paddingBottom="10dp"
                     android:background="@color/colorAccent"
                     android:textAllCaps="true"
-                    android:fontFamily="sans-serif" />
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal|bold" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                     android:textSize="18sp"
                     android:layout_marginBottom="20dp" />
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
 
-</LinearLayout>
+    </LinearLayout>
 

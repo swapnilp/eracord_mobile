@@ -10,7 +10,7 @@
         style="@style/BB_BottomBarBadge_Text">
     </include>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -137,6 +137,6 @@
                 android:clickable="true"
                 android:textAlignment="center" />
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
