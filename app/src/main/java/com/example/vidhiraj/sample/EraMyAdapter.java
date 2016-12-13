@@ -92,7 +92,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
         email = Email;
         org_t_name = ORG_NAME;
         url_icon = url;
-        this.context = context;
+        EraMyAdapter.context = context;
     }
 
     @Override

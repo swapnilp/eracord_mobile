@@ -86,7 +86,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof StudentViewHolder) {
 
-            DailyTeachData singleStudent = (DailyTeachData) dataSet.get(position);
+            DailyTeachData singleStudent = dataSet.get(position);
             ((StudentViewHolder) holder).textViewClass.setText(singleStudent.getStandard());
             ((StudentViewHolder) holder).textViewChapter.setText(singleStudent.getChapter());
             ((StudentViewHolder) holder).textViewDate.setText(singleStudent.getDate());

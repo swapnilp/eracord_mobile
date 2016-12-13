@@ -89,7 +89,7 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof StudentViewHolder) {
 
-            StudentData singleStudent = (StudentData) studentList.get(position);
+            StudentData singleStudent = studentList.get(position);
 
             ((StudentViewHolder) holder).textViewName.setText(singleStudent.getStud_name());
 
