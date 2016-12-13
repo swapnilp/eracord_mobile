@@ -122,7 +122,8 @@
 
         <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
-            android:paddingTop="10dp">
+            android:paddingTop="10dp"
+            android:id="@+id/scrollView_dailyTeach">
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
