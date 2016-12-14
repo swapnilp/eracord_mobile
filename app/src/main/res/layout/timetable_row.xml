@@ -6,7 +6,7 @@
     android:layout_gravity="top"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:background="@drawable/divider">
+    android:background="@color/colorWhite">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:textColor="@color/bb_inActiveBottomBarItemColor"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="14dp"
+            android:textSize="13dp"
             android:layout_height="wrap_content"
             android:text="Subject"
             android:layout_gravity="right"
@@ -99,7 +99,7 @@
         <TextView
             android:id="@+id/class_div"
             android:layout_width="match_parent"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textColor="@color/bb_inActiveBottomBarItemColor"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_height="wrap_content"
@@ -108,5 +108,9 @@
             android:fontFamily="sans-serif" />
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/bottomLine"/>
 </LinearLayout>
     <!--</android.support.v7.widget.CardView>-->

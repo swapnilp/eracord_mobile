@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
+//import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -55,7 +55,7 @@ public class ClassActivity extends AppCompatActivity {
     private static RecyclerView recyclerView;
     private static ArrayList<ClassData> data = null;
     private static ArrayList<DailyTeachData> dailyTeach = null;
-    SwipeRefreshLayout swipeRefreshLayout;
+    //SwipeRefreshLayout swipeRefreshLayout;
     boolean mIsRefreshing = false;
     TextView dataAvailability;
     private GoogleApiClient client;
@@ -68,10 +68,10 @@ public class ClassActivity extends AppCompatActivity {
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
         url_icon = prefs.getString("org_icon", null);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        //swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         dataAvailability = (TextView) findViewById(R.id.noStData);
         fetchClassData();
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (Utils.isConnected(getApplicationContext())) {
@@ -87,7 +87,7 @@ public class ClassActivity extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
 
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -138,7 +138,7 @@ public class ClassActivity extends AppCompatActivity {
                     boolean success = response.getBoolean("success");
                     if (success) {
                         Log.e("ssss","class data");
-                        swipeRefreshLayout.setRefreshing(false);
+                        //swipeRefreshLayout.setRefreshing(false);
                         JSONArray jsonArray = response.getJSONArray("time_table_classes");
                         if (jsonArray.length() != 0) {
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -159,7 +159,7 @@ public class ClassActivity extends AppCompatActivity {
                             dataAvailability.setVisibility(View.VISIBLE);
                         }
                     }
-                    recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+                    recyclerView = (RecyclerView) findViewById(R.id.st_recycler_view);
                     recyclerView.setHasFixedSize(true);
                     adapter = new ClassAdapter(ClassActivity.this, data);
                     recyclerView.setAdapter(adapter);
@@ -180,7 +180,7 @@ public class ClassActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             Log.e("Volley", "Error");
-                            swipeRefreshLayout.setRefreshing(false);
+                            //swipeRefreshLayout.setRefreshing(false);
                         }
                     }
                 }) {

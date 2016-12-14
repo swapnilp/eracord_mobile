@@ -10,7 +10,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/divider">
+    android:background="@color/colorWhite">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -90,7 +90,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/standard"
@@ -103,6 +103,11 @@
             android:layout_gravity="left"
             android:fontFamily="sans-serif" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/bottomLine"/>
 
 </LinearLayout>
 <!--</android.support.v7.widget.CardView>-->
