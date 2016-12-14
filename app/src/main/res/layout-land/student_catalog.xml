@@ -19,16 +19,35 @@
             android:layout_height="match_parent"
             android:layout_weight="1"></include>
 
-        <EditText
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/search"
-            android:hint="Search by class"
-            android:textSize="20dp"
-            android:textColor="@color/textcolor"
-            android:background="@color/colorWhite"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"/>
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@color/stripBgColor">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/search"
+                android:hint="Search by class"
+                android:textSize="16dp"
+                android:textColor="@color/textcolor"
+                android:background="@color/colorWhite"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:fontFamily="serif" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/bottomLine"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
