@@ -87,7 +87,7 @@ public class StudentListActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         //  toolbar = (Toolbar) findViewById(R.id.toolbar);
         // tvEmptyView = (TextView) findViewById(R.id.empty_view);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.sd_recycler_view);
         dataAvailability = (TextView) findViewById(R.id.noSdData);
         scrollview = ((ScrollView) findViewById(R.id.scrollView_st_catalog));
         mProgress = new ProgressDialog(this);
@@ -344,14 +344,14 @@ public class StudentListActivity extends AppCompatActivity {
                                     scrollview.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            //int x=0,y=30;
-                                            //scrollview.scrollTo(x, y);
                                             counter = counter + scrollview.getBottom()+1180;
                                             scrollview.scrollTo(0, counter);
                                             mRecyclerView.scrollToPosition(counter);
                                             mRecyclerView.smoothScrollBy(0, counter);
                                             mRecyclerView.smoothScrollToPosition(counter);
                                             scrollview.smoothScrollTo(0, counter);
+                                            //int x=0,y=30;
+                                            //scrollview.scrollTo(x, y);
                                         }
                                     });
 

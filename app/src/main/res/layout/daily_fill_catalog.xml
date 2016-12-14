@@ -8,7 +8,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/appBgColor">
 
         <include
             android:id="@+id/tool_bar"
@@ -52,14 +53,15 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal" />
 
-            <android.support.v4.widget.NestedScrollView
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/scrollView">
+                android:id="@+id/scrollView_dailyTeach"
+                android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical" >
 
                     <TextView
@@ -77,19 +79,15 @@
                         android:textAlignment="center"
                         android:layout_marginTop="40dp" />
 
-                    <android.support.v4.widget.SwipeRefreshLayout
-                        android:id="@+id/swipe_refresh"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent">
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/my_recycler_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/dailyT_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                        </android.support.v7.widget.RecyclerView>
-                    </android.support.v4.widget.SwipeRefreshLayout>
+                    </android.support.v7.widget.RecyclerView>
+
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </ScrollView>
 
         </RelativeLayout>
 

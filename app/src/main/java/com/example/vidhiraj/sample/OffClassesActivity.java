@@ -70,7 +70,7 @@ public class OffClassesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.off_class_activity);
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.off_recycler_view);
         scrollview = ((ScrollView) findViewById(R.id.scrollView_offclass));
         load = (Button) findViewById(R.id.loadmore_offclasses);
         dataAvailability = (TextView) findViewById(R.id.noOffData);

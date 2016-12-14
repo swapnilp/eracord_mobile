@@ -164,7 +164,7 @@ public class PresentyCatalog extends AppCompatActivity {
                         }
                     }
 
-                    recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+                    recyclerView = (RecyclerView) findViewById(R.id.pr_recycler_view);
                     recyclerView.setHasFixedSize(true);
                     adapter = new PresentyAdapter(PresentyCatalog.this, data);
                     recyclerView.setAdapter(adapter);

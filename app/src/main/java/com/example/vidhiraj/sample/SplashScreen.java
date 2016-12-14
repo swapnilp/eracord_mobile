@@ -31,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
                 try {
                     Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);
                     eracod_load.startAnimation(animation);
-                    sleep(5000);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
