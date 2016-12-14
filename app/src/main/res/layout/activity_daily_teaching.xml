@@ -10,7 +10,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/appBgColor">
 
         <include
             android:id="@+id/tool_bar"
@@ -122,15 +123,16 @@
                 <!--android:layout_height="wrap_content"/>-->
         </LinearLayout>
 
-        <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            android:id="@+id/scrollView_dailyTeach">
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:id="@+id/scrollView_dailyTeach"
+            android:fillViewport="true">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -161,9 +163,9 @@
                         android:weightSum="1">
 
                          <android.support.v7.widget.RecyclerView
-                             android:id="@+id/my_recycler_view"
+                             android:id="@+id/point_recycler_view"
                              android:layout_width="match_parent"
-                             android:layout_height="306dp"
+                             android:layout_height="match_parent"
                              android:scrollbars="vertical"
                              android:layout_marginLeft="20dp"
                              android:layout_marginRight="20dp"
@@ -176,11 +178,11 @@
 
                  </LinearLayout>
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:orientation="horizontal"
                     android:weightSum="1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
 
                     <Button
@@ -201,8 +203,9 @@
                         android:layout_marginBottom="10dp" />
 
                 </LinearLayout>
+
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </ScrollView>
 
     </LinearLayout>
 

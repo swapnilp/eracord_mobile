@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="206dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/chapter_text"
@@ -26,12 +26,11 @@
             android:fontFamily="sans-serif"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
-            android:textAllCaps="false"
-            android:layout_weight="0.38" />
+            android:textAllCaps="false" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="50dp"
+            android:layout_width="100dp"
             android:textColor="@android:color/holo_red_light"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="14sp"
@@ -39,7 +38,6 @@
             android:text="@string/date"
             android:layout_gravity="center_horizontal"
             android:textAlignment="textEnd"
-            android:layout_weight="0.33"
             android:paddingTop="4dp" />
 
     </LinearLayout>

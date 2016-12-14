@@ -353,7 +353,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                             Log.e("points are", String.valueOf(pointsList));
                         }
                     }
-                    m_points_RecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+                    m_points_RecyclerView = (RecyclerView) findViewById(R.id.point_recycler_view);
                     m_points_RecyclerView.setHasFixedSize(true);
                     m_points_RecyclerView.setLayoutManager(new LinearLayoutManager(DailyTeachingActivity.this));
                     mAdapter = new PointsAdapter(pointsList);

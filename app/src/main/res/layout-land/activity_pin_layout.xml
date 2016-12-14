@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/appBgColor">
 
 
     <include
@@ -10,9 +11,10 @@
         layout="@layout/tool_bar">
     </include>
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,9 +38,9 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="40dp">
 
                 <EditText
                     android:id="@+id/userpin"
@@ -55,7 +57,7 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/inputconfirm"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="20dp">
 
@@ -69,6 +71,7 @@
                     android:textStyle="bold"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp" />
+
             </android.support.design.widget.TextInputLayout>
 
             <Button
@@ -86,9 +89,10 @@
                 android:layout_marginRight="20dp"
                 android:textStyle="normal|bold"
                 android:textSize="18sp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1" />
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 
 </LinearLayout>
 
