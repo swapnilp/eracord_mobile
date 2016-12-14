@@ -33,95 +33,109 @@
             android:fontFamily="sans-serif" />
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:paddingBottom="10dp"
+            android:background="@color/stripBgColor">
 
-            <TextView
-                android:text="@string/select_date"
-                android:layout_width="172dp"
-                android:layout_height="40dp"
-                android:id="@+id/select_date"
-                android:elevation="1dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/textcolor"
-                android:textStyle="normal|bold"
-                android:textSize="18sp"
-                android:fontFamily="serif" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/edit_date_picker"
-                android:onClick="setDate"
-                android:text="@string/today_date"
-                android:cursorVisible="false"
-                android:focusableInTouchMode="false"
-                android:keepScreenOn="false"
-                android:labelFor="@+id/select_date"
-                android:textAlignment="center"
-                android:fontFamily="sans-serif"
-                android:textAllCaps="true"
-                android:background="@color/colorWhite"
-                android:maxLines="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/divider"
-            android:layout_marginTop="10dp">
-            <Spinner
-                android:id="@+id/spinner"
-                android:spinnerMode="dialog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:prompt="@string/chapter"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:gravity="center_vertical" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/points_recycler_view"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:scrollbars="vertical"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:scrollbarThumbVertical="@color/colorWhite"
-                android:scrollbarThumbHorizontal="@color/colorWhite"
-                tools:ignore="RtlHardcoded">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
-            </android.support.v7.widget.RecyclerView>
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="30dp"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:text="Chapters :"-->
-                <!--android:textColor="@color/textcolor"-->
-                <!--android:textSize="20sp"-->
-                <!--android:layout_marginBottom="5dp"/>-->
+                <TextView
+                    android:text="@string/select_date"
+                    android:layout_width="172dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/select_date"
+                    android:elevation="1dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/textcolor"
+                    android:textStyle="normal|bold"
+                    android:textSize="18sp"
+                    android:fontFamily="serif" />
 
-            <!--<Spinner-->
-                <!--android:id="@+id/spinner"-->
-                <!--android:layout_marginTop="30dp"-->
-                <!--android:layout_marginBottom="5dp"-->
-                <!--android:prompt="@string/chapter"-->
-                <!--android:spinnerMode="dialog"-->
-                <!--android:background="#50337ab7"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"/>-->
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:ems="10"
+                    android:id="@+id/edit_date_picker"
+                    android:onClick="setDate"
+                    android:text="@string/today_date"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:keepScreenOn="false"
+                    android:labelFor="@+id/select_date"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif"
+                    android:textAllCaps="true"
+                    android:background="@color/colorWhite"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/divider"
+                android:layout_marginTop="10dp">
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:spinnerMode="dialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/chapter"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:gravity="center_vertical" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/points_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:scrollbars="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:scrollbarThumbVertical="@color/colorWhite"
+                    android:scrollbarThumbHorizontal="@color/colorWhite"
+                    tools:ignore="RtlHardcoded">
+
+                </android.support.v7.widget.RecyclerView>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="30dp"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:text="Chapters :"-->
+                    <!--android:textColor="@color/textcolor"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:layout_marginBottom="5dp"/>-->
+
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinner"-->
+                    <!--android:layout_marginTop="30dp"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:prompt="@string/chapter"-->
+                    <!--android:spinnerMode="dialog"-->
+                    <!--android:background="#50337ab7"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"/>-->
+            </LinearLayout>
+
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/bottomLine"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -132,7 +146,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:background="@color/colorWhite">
 
                 <LinearLayout
                     android:orientation="vertical"
