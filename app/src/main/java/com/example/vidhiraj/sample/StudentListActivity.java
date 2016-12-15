@@ -104,17 +104,10 @@ public class StudentListActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(org);
-
         mDrawerRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-
         mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-
         mDrawerAdapter = new EraMyAdapter(StudentListActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        // And passing the titles,icons,header view name, header view email,
-        // and header view profile picture
-
         mDrawerRecyclerView.setAdapter(mDrawerAdapter);                              // Setting the adapter to RecyclerView
-
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
         mDrawerRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
         mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {

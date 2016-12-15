@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lenovo on 21/08/2016.
@@ -23,19 +24,19 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
     private int lastVisibleItem, totalItemCount;
     private boolean loading;
     private OnLoadMoreListener onLoadMoreListener;
-    private ArrayList<DailyTeachData> dataSet;
+    private List<DailyTeachData> dataSet;
     private Context mcontext;
 
-    public DailyCatalogAdapter(Context mcontext, ArrayList<DailyTeachData> data, RecyclerView recyclerView) {
+    public DailyCatalogAdapter(List<DailyTeachData> data, Context mcontext) {
         this.dataSet = data;
         this.mcontext = mcontext;
 
 
-        final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView
-                .getLayoutManager();
+        //final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView
+        //        .getLayoutManager();
 
 
-        recyclerView
+        /*recyclerView
                 .addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrolled(RecyclerView recyclerView,
@@ -55,7 +56,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
                             loading = true;
                         }
                     }
-                });
+                });*/
     }
 
     @Override
@@ -71,7 +72,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
             View v = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.daily_fill_items, parent, false);
 
-            vh = new StudentViewHolder(v);
+            vh = new DailyCatalogViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.progressbar_item, parent, false);
@@ -84,14 +85,14 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof StudentViewHolder) {
+        if (holder instanceof DailyCatalogViewHolder) {
 
             DailyTeachData singleStudent = dataSet.get(position);
-            ((StudentViewHolder) holder).textViewClass.setText(singleStudent.getStandard());
-            ((StudentViewHolder) holder).textViewChapter.setText(singleStudent.getChapter());
-            ((StudentViewHolder) holder).textViewDate.setText(singleStudent.getDate());
-            ((StudentViewHolder) holder).textViewPoints.setText(singleStudent.getPoints());
-            ((StudentViewHolder) holder).textViewId.setText(Integer.toString(singleStudent.getId()));
+            ((DailyCatalogViewHolder) holder).textViewClass.setText(singleStudent.getStandard());
+            ((DailyCatalogViewHolder) holder).textViewChapter.setText(singleStudent.getChapter());
+            ((DailyCatalogViewHolder) holder).textViewDate.setText(singleStudent.getDate());
+            ((DailyCatalogViewHolder) holder).textViewPoints.setText(singleStudent.getPoints());
+            ((DailyCatalogViewHolder) holder).textViewId.setText(Integer.toString(singleStudent.getId()));
 
         } else {
             ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);
@@ -111,7 +112,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
         this.onLoadMoreListener = onLoadMoreListener;
     }
 
-    public static class StudentViewHolder extends RecyclerView.ViewHolder {
+    public static class DailyCatalogViewHolder extends RecyclerView.ViewHolder {
         TextView textViewClass;
         TextView textViewChapter;
         TextView textViewDate;
@@ -120,7 +121,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
         private Context context = null;
         public StudentData student;
 
-        public StudentViewHolder(View v) {
+        public DailyCatalogViewHolder(View v) {
             super(v);
             context = itemView.getContext();
             context = itemView.getContext();
