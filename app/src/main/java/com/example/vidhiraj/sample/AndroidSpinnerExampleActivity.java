@@ -37,6 +37,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.vidhiraj.sample.PinEntryView;
+
 /**
  * Created by vidhiraj on 10-08-2016.
  */
@@ -50,7 +52,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
     TextView signDiffUser;
     TextView useremail;
     ActionBarDrawerToggle mDrawerToggle;
-    EditText editPassword;
+    PinEntryView editPassword;
     String finalEmail;
     String device_id;
     ProgressDialog mProgress;
@@ -174,7 +176,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
 
 
-        editPassword = (EditText) findViewById(R.id.editTextPassword);
+        editPassword = (PinEntryView) findViewById(R.id.editTextPassword);
         signDiffUser = (TextView) findViewById(R.id.diffuser);
         signDiffUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +212,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
 
     public void validateCheck() throws JSONException {
         if (!validate()) {
-            onLoginFailed();
+            //onLoginFailed();
             return;
         } else {
             final String user_password = editPassword.getText().toString();
@@ -284,13 +286,11 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
         boolean valid = true;
         String userpin = editPassword.getText().toString();
         if (userpin.length() != 4) {
-            editPassword.setError("enter only 4 digit pin");
+            Toast.makeText(getBaseContext(), "Enter only 4 digit pin", Toast.LENGTH_LONG).show();
+            //editPassword.setError("enter only 4 digit pin");
             valid = false;
-        } else {
-
-            editPassword.setError(null);
-
         }
+
         return valid;
     }
 
