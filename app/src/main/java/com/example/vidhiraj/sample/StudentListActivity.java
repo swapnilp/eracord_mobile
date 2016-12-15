@@ -66,10 +66,9 @@ public class StudentListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private StudentCatalogAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
-    private static List<StudentData> dailyTeach;
+    private static ArrayList<StudentData> dailyTeach;
     private int current_page = 1;
     Button load;
-    int counter = 9;
     EditText search;
     ProgressDialog pDialog;
     TextView dataAvailability;
@@ -186,14 +185,12 @@ public class StudentListActivity extends AppCompatActivity {
                         }
                     }
 
-                    if (getResources().getConfiguration().orientation == 2) {
-                        counter = 2;
-                    }
-                    mRecyclerView.setHasFixedSize(false);
+                    mRecyclerView.setHasFixedSize(true);
                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     mRecyclerView.setLayoutManager(mLayoutManager);
                     mAdapter = new StudentCatalogAdapter(dailyTeach, getApplicationContext());
                     mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount());
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                     Log.e("sdcard-err2:", err);
@@ -344,25 +341,18 @@ public class StudentListActivity extends AppCompatActivity {
                                     scrollview.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            counter = counter + scrollview.getBottom()+1180;
-                                            scrollview.scrollTo(0, counter);
-                                            mRecyclerView.scrollToPosition(counter);
-                                            mRecyclerView.smoothScrollBy(0, counter);
-                                            mRecyclerView.smoothScrollToPosition(counter);
-                                            scrollview.smoothScrollTo(0, counter);
-                                            //int x=0,y=30;
-                                            //scrollview.scrollTo(x, y);
+                                            int x=0,y=1000;
+                                            scrollview.scrollTo(x, y);
                                         }
                                     });
 
                                     if (arrayLength < 10) {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
-                                        mRecyclerView.setHasFixedSize(false);
-                                        /*mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);
-                                        scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);*/
                                         Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
                                     }
+
+                                    mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount());
                                 }
 
                             } catch (JSONException e) {
@@ -384,10 +374,8 @@ public class StudentListActivity extends AppCompatActivity {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
                                         mRecyclerView.setHasFixedSize(false);
-                                        /*scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);
-                                        mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);*/
                                         Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
-                                     //   Log.e("Poonam", error.getMessage());
+                                        //Log.e("Poonam", error.getMessage());
                                     }
                                 }
                             }) {
