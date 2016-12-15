@@ -26,6 +26,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.vidhiraj.sample.PinEntryView;
+
 /**
  * Created by vidhiraj on 10-08-2016.
  */
@@ -34,8 +36,7 @@ public class LoginPinActivity extends AppCompatActivity implements View.OnClickL
     String device_id;
     String email;
     Integer mpin;
-    EditText uniqueUserPin, uniqueConfirmUserPin;
-    TextInputLayout inputConfirmPin;
+    PinEntryView uniqueUserPin, uniqueConfirmUserPin;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     ProgressDialog mProgress;
     ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
@@ -49,9 +50,8 @@ public class LoginPinActivity extends AppCompatActivity implements View.OnClickL
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
-        inputConfirmPin = (TextInputLayout) findViewById(R.id.inputconfirm);
-        uniqueUserPin = (EditText) findViewById(R.id.userpin);
-        uniqueConfirmUserPin = (EditText) findViewById(R.id.confirmuserpin);
+        uniqueUserPin = (PinEntryView) findViewById(R.id.userpin);
+        uniqueConfirmUserPin = (PinEntryView) findViewById(R.id.confirmuserpin);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
@@ -167,15 +167,15 @@ public class LoginPinActivity extends AppCompatActivity implements View.OnClickL
         String userpin = uniqueUserPin.getText().toString();
         String confirmpin = uniqueConfirmUserPin.getText().toString();
         if (userpin.length() != 4) {
-            uniqueUserPin.setError("enter only 4 digit pin");
+            Toast.makeText(getBaseContext(), "Enter only 4 digit pin", Toast.LENGTH_LONG).show();
+            //uniqueUserPin.setError("enter only 4 digit pin");
             Log.e("user pin size", "false");
             valid = false;
         } else {
             if (!userpin.equals(confirmpin)) {
-                uniqueConfirmUserPin.setError("pin does not match");
+                Toast.makeText(getBaseContext(), "Both pin does not match", Toast.LENGTH_LONG).show();
+                //uniqueConfirmUserPin.setError("pin does not match");
                 valid = false;
-            } else {
-                uniqueUserPin.setError(null);
             }
         }
         return valid;

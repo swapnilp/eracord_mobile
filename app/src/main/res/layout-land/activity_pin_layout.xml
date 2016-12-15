@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -36,43 +38,64 @@
                 android:fontFamily="sans-serif"
                 android:textStyle="normal|bold" />
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="40dp">
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-                <EditText
+                <TextView
+                    android:text="@string/enter_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/enter_pin"
+                    android:textColor="@color/textcolor"
+                    android:textSize="18sp" />
+
+                <com.example.vidhiraj.sample.PinEntryView
                     android:id="@+id/userpin"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_pin"
-                    android:textColor="@color/textcolor"
-                    android:inputType="numberPassword"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-            </android.support.design.widget.TextInputLayout>
+                    app:accentType="all"
+                    app:digitBackground="@android:color/white"
+                    app:digitTextColor="@color/colorAccent"
+                    app:digitElevation="5dp"
+                    android:layout_marginTop="10dp"
+                    app:digitHeight="60dp"
+                    app:digitWidth="100dp"
+                    app:digitSpacing="60dp" />
+            </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputconfirm"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="20dp">
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-                <EditText
-                    android:id="@+id/confirmuserpin"
+                <TextView
+                    android:text="@string/confirm_pin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/confirm_pin"
-                    android:textColor="@color/textcolor"
-                    android:inputType="numberPassword"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/textcolor" />
 
-            </android.support.design.widget.TextInputLayout>
+                <com.example.vidhiraj.sample.PinEntryView
+                    android:id="@+id/confirmuserpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:accentType="all"
+                    app:digitBackground="@android:color/white"
+                    app:digitTextColor="@color/colorAccent"
+                    app:digitElevation="5dp"
+                    android:layout_marginTop="10dp"
+                    app:digitHeight="60dp"
+                    app:digitWidth="100dp"
+                    app:digitSpacing="60dp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/loginuser"
