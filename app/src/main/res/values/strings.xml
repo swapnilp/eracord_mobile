@@ -47,4 +47,7 @@
     <string name="standard">Standard</string>
     <string name="dailyid">dailyid</string>
     <string name="no_more_data_to_load">No more data to load</string>
+    <string name="no_timetable">No Timetable</string>
+
+    <string name="timetable_label">Weekly TimeTable</string>
 </resources>
