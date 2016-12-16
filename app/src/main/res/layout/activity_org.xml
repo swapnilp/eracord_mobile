@@ -117,13 +117,15 @@
                     android:layout_marginRight="20dp"
                     android:textColor="@color/textcolor"
                     android:textAllCaps="false"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp" />
 
                 <com.example.vidhiraj.sample.PinEntryView
                     android:id="@+id/editTextPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:accentType="all"
+                    app:accentType="character"
+                    app:mask=""
                     app:digitBackground="@android:color/white"
                     app:digitTextColor="@color/colorAccent"
                     app:digitElevation="5dp"
@@ -133,7 +135,6 @@
                     app:digitHeight="50dp"
                     app:digitWidth="60dp"
                     app:digitSpacing="24dp" />
-
             </LinearLayout>
 
             <Button

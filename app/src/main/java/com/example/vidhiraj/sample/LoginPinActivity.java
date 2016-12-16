@@ -1,6 +1,7 @@
 package com.example.vidhiraj.sample;
 
 import android.app.ProgressDialog;
+import android.view.WindowManager;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -45,6 +46,7 @@ public class LoginPinActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_layout);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");

@@ -1,6 +1,7 @@
 package com.example.vidhiraj.sample;
 
 import android.app.ProgressDialog;
+import android.view.WindowManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -70,6 +71,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         useremail = (TextView) findViewById(R.id.useremail);
