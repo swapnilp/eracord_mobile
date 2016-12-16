@@ -18,7 +18,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:clickable="false">
 
         <ImageView
             android:layout_width="20dp"
@@ -37,7 +38,6 @@
             android:text="Medium Text"
             android:id="@+id/rowText"
             android:textAllCaps="false"
-            android:background="@color/colorWhite"
             android:fontFamily="sans-serif-smallcaps"
             android:textColor="@drawable/left_links"
             android:textSize="14sp"

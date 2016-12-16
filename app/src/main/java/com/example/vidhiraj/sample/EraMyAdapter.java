@@ -126,6 +126,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                 int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
                 Drawable res = context.getResources().getDrawable(imageResource);
                 holder.menu_icon.setImageDrawable(res);
+
             } catch (Exception e) {
                 //Catch here
             }
