@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
@@ -13,20 +14,34 @@
         <!--android:paddingLeft="16dp"-->
         <!--android:src="@drawable/ic_photos"/>-->
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="12dp"
-        android:paddingTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/rowText"
-        android:textAllCaps="false"
-        android:background="@color/colorWhite"
-        android:fontFamily="sans-serif"
-        android:textColor="@drawable/left_links"
-        android:textSize="14sp"
-        android:paddingBottom="10dp"
-        android:cursorVisible="true" />
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:visibility="visible"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/menu_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/rowText"
+            android:textAllCaps="false"
+            android:background="@color/colorWhite"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@drawable/left_links"
+            android:textSize="14sp"
+            android:paddingBottom="10dp"
+            android:cursorVisible="true" />
+    </LinearLayout>
 </LinearLayout>
