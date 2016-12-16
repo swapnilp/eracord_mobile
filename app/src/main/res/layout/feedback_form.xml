@@ -18,12 +18,14 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:paddingTop="20dp">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -74,7 +76,7 @@
                         android:textAppearance="@android:style/TextAppearance.Material.Small"
                         android:textColor="@color/textcolor"
                         android:inputType="textAutoCorrect|textShortMessage"
-                        android:background="@android:drawable/edit_text" />
+                        android:background="@android:drawable/editbox_background" />
 
                 </LinearLayout>
 
@@ -85,7 +87,8 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
+                    android:layout_marginRight="20dp"
+                    android:weightSum="1">
 
                     <TextView
                         android:text="@string/message"
@@ -98,12 +101,14 @@
                         android:id="@+id/message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lines="10"
                         android:gravity="top|left"
                         android:inputType="textMultiLine"
                         android:scrollHorizontally="false"
                         android:textAppearance="@android:style/TextAppearance.Material.Small"
-                        android:background="@android:drawable/edit_text" />
+                        android:background="@android:drawable/editbox_background"
+                        android:layout_weight="19.15"
+                        android:lines="15"
+                        android:padding="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
