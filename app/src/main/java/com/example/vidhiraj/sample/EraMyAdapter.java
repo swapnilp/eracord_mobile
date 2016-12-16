@@ -79,7 +79,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                             Intent shareIntent = new Intent(Intent.ACTION_SEND);
                             shareIntent.setType("text/plain");
                             //shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Share Eracord App");
-                            shareIntent.putExtra(Intent.EXTRA_TEXT, "Share Eracord App: http://eracord.com");
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, "Share eracord app link,  http://eracord.com");
                             context.startActivity(Intent.createChooser(shareIntent, "Share link using"));
                         } else if (pos == 8) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));

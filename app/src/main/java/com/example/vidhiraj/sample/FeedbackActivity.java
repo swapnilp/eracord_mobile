@@ -136,7 +136,7 @@ public class FeedbackActivity extends AppCompatActivity {
         Uri uri = Uri.parse(uriText);
         send.setType("message/rfc822");
         send.setData(uri);
-        startActivity(Intent.createChooser(send, "Send mail..."));
+        startActivity(Intent.createChooser(send, "Send feedback using"));
     }
 
     @Override
