@@ -40,7 +40,7 @@
             android:textAllCaps="false"
             android:fontFamily="sans-serif-smallcaps"
             android:textColor="@drawable/left_links"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:paddingBottom="10dp"
             android:cursorVisible="true" />
     </LinearLayout>
