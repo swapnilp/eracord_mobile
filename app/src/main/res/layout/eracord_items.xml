@@ -19,15 +19,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1"
-        android:clickable="false">
+        android:clickable="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:visibility="visible"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="8dp"
-            android:id="@+id/menu_icon" />
+            android:layout_marginTop="5dp"
+            android:id="@+id/menu_icon"
+            android:src="@drawable/eracord_logo" />
 
         <TextView
             android:layout_width="match_parent"
@@ -40,10 +43,9 @@
             android:textAllCaps="false"
             android:fontFamily="sans-serif-smallcaps"
             android:textColor="@drawable/left_links"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:paddingBottom="10dp"
-            android:cursorVisible="true"
-            android:textStyle="normal|bold" />
+            android:cursorVisible="true" />
 
 
     </LinearLayout>
