@@ -1,5 +1,6 @@
 package com.example.vidhiraj.sample;
 
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.content.SharedPreferences;
@@ -23,9 +24,6 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
 
 /**
  * Created by vidhiraj on 12-08-2016.
@@ -55,6 +53,7 @@ public class FeedbackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feedback_form);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
