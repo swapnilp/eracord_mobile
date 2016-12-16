@@ -29,8 +29,7 @@
             android:visibility="visible"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:id="@+id/menu_icon"
-            android:src="@drawable/eracord_logo" />
+            android:id="@+id/menu_icon" />
 
         <TextView
             android:layout_width="match_parent"
