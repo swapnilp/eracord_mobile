@@ -1,11 +1,13 @@
 package com.example.vidhiraj.sample;
 
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -19,9 +21,16 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.Button;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
 
@@ -120,10 +129,15 @@ public class FeedbackActivity extends AppCompatActivity {
     }
 
     public void send_feedback_user() {
+        final ProgressDialog mDialog;
+
         if (!validate_fields()) {
             return;
         }
+        send_feedback.setEnabled(false);
+        mDialog = ProgressDialog.show(FeedbackActivity.this, "In Progress", "Loading...");
 
+        /*
         //get to, subject and content from the user input and store as string.
         String emailTo 		= RECIPIENT;
         String emailSubject = "From: " + from_cust.getText() + " Title: " + title.getText();
@@ -137,6 +151,55 @@ public class FeedbackActivity extends AppCompatActivity {
         send.setType("message/rfc822");
         send.setData(uri);
         startActivity(Intent.createChooser(send, "Send feedback using"));
+        */
+
+        JSONObject userObj = new JSONObject();
+        JSONObject feed_back = new JSONObject();
+
+        try {
+            userObj.put("email", from_cust.getText().toString());
+            userObj.put("title", title.getText().toString());
+            userObj.put("message", body_message.getText().toString());
+            feed_back.put("feed_back", userObj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String feedbackURL = ApiKeyConstant.apiUrl + "/api/v1/feedbacks";
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, feedbackURL, feed_back, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    boolean success = response.getBoolean("success");
+                    if (success) {
+                        //ApiKeyConstant.authToken = response.getString("token");
+                        Toast.makeText(getBaseContext(), "Feedback mailed successfully !!!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(FeedbackActivity.this, ClassActivity.class);
+                        startActivity(intent);
+                        send_feedback.setEnabled(true);
+                        mDialog.dismiss();
+                    }
+
+                } catch (JSONException e) {
+                    send_feedback.setEnabled(true);
+                    mDialog.dismiss();
+                    String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
+                    Log.e("sdcard-err2:", err);
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        send_feedback.setEnabled(true);
+                        mDialog.dismiss();
+                        Toast.makeText(getBaseContext(), "Mail sending failed !!!", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+        VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
     }
 
     @Override

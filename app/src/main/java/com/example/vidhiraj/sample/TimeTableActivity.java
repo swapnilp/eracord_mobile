@@ -214,17 +214,17 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String timedayyyy = null;
+        String timeday = null;
         for (int j = position; j <= position; j++) {
-            timedayyyy = weekDays.get(j);
-            Log.e("for chap_id", String.valueOf(timedayyyy));
+            timeday = weekDays.get(j);
+            Log.e("for chap_id", String.valueOf(timeday));
         }
         try {
             timeTableDatas = new ArrayList<>();
             timetableObj = getJsonArray();
-            if (timetableObj.has(timedayyyy)) {
+            if (timetableObj.has(timeday)) {
                 timetableData.setVisibility(View.GONE);
-                timeTableArray = timetableObj.getJSONArray(timedayyyy);
+                timeTableArray = timetableObj.getJSONArray(timeday);
                 Log.e("obj", String.valueOf(timetableObj));
                 Log.e("timearray is", String.valueOf(timeTableArray));
                 for (int i = 0; i < timeTableArray.length(); i++) {
