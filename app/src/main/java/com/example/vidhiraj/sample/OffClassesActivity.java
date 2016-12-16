@@ -45,7 +45,7 @@ public class OffClassesActivity extends AppCompatActivity {
     private static OffClassesAdapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<OffClassesData> dailyTeach = null;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;

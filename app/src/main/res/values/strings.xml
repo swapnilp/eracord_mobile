@@ -5,6 +5,12 @@
     <string name="chapter">Select Chapters</string>
     <string name="org">Select Organization</string>
 
+    <!-- feedback form -->
+    <string name="from">From</string>
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="send_feedback">Send Feedback</string>
+
     <!-- activity_main -->
     <string name="email">Email</string>
     <string name="password">Password</string>
