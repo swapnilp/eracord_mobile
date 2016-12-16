@@ -57,7 +57,7 @@ public class PointsAdapter extends
             super(itemLayoutView);
             tvName = (TextView) itemLayoutView.findViewById(R.id.tvName);
             chkSelected = (CheckBox) itemLayoutView
-                    .findViewById(R.id.chkSelected);
+                    .findViewById(R.id.point_chkSelected);
         }
     }
 
