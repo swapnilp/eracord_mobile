@@ -19,16 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1"
-        android:clickable="false"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:clickable="false">
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:visibility="visible"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
             android:id="@+id/menu_icon" />
 
         <TextView
@@ -40,7 +38,7 @@
             android:text="Medium Text"
             android:id="@+id/rowText"
             android:textAllCaps="false"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="sans-serif"
             android:textColor="@drawable/left_links"
             android:textSize="18sp"
             android:paddingBottom="10dp"
