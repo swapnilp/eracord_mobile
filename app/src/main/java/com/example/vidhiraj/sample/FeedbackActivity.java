@@ -29,7 +29,7 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  * Created by vidhiraj on 12-08-2016.
  */
 public class FeedbackActivity extends AppCompatActivity {
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
@@ -129,18 +129,14 @@ public class FeedbackActivity extends AppCompatActivity {
         String emailSubject = "From: " + from_cust.getText() + " Title: " + title.getText();
         String emailContent = body_message.getText().toString();
 
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",RECIPIENT, null));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
-        emailIntent.putExtra(Intent.EXTRA_TEXT, emailContent);
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { RECIPIENT });
-        /// use below 2 commented lines if need to use BCC an CC feature in email
-        //emailIntent.putExtra(Intent.EXTRA_CC, new String[]{ to});
-        //emailIntent.putExtra(Intent.EXTRA_BCC, new String[]{to});
-        ////use below 3 commented lines if need to send attachment
-        emailIntent .setType("image/jpeg");
-        //need this to prompts email client only
-        emailIntent.setType("message/rfc822");
-        startActivity(Intent.createChooser(emailIntent, "Select an Email Client:"));
+        Intent send = new Intent(Intent.ACTION_SENDTO);
+        String uriText = "mailto:" + Uri.encode(emailTo) +
+                "?subject=" + Uri.encode(emailSubject) +
+                "&body=" + Uri.encode(emailContent);
+        Uri uri = Uri.parse(uriText);
+        send.setType("message/rfc822");
+        send.setData(uri);
+        startActivity(Intent.createChooser(send, "Send mail..."));
     }
 
     @Override

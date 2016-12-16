@@ -75,8 +75,13 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                             intent1 = new Intent(context, FeedbackActivity.class);
                             context.startActivity(intent1);
                             ((Activity)(context)).finish();
-                        }
-                        else if (pos == 7) {
+                        } else if(pos == 7) {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            shareIntent.setType("text/plain");
+                            //shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Share Eracord App");
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, "Share Eracord App: http://eracord.com");
+                            context.startActivity(Intent.createChooser(shareIntent, "Share link using"));
+                        } else if (pos == 8) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
                             intent1 = new Intent(context, AndroidSpinnerExampleActivity.class);
                             context.startActivity(intent1);

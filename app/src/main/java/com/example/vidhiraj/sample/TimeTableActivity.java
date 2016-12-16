@@ -60,7 +60,7 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
     TextView date_selected;
     int day, month, year;
     ArrayList<String> weekDays;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes","Feedback", "Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes","Feedback", "Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;
