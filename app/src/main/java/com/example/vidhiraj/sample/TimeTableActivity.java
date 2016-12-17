@@ -155,7 +155,8 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                             Log.e("timearray is", String.valueOf(timeTableArray));
                             for (int i = 0; i < timeTableArray.length(); i++) {
                                 JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                                TimeTableData timeTable = new TimeTableData(dayDataObj.getString("name"),
+                                TimeTableData timeTable = new TimeTableData(dayDataObj.getInt("id"),
+                                                                            dayDataObj.getString("name"),
                                                                             dayDataObj.getString("subject"),
                                                                             dayDataObj.getString("class_room"),
                                                                             dayDataObj.getString("start_time"),
@@ -229,7 +230,8 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                 Log.e("timearray is", String.valueOf(timeTableArray));
                 for (int i = 0; i < timeTableArray.length(); i++) {
                     JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                    TimeTableData timeTable = new TimeTableData(dayDataObj.getString("class_name"),
+                    TimeTableData timeTable = new TimeTableData(dayDataObj.getInt("id"),
+                                                                dayDataObj.getString("class_name"),
                                                                 dayDataObj.getString("subject"),
                                                                 dayDataObj.getString("sub_class_name"),
                                                                 dayDataObj.getString("start_time"),

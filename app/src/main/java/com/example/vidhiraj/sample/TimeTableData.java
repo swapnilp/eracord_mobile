@@ -5,19 +5,30 @@ package com.example.vidhiraj.sample;
  */
 
 public class TimeTableData {
+    private int id;
     private String classDivision;
     private String startTime;
     private String endTime;
     private String className;
     private String subject;
 
-    public TimeTableData(String className, String subject, String classDivision, String startTime, String endTime) {
+    public TimeTableData(int id, String className, String subject, String classDivision, String startTime, String endTime) {
+        this.id = id;
         this.className = className;
         this.subject = subject;
         this.classDivision = classDivision;
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
+
 
     public String getClassDivision() {
         return classDivision;

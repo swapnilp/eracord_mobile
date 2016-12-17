@@ -97,6 +97,14 @@
         android:layout_marginBottom="10dp">
 
         <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tt_row_id"
+            android:layout_weight="1"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/class_div"
             android:layout_width="match_parent"
             android:textSize="13sp"
