@@ -49,9 +49,7 @@ public class PointsAdapter extends
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvName;
-        public TextView tvEmailId;
         public CheckBox chkSelected;
-        public PointsData singlestudent;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);

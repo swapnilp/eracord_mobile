@@ -57,17 +57,15 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     List<Integer> chapter_array = new ArrayList<Integer>();
     String classid;
-    Button createCatalog, cancelCatalog;
+    Button createCatalog;
     LinearLayout linearpoints;
     Integer chapter_id = null;
     RecyclerView m_points_RecyclerView;
     ProgressDialog mProgress;
-    //TextView date_selected;
     int day, month, year;
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Share app","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
-    int PROFILE = R.drawable.ic_photos;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     RecyclerView mDrawerRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mDrawerAdapter;                        // Declaring Adapter For Recycler View
@@ -91,7 +89,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                     // arg1 = year
                     // arg2 = month
                     // arg3 = day
-                    selected_date = arg1 + "-" + (arg2+1) + "-" + arg3;
+                    selected_date = arg1 + "-" + (arg2 + 1) + "-" + arg3;
                     showDate(arg1, arg2 + 1, arg3);
                 }
             };
@@ -114,9 +112,6 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
-        /* end DateWidget */
-
-        //date_selected = (TextView) findViewById(R.id.selected_date);
         Intent intent = getIntent();
         classid = intent.getStringExtra("teach_id");
         intent.putExtra("day", day);
@@ -124,12 +119,10 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         intent.putExtra("year", year);
         intent.putExtra("teachId", classid);
         selected_date = day + "-" + (month) + "-" + year;
-        //date_selected.setText(day + " / " + (month + 1) + " / " + year);
         Log.e("getchap", String.valueOf(classid));
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         createCatalog = (Button) findViewById(R.id.buttonCreate);
-        //cancelCatalog = (Button) findViewById(R.id.buttonCancel);
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
@@ -182,18 +175,18 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                 }
             }
         },
-        new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                NetworkResponse networkResponse = error.networkResponse;
-                if (networkResponse != null && networkResponse.statusCode == 401) {
-                    Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
-                    startActivity(intent);
-                } else {
-                    Log.e("Volley", "Error");
-                }
-            }
-        }) {
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        NetworkResponse networkResponse = error.networkResponse;
+                        if (networkResponse != null && networkResponse.statusCode == 401) {
+                            Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getBaseContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -203,13 +196,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
             }
         };
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
-        /*cancelCatalog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(DailyTeachingActivity.this, ClassActivity.class);
-                startActivity(intent1);
-            }
-        });*/
+
         createCatalog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,7 +210,6 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                         buff.append(sep);
                         buff.append(singleStudent.getPointId());
                         sep = ",";
-                        Log.e("buff is", String.valueOf(buff));
                     }
                 }
                 JSONObject daily_teaching_point = new JSONObject();
@@ -246,30 +232,27 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
                             if (success) {
                                 int id = response.getInt("dtp_id");
                                 String dtp_id = String.valueOf(id);
-                                Log.e("dtp id", String.valueOf(dtp_id));
                                 Intent intent1 = new Intent(DailyTeachingActivity.this, PresentyCatalog.class);
                                 intent1.putExtra("dtp_id", dtp_id);
-                                Log.e("put extra dtp", String.valueOf(dtp_id));
                                 startActivity(intent1);
                             }
                         } catch (JSONException e) {
                             String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                            Log.e("sdcard-err2:", err);
                         }
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.statusCode == 401) {
-                            Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getBaseContext(), "Daily Catalog Not Saved", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }) {
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                NetworkResponse networkResponse = error.networkResponse;
+                                if (networkResponse != null && networkResponse.statusCode == 401) {
+                                    Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getBaseContext(), "Daily Catalog Not Saved", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }) {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         HashMap<String, String> headers = new HashMap<String, String>();
@@ -286,18 +269,11 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "DailyTeaching Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.example.vidhiraj.sample/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -306,15 +282,10 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onStop() {
         super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "DailyTeaching Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.example.vidhiraj.sample/http/host/path")
@@ -325,61 +296,60 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("selected", "done");
         Intent intent = getIntent();
         classid = intent.getStringExtra("teachId");
         for (int j = position; j <= position; j++) {
             chapter_id = chapter_array.get(j);
-            Log.e("for chap_id", String.valueOf(chapter_id));
         }
-        Log.e(" out chap_id", String.valueOf(chapter_id));
-        Log.e("getpoints", String.valueOf(classid));
         String loginURL = ApiKeyConstant.apiUrl + "/api/v1/time_table_classes/" + classid + "/chapters/" + chapter_id + "/get_points.json";
         mProgress.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, loginURL, new JSONObject(), new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    linearpoints = (LinearLayout) findViewById(R.id.pointslinear);
-                    boolean success = response.getBoolean("success");
-                    List<PointsData> pointsList = new ArrayList<PointsData>();
-                    if (success) {
-                        mProgress.dismiss();
-                        JSONArray jsonArray = response.getJSONArray("points");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject pointsObj = jsonArray.getJSONObject(i);
-                            PointsData points = new PointsData(pointsObj.getString("name"), false, pointsObj.getInt("id"));
-                            pointsList.add(points);
-                            Log.e("points are", String.valueOf(pointsList));
+        if (Utils.isConnected(getApplicationContext())) {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, loginURL, new JSONObject(), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        linearpoints = (LinearLayout) findViewById(R.id.pointslinear);
+                        boolean success = response.getBoolean("success");
+                        List<PointsData> pointsList = new ArrayList<PointsData>();
+                        if (success) {
+                            mProgress.dismiss();
+                            JSONArray jsonArray = response.getJSONArray("points");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject pointsObj = jsonArray.getJSONObject(i);
+                                PointsData points = new PointsData(pointsObj.getString("name"), false, pointsObj.getInt("id"));
+                                pointsList.add(points);
+                            }
                         }
+                        m_points_RecyclerView = (RecyclerView) findViewById(R.id.point_recycler_view);
+                        m_points_RecyclerView.setHasFixedSize(true);
+                        m_points_RecyclerView.setLayoutManager(new LinearLayoutManager(DailyTeachingActivity.this));
+                        mAdapter = new PointsAdapter(pointsList);
+                        m_points_RecyclerView.setAdapter(mAdapter);
+                    } catch (JSONException e) {
+                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                     }
-                    m_points_RecyclerView = (RecyclerView) findViewById(R.id.point_recycler_view);
-                    m_points_RecyclerView.setHasFixedSize(true);
-                    m_points_RecyclerView.setLayoutManager(new LinearLayoutManager(DailyTeachingActivity.this));
-                    mAdapter = new PointsAdapter(pointsList);
-                    m_points_RecyclerView.setAdapter(mAdapter);
-                } catch (JSONException e) {
-                    String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                    Log.e("sdcard-err2:", err);
-                }
 
-            }
-        },
-        new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Volley", "Error");
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", ApiKeyConstant.authToken);
-                return headers;
-            }
-        };
-        VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getBaseContext(), "Something went wrong...", Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("Authorization", ApiKeyConstant.authToken);
+                    return headers;
+                }
+            };
+            VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+        } else {
+            mProgress.dismiss();
+            Toast.makeText(getBaseContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -389,9 +359,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
         showDialog(999);
-        /*Toast.makeText(getApplicationContext(), "ca",
-                Toast.LENGTH_SHORT)
-                .show();*/
+
     }
 
     @Override
@@ -404,10 +372,6 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         return null;
     }
 
-    public void showChapters(View view) {
-
-
-    }
     private void showDate(int year, int month, int day) {
         dateText.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));

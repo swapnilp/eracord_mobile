@@ -103,8 +103,6 @@ public class ClassActivity extends AppCompatActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
-                // open I am not going to put anything here)
             }
 
             @Override
@@ -114,8 +112,6 @@ public class ClassActivity extends AppCompatActivity {
         }; // Drawer Toggle Object Made
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -137,7 +133,6 @@ public class ClassActivity extends AppCompatActivity {
                 try {
                     boolean success = response.getBoolean("success");
                     if (success) {
-                        Log.e("ssss","class data");
                         swipeRefreshLayout.setRefreshing(false);
                         JSONArray jsonArray = response.getJSONArray("time_table_classes");
                         if (jsonArray.length() != 0) {
@@ -153,7 +148,6 @@ public class ClassActivity extends AppCompatActivity {
                                 String id = orgObj.getString("id");
                                 classData.id = Integer.parseInt(id);
                                 data.add(classData);
-                                Log.e("class data is", String.valueOf(data));
                             }
                         } else {
                             dataAvailability.setVisibility(View.VISIBLE);
@@ -167,7 +161,6 @@ public class ClassActivity extends AppCompatActivity {
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                    Log.e("sdcard-err2:", err);
                 }
             }
         },
@@ -179,7 +172,6 @@ public class ClassActivity extends AppCompatActivity {
                             Intent intent = new Intent(ClassActivity.this, AndroidSpinnerExampleActivity.class);
                             startActivity(intent);
                         } else {
-                            Log.e("Volley", "Error");
                             swipeRefreshLayout.setRefreshing(false);
                         }
                     }
@@ -198,17 +190,11 @@ public class ClassActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "Class Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.example.vidhiraj.sample/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
@@ -217,16 +203,10 @@ public class ClassActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "Class Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.example.vidhiraj.sample/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);

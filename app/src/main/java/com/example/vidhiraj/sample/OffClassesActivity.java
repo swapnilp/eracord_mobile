@@ -45,13 +45,11 @@ public class OffClassesActivity extends AppCompatActivity {
     private static OffClassesAdapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<OffClassesData> dailyTeach = null;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback","Share app","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
-    int PROFILE = R.drawable.ic_photos;
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
-    RecyclerView.LayoutManager mLayoutManagers;         // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;
     int counter = 9;
@@ -106,83 +104,83 @@ public class OffClassesActivity extends AppCompatActivity {
         }; // Drawer Toggle Object Made
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         dailyTeach = new ArrayList<>();
         mProgress.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
+        if (Utils.isConnected(getApplicationContext())) {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
 
-                    boolean success = response.getBoolean("success");
-                    if (success) {
-                        load.setVisibility(View.VISIBLE);
-                        mProgress.dismiss();
-                        JSONArray jsonArray = response.getJSONArray("off_classes");
-                        int arrayLength = jsonArray.length();
-                        Log.e("array length is", String.valueOf(arrayLength));
-
-                        if (jsonArray.length() != 0) {
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject orgObj = jsonArray.getJSONObject(i);
-                                OffClassesData offClassData = new OffClassesData();
-                                offClassData.name = orgObj.getString("name");
-                                offClassData.date = orgObj.getString("date");
-                                offClassData.teacher_name = orgObj.getString("teacher_name");
-                                dailyTeach.add(offClassData);
-                                load.bringToFront();
-                            }
-                        } else {
-                            dataAvailability.setVisibility(View.VISIBLE);
-                            load.setVisibility(View.GONE);
-                        }
-                    }
-
-                    if (getResources().getConfiguration().orientation == 2) {
-                        counter = 2;
-                    }
-                    recyclerView.setHasFixedSize(true);
-                    mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    adapter = new OffClassesAdapter(getApplicationContext(), dailyTeach);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
-                } catch (JSONException e) {
-                    String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                    Log.e("sdcard-err2:", err);
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.statusCode == 401) {
-                            Intent intent = new Intent(OffClassesActivity.this, AndroidSpinnerExampleActivity.class);
-                            startActivity(intent);
-                        } else {
+                        boolean success = response.getBoolean("success");
+                        if (success) {
+                            load.setVisibility(View.VISIBLE);
                             mProgress.dismiss();
+                            JSONArray jsonArray = response.getJSONArray("off_classes");
+                            int arrayLength = jsonArray.length();
+                            if (jsonArray.length() != 0) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject orgObj = jsonArray.getJSONObject(i);
+                                    OffClassesData offClassData = new OffClassesData();
+                                    offClassData.name = orgObj.getString("name");
+                                    offClassData.date = orgObj.getString("date");
+                                    offClassData.teacher_name = orgObj.getString("teacher_name");
+                                    dailyTeach.add(offClassData);
+                                    load.bringToFront();
+                                }
+                            } else {
+                                dataAvailability.setVisibility(View.VISIBLE);
+                                load.setVisibility(View.GONE);
+                            }
                         }
+                        if (getResources().getConfiguration().orientation == 2) {
+                            counter = 2;
+                        }
+                        recyclerView.setHasFixedSize(true);
+                        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        recyclerView.setLayoutManager(mLayoutManager);
+                        adapter = new OffClassesAdapter(getApplicationContext(), dailyTeach);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
+                    } catch (JSONException e) {
+                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                     }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", ApiKeyConstant.authToken);
-                return headers;
-            }
-        };
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            mProgress.dismiss();
+                            NetworkResponse networkResponse = error.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Intent intent = new Intent(OffClassesActivity.this, AndroidSpinnerExampleActivity.class);
+                                startActivity(intent);
+                            } else {
+                                mProgress.dismiss();
+                            }
+                        }
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("Authorization", ApiKeyConstant.authToken);
+                    return headers;
+                }
+            };
 
-        VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
-        load.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new loadMoreListView().execute();
-            }
-        });
+            VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+            load.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new loadMoreListView().execute();
+                }
+            });
+        } else {
+            mProgress.dismiss();
+            Toast.makeText(getBaseContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -192,11 +190,9 @@ public class OffClassesActivity extends AppCompatActivity {
         finish();
     }
 
-
     private class loadMoreListView extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
-            // Showing progress dialog before sending http request
             pDialog = new ProgressDialog(
                     OffClassesActivity.this);
             pDialog.setMessage("Please wait..");
@@ -219,8 +215,6 @@ public class OffClassesActivity extends AppCompatActivity {
                                     mProgress.dismiss();
                                     JSONArray jsonArray = response.getJSONArray("off_classes");
                                     int arrayLength = jsonArray.length();
-                                    Log.e("array length is", String.valueOf(arrayLength));
-
                                     if (jsonArray.length() != 0) {
                                         for (int i = 0; i < jsonArray.length(); i++) {
                                             JSONObject orgObj = jsonArray.getJSONObject(i);
@@ -239,7 +233,7 @@ public class OffClassesActivity extends AppCompatActivity {
                                     scrollview.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            int x=0,y=1000;
+                                            int x = 0, y = 1000;
                                             scrollview.scrollTo(x, y);
                                         }
                                     });
@@ -254,7 +248,6 @@ public class OffClassesActivity extends AppCompatActivity {
                                 }
                             } catch (JSONException e) {
                                 String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                                Log.e("sdcard-err2:", err);
                             }
                         }
                     },
@@ -269,7 +262,6 @@ public class OffClassesActivity extends AppCompatActivity {
                                     } else {
                                         load.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(), "No More Data to laod", Toast.LENGTH_LONG).show();
-                                        Log.e("Poonam", "Error");
                                     }
                                 }
                             }) {

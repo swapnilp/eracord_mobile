@@ -22,13 +22,9 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  */
 
 public class CatalogSchedule extends AppCompatActivity {
-    CalendarView calender;
-
     String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback", "Share app", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
-    //String NAME = "Eracord";
     String org = null;
-    int PROFILE = R.drawable.ic_photos;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
@@ -44,8 +40,6 @@ public class CatalogSchedule extends AppCompatActivity {
         setContentView(R.layout.calendar_activity);
         Intent intent = getIntent();
         final String teachId = intent.getStringExtra("teach_id");
-        //calender = (CalendarView) findViewById(R.id.calendarView);
-
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
@@ -73,21 +67,8 @@ public class CatalogSchedule extends AppCompatActivity {
         }; // Drawer Toggle Object Made
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        /*calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month,
-                                            int dayOfMonth) {
-                Intent intent = new Intent(CatalogSchedule.this, DailyTeachingActivity.class);
-                intent.putExtra("day", dayOfMonth);
-                intent.putExtra("month", month);
-                intent.putExtra("year", year);
-                intent.putExtra("teachId", teachId);
-                startActivity(intent);
-            }
-        });*/
+
     }
 }
 

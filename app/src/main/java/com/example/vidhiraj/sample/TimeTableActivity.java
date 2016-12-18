@@ -14,10 +14,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -34,12 +33,9 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
@@ -49,29 +45,16 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  */
 
 public class TimeTableActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
-    List<Integer> chapter_array = new ArrayList<Integer>();
-    String classid;
-    Button createCatalog, cancelCatalog;
-    LinearLayout linearpoints;
-    Integer chapter_id = null;
+    RecyclerView.Adapter mAdapter;
     RecyclerView mRecyclerView;
     ProgressDialog mProgress;
-    TextView date_selected;
-    int day, month, year;
     ArrayList<String> weekDays;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes","Feedback", "Share app","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
-    int PROFILE = R.drawable.ic_photos;
-    private Toolbar toolbar;                              // Declaring the Toolbar Object
-    RecyclerView mDrawerRecyclerView;                           // Declaring RecyclerView
-    RecyclerView.Adapter mDrawerAdapter;
-    // Declaring Adapter For Recycler View
-    RecyclerView.LayoutManager mLayoutManagers;
+    private Toolbar toolbar;
     private LinearLayoutManager mLayoutManager;
-    // Declaring Layout Manager as a linear layout manager
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
+    DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
     String url_icon;
     String weekDay;
@@ -102,12 +85,12 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(org);
-        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-        mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mAdapter = new EraMyAdapter(TimeTableActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
-        mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
-        mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
+        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new EraMyAdapter(TimeTableActivity.this, TITLES, ICONS, org, user_email, url_icon);
+        mRecyclerView.setAdapter(mAdapter);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -118,11 +101,9 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
             }
-        }; // Drawer Toggle Object Made
-        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        };
+        Drawer.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         weekDays = new ArrayList<>();
         weekDays.add("Monday");
@@ -140,76 +121,78 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         spinner.setAdapter(dataAdapter);
         int selectedDay = dataAdapter.getPosition(weekDay);
         spinner.setSelection(selectedDay);
-
-
         String timetableURL = ApiKeyConstant.apiUrl + "/api/v1/time_tables/get_time_tables.json";
         mProgress.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, timetableURL, new JSONObject(), new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    boolean success = response.getBoolean("success");
-                    if (success) {
-                        mProgress.dismiss();
-                        timetableObj = response.getJSONObject("timetable");
-                        setJsonArray(timetableObj);
-                        timeTableArray = timetableObj.getJSONArray(weekDay);
-                        if (timeTableArray.length() == 0) {
-                            timetableData.setVisibility(View.VISIBLE);
-                        } else {
-                            timetableData.setVisibility(View.GONE);
-                            Log.e("timearray is", String.valueOf(timeTableArray));
-                            for (int i = 0; i < timeTableArray.length(); i++) {
-                                JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                                TimeTableData timeTable = new TimeTableData(dayDataObj.getInt("id"),
-                                                                            dayDataObj.getString("name"),
-                                                                            dayDataObj.getString("subject"),
-                                                                            dayDataObj.getString("class_room"),
-                                                                            dayDataObj.getString("start_time"),
-                                                                            dayDataObj.getString("end_time"));
-                                timeTableDatas.add(timeTable);
+        if (Utils.isConnected(getApplicationContext())) {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, timetableURL, new JSONObject(), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (success) {
+                            mProgress.dismiss();
+                            timetableObj = response.getJSONObject("timetable");
+                            setJsonArray(timetableObj);
+                            timeTableArray = timetableObj.getJSONArray(weekDay);
+                            if (timeTableArray.length() == 0) {
+                                timetableData.setVisibility(View.VISIBLE);
+                            } else {
+                                timetableData.setVisibility(View.GONE);
+                                for (int i = 0; i < timeTableArray.length(); i++) {
+                                    JSONObject dayDataObj = timeTableArray.getJSONObject(i);
+                                    TimeTableData timeTable = new TimeTableData(dayDataObj.getInt("id"),
+                                            dayDataObj.getString("name"),
+                                            dayDataObj.getString("subject"),
+                                            dayDataObj.getString("class_room"),
+                                            dayDataObj.getString("start_time"),
+                                            dayDataObj.getString("end_time"));
+                                    timeTableDatas.add(timeTable);
+                                }
+
+                                mRecyclerView = (RecyclerView) findViewById(R.id.tt_recycler_view);
+                                mRecyclerView.setHasFixedSize(true);
+                                mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
+                                mAdapter = new TimeTableAdapter(timeTableDatas);
+                                mRecyclerView.setAdapter(mAdapter);
+                                mAdapter.notifyDataSetChanged();
+                                mRecyclerView.invalidate();
                             }
-
-                            mRecyclerView = (RecyclerView) findViewById(R.id.tt_recycler_view);
-                            mRecyclerView.setHasFixedSize(true);
-                            mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
-                            mAdapter = new TimeTableAdapter(timeTableDatas);
-                            mRecyclerView.setAdapter(mAdapter);
-                            mAdapter.notifyDataSetChanged();
-                            mRecyclerView.invalidate();
                         }
-                    }
 
-                } catch (JSONException e) {
-                    String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                    Log.e("sdcard-err2:", err);
+                    } catch (JSONException e) {
+                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
+                        Log.e("sdcard-err2:", err);
+                    }
                 }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            mProgress.dismiss();
+                            NetworkResponse networkResponse = error.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Intent intent = new Intent(TimeTableActivity.this, AndroidSpinnerExampleActivity.class);
+                                startActivity(intent);
+                            } else {
+                                mProgress.dismiss();
+                                Toast.makeText(getBaseContext(), "Please Try Again", Toast.LENGTH_LONG).show();
 
-
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        mProgress.dismiss();
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.statusCode == 401) {
-                            Intent intent = new Intent(TimeTableActivity.this, AndroidSpinnerExampleActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Log.e("Volley", "Error");
+                            }
                         }
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", ApiKeyConstant.authToken);
-                return headers;
-            }
-        };
-        VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("Authorization", ApiKeyConstant.authToken);
+                    return headers;
+                }
+            };
+            VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+        } else {
+            mProgress.dismiss();
+            Toast.makeText(getBaseContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setJsonArray(JSONObject jsonObject) {
@@ -238,15 +221,14 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                 for (int i = 0; i < timeTableArray.length(); i++) {
                     JSONObject dayDataObj = timeTableArray.getJSONObject(i);
                     TimeTableData timeTable = new TimeTableData(dayDataObj.getInt("id"),
-                                                                dayDataObj.getString("class_name"),
-                                                                dayDataObj.getString("subject"),
-                                                                dayDataObj.getString("sub_class_name"),
-                                                                dayDataObj.getString("start_time"),
-                                                                dayDataObj.getString("end_time"));
+                            dayDataObj.getString("class_name"),
+                            dayDataObj.getString("subject"),
+                            dayDataObj.getString("sub_class_name"),
+                            dayDataObj.getString("start_time"),
+                            dayDataObj.getString("end_time"));
                     timeTableDatas.add(timeTable);
                 }
-            }
-            else {
+            } else {
                 timetableData.setVisibility(View.VISIBLE);
             }
             mRecyclerView = (RecyclerView) findViewById(R.id.tt_recycler_view);
@@ -259,11 +241,9 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
-
 }

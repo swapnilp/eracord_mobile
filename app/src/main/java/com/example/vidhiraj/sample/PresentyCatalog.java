@@ -42,11 +42,9 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  */
 public class PresentyCatalog extends AppCompatActivity {
 
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Share app","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
-    //String NAME = "Eracord";
     String org = null;
-    int PROFILE = R.drawable.ic_photos;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     RecyclerView mDrawerRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mDrawerAdapter;                        // Declaring Adapter For Recycler View
@@ -54,8 +52,6 @@ public class PresentyCatalog extends AppCompatActivity {
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;
     private GoogleApiClient client;
-
-
     private static RecyclerView.Adapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<PresentyData> data = null;
@@ -66,13 +62,13 @@ public class PresentyCatalog extends AppCompatActivity {
     int countAbsent = 0;
     ProgressDialog mProgress;
     StringBuilder buff = new StringBuilder();
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.presenty_catalog);
         final Intent intent = getIntent();
         final String id = intent.getStringExtra("dtp_id");
-        Log.e("next dtp", String.valueOf(id));
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");
@@ -86,22 +82,14 @@ public class PresentyCatalog extends AppCompatActivity {
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
         url_icon = prefs.getString("org_icon", null);
-
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(org);
-
         mDrawerRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-
         mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-
         mDrawerAdapter = new EraMyAdapter(PresentyCatalog.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        // And passing the titles,icons,header view name, header view email,
-        // and header view profile picture
-
         mDrawerRecyclerView.setAdapter(mDrawerAdapter);                              // Setting the adapter to RecyclerView
-
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
         mDrawerRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
         mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
@@ -109,172 +97,159 @@ public class PresentyCatalog extends AppCompatActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
-                // open I am not going to put anything here)
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                // Code here will execute once drawer is closed
             }
         }; // Drawer Toggle Object Made
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-
         String url = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs/" + id + "/get_catlogs";
-        Log.e("dtp url", url);
         mProgress.show();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                data = new ArrayList<>();
-                try {
-                    boolean success = response.getBoolean("success");
-                    if (success) {
-                        mProgress.dismiss();
-                        savePresenty.setVisibility(View.VISIBLE);
-                        JSONArray jsonArray = response.getJSONArray("class_catlogs");
-                        if (jsonArray.length() != 0) {
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject orgObj = jsonArray.getJSONObject(i);
-                                PresentyData classData = new PresentyData();
-                                classData.setName(orgObj.getString("name"));
-                                classData.setSelected(orgObj.getBoolean("is_present"));
-                                boolean totalcount = orgObj.getBoolean("is_present");
-                                if (totalcount) {
-                                    countPresent++;
-                                } else {
-                                    countAbsent++;
-                                }
-                                classData.setPointId(orgObj.getInt("id"));
-                                data.add(classData);
-                            }
-                            totalAbsent.setText(Integer.toString(countAbsent));
-                            totalPresent.setText(Integer.toString(countPresent));
-
-                        } else {
-                            savePresenty.setVisibility(View.GONE);
-                            dataAvailabiliy.setVisibility(View.VISIBLE);
-                        }
-                    }
-
-                    recyclerView = (RecyclerView) findViewById(R.id.pr_recycler_view);
-                    recyclerView.setHasFixedSize(true);
-                    adapter = new PresentyAdapter(PresentyCatalog.this, data, totalPresent, totalAbsent);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(PresentyCatalog.this));
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-                } catch (JSONException e) {
-                    String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                    Log.e("sdcard-err2:", err);
-                }
-
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.statusCode == 401) {
-                            Intent intent = new Intent(PresentyCatalog.this, AndroidSpinnerExampleActivity.class);
-                            startActivity(intent);
-                        } else {
+        if (Utils.isConnected(getApplicationContext())) {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    data = new ArrayList<>();
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (success) {
                             mProgress.dismiss();
-                            dataAvailabiliy.setVisibility(View.VISIBLE);
-                            Log.e("Volley", "Error");
-                        }
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", ApiKeyConstant.authToken);
-                return headers;
-            }
-        };
-        VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+                            savePresenty.setVisibility(View.VISIBLE);
+                            JSONArray jsonArray = response.getJSONArray("class_catlogs");
+                            if (jsonArray.length() != 0) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject orgObj = jsonArray.getJSONObject(i);
+                                    PresentyData classData = new PresentyData();
+                                    classData.setName(orgObj.getString("name"));
+                                    classData.setSelected(orgObj.getBoolean("is_present"));
+                                    boolean totalcount = orgObj.getBoolean("is_present");
+                                    if (totalcount) {
+                                        countPresent++;
+                                    } else {
+                                        countAbsent++;
+                                    }
+                                    classData.setPointId(orgObj.getInt("id"));
+                                    data.add(classData);
+                                }
+                                totalAbsent.setText(Integer.toString(countAbsent));
+                                totalPresent.setText(Integer.toString(countPresent));
 
+                            } else {
+                                savePresenty.setVisibility(View.GONE);
+                                dataAvailabiliy.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        recyclerView = (RecyclerView) findViewById(R.id.pr_recycler_view);
+                        recyclerView.setHasFixedSize(true);
+                        adapter = new PresentyAdapter(PresentyCatalog.this, data, totalPresent, totalAbsent);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(PresentyCatalog.this));
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    } catch (JSONException e) {
+                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
+                    }
+
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            NetworkResponse networkResponse = error.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Intent intent = new Intent(PresentyCatalog.this, AndroidSpinnerExampleActivity.class);
+                                startActivity(intent);
+                            } else {
+                                mProgress.dismiss();
+                                dataAvailabiliy.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json; charset=utf-8");
+                    headers.put("Authorization", ApiKeyConstant.authToken);
+                    return headers;
+                }
+            };
+            VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+        } else {
+            mProgress.dismiss();
+            Toast.makeText(getBaseContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
+        }
         savePresenty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String sep = "";
                 List<PresentyData> stList = ((PresentyAdapter) adapter)
                         .getStudentist();
-                Log.e("list is", String.valueOf(stList));
                 for (int i = 0; i < stList.size(); i++) {
-                    Log.e("point is", String.valueOf(stList.get(i).getPointId()));
-                    Log.e("selection is", String.valueOf(stList.get(i).isSelected()));
-//                    PresentyData singleStudent = stList.get(i);
                     if (stList.get(i).isSelected() == false) {
                         buff.append(sep);
                         buff.append(stList.get(i).getPointId());
                         sep = ",";
-                        Log.e("inside b", String.valueOf(buff));
-//
-                   }
+                    }
                 }
-//
-                Log.e("outside b", String.valueOf(buff));
                 JSONObject daily_teaching = new JSONObject();
                 JSONObject daily_teaching_point = new JSONObject();
 
                 try {
                     daily_teaching.put("absenty_string", buff);
                     daily_teaching_point.put("daily_teaching_point", daily_teaching);
-                    Log.e("daily_teach", String.valueOf(daily_teaching_point));
                 } catch (JSONException e) {
 
                     e.printStackTrace();
                 }
 
                 String loginURL = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs/" + id + "/save_catlogs";
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, daily_teaching_point, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            boolean success = response.getBoolean("success");
-                            if (success) {
-                                Intent intent1 = new Intent(PresentyCatalog.this, DailyCatalogActivity.class);
-                                startActivity(intent1);
-                                Toast.makeText(getBaseContext(), "Student Presentee Saved", Toast.LENGTH_LONG).show();
-                            }
-
-                        } catch (JSONException e) {
-                            String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                            Log.e("sdcard-err2:", err);
-                        }
-
-                    }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                NetworkResponse networkResponse = error.networkResponse;
-                                if (networkResponse != null && networkResponse.statusCode == 401) {
-                                    Intent intent = new Intent(PresentyCatalog.this, AndroidSpinnerExampleActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getBaseContext(), "Student Presenty Not Saved", Toast.LENGTH_LONG).show();
+                if (Utils.isConnected(getApplicationContext())) {
+                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, daily_teaching_point, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                boolean success = response.getBoolean("success");
+                                if (success) {
+                                    Intent intent1 = new Intent(PresentyCatalog.this, DailyCatalogActivity.class);
+                                    startActivity(intent1);
+                                    Toast.makeText(getBaseContext(), "Student Presentee Saved", Toast.LENGTH_LONG).show();
                                 }
+
+                            } catch (JSONException e) {
+                                String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                             }
-                        }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        HashMap<String, String> headers = new HashMap<String, String>();
-                        headers.put("Content-Type", "application/json; charset=utf-8");
-                        headers.put("Authorization", ApiKeyConstant.authToken);
-                        return headers;
-                    }
-                };
-                VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+
+                        }
+                    },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    NetworkResponse networkResponse = error.networkResponse;
+                                    if (networkResponse != null && networkResponse.statusCode == 401) {
+                                        Intent intent = new Intent(PresentyCatalog.this, AndroidSpinnerExampleActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(getBaseContext(), "Student Presenty Not Saved", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            HashMap<String, String> headers = new HashMap<String, String>();
+                            headers.put("Content-Type", "application/json; charset=utf-8");
+                            headers.put("Authorization", ApiKeyConstant.authToken);
+                            return headers;
+                        }
+                    };
+                    VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+                } else {
+                    Toast.makeText(getBaseContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
