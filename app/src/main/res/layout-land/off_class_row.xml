@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/divider">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/chapter_text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:paddingTop="2dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:layout_weight="0.73" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="100dp"
+            android:textColor="@android:color/holo_red_light"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="textEnd"
+            android:paddingTop="4dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:id="@+id/teacher_name"
+            android:layout_width="match_parent"
+            android:textColor="@color/bb_darkBackgroundColor"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="13dp"
+            android:layout_height="wrap_content"
+            android:text="@string/points"
+            android:layout_gravity="right"
+            android:fontFamily="sans-serif"
+            android:textAlignment="viewStart"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/bottomLine"/>
+
+
+</LinearLayout>

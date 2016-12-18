@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -26,18 +27,17 @@
                 android:text="@string/email"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:layout_gravity="end"
                 android:id="@+id/useremail"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="30dp"
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
                 android:textAllCaps="true" />
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -47,10 +47,10 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
                     android:text="@string/choose_organization"
-                    android:textStyle="bold"
                     android:layout_marginRight="20dp"
                     android:textColor="@color/textcolor"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif" />
 
 
                 <LinearLayout
@@ -79,7 +79,7 @@
 
                     <Spinner
                         android:id="@+id/spinner"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
                         android:spinnerMode="dialog"
@@ -89,14 +89,8 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/passwordinput"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="8dp">
 
-                <EditText android:id="@+id/editTextPassword"
+                <!--<EditText android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberPassword"
@@ -105,9 +99,42 @@
                     android:textColor="@color/textcolor"
                     android:hint="@string/pin_label"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginRight="20dp" />-->
 
-            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:text="@string/pin_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/textcolor"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp" />
+
+                <com.example.vidhiraj.sample.PinEntryView
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:accentType="character"
+                    app:digitBackground="@android:color/white"
+                    app:digitTextColor="@color/colorAccent"
+                    app:digitElevation="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:digitHeight="50dp"
+                    app:digitWidth="60dp"
+                    app:digitSpacing="24dp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/buttonLogin"

@@ -47,7 +47,7 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  */
 public class StudentListActivity extends AppCompatActivity {
 
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     //String NAME = "Eracord";
     String org = null;
@@ -66,10 +66,9 @@ public class StudentListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private StudentCatalogAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
-    private static List<StudentData> dailyTeach;
+    private static ArrayList<StudentData> dailyTeach;
     private int current_page = 1;
     Button load;
-    int counter = 9;
     EditText search;
     ProgressDialog pDialog;
     TextView dataAvailability;
@@ -105,17 +104,10 @@ public class StudentListActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(org);
-
         mDrawerRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-
         mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-
         mDrawerAdapter = new EraMyAdapter(StudentListActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        // And passing the titles,icons,header view name, header view email,
-        // and header view profile picture
-
         mDrawerRecyclerView.setAdapter(mDrawerAdapter);                              // Setting the adapter to RecyclerView
-
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
         mDrawerRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
         mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
@@ -186,14 +178,12 @@ public class StudentListActivity extends AppCompatActivity {
                         }
                     }
 
-                    if (getResources().getConfiguration().orientation == 2) {
-                        counter = 2;
-                    }
-                    mRecyclerView.setHasFixedSize(false);
+                    mRecyclerView.setHasFixedSize(true);
                     mLayoutManager = new LinearLayoutManager(getApplicationContext());
                     mRecyclerView.setLayoutManager(mLayoutManager);
                     mAdapter = new StudentCatalogAdapter(dailyTeach, getApplicationContext());
                     mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount());
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                     Log.e("sdcard-err2:", err);
@@ -344,25 +334,18 @@ public class StudentListActivity extends AppCompatActivity {
                                     scrollview.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            counter = counter + scrollview.getBottom()+1180;
-                                            scrollview.scrollTo(0, counter);
-                                            mRecyclerView.scrollToPosition(counter);
-                                            mRecyclerView.smoothScrollBy(0, counter);
-                                            mRecyclerView.smoothScrollToPosition(counter);
-                                            scrollview.smoothScrollTo(0, counter);
-                                            //int x=0,y=30;
-                                            //scrollview.scrollTo(x, y);
+                                            int x=0,y=1000;
+                                            scrollview.scrollTo(x, y);
                                         }
                                     });
 
                                     if (arrayLength < 10) {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
-                                        mRecyclerView.setHasFixedSize(false);
-                                        /*mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);
-                                        scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);*/
                                         Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
                                     }
+
+                                    mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount());
                                 }
 
                             } catch (JSONException e) {
@@ -384,10 +367,8 @@ public class StudentListActivity extends AppCompatActivity {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
                                         mRecyclerView.setHasFixedSize(false);
-                                        /*scrollview.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);
-                                        mRecyclerView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.student_box_full_width);*/
                                         Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
-                                     //   Log.e("Poonam", error.getMessage());
+                                        //Log.e("Poonam", error.getMessage());
                                     }
                                 }
                             }) {

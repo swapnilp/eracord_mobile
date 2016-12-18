@@ -1,24 +1,26 @@
 package com.example.vidhiraj.sample;
 
-import android.content.Intent;
+import android.util.Log;
+import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.EditText;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Button;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,20 +29,15 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
 
 /**
  * Created by vidhiraj on 12-08-2016.
  */
-public class ClassActivity extends AppCompatActivity {
+public class FeedbackActivity extends AppCompatActivity {
     String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
@@ -51,43 +48,31 @@ public class ClassActivity extends AppCompatActivity {
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;
     String url_icon = null;
+    TextView from_cust;
+    EditText title, body_message;
+    Button send_feedback;
+
     private static RecyclerView.Adapter adapter;
     private static RecyclerView recyclerView;
-    private static ArrayList<ClassData> data = null;
-    private static ArrayList<DailyTeachData> dailyTeach = null;
-    SwipeRefreshLayout swipeRefreshLayout;
-    boolean mIsRefreshing = false;
-    TextView dataAvailability;
     private GoogleApiClient client;
+
+    private static String RECIPIENT = "nileshgorle@gmail.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_class);
+        setContentView(R.layout.feedback_form);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
         url_icon = prefs.getString("org_icon", null);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.st_swipeRefreshLayout);
-        dataAvailability = (TextView) findViewById(R.id.noStData);
-        fetchClassData();
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (Utils.isConnected(getApplicationContext())) {
-                    mIsRefreshing = true;
-                    fetchClassData();
-                } else {
-                    android.os.Handler handler = new android.os.Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
-                    }, 5000);
 
-                }
-            }
-        });
+        from_cust = (TextView) findViewById(R.id.from_cust);
+        from_cust.setText(user_email);
+        title = (EditText) findViewById(R.id.title);
+        body_message = (EditText) findViewById(R.id.message);
+        send_feedback = (Button) findViewById(R.id.send_feedback);
 
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -95,7 +80,7 @@ public class ClassActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(org);
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mAdapter = new EraMyAdapter(ClassActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
+        mAdapter = new EraMyAdapter(FeedbackActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
         mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
@@ -117,6 +102,13 @@ public class ClassActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        send_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                send_feedback_user();
+            }
+        });
     }
 
     @Override
@@ -128,70 +120,85 @@ public class ClassActivity extends AppCompatActivity {
         }
     }
 
-    public void fetchClassData() {
-        String loginURL = ApiKeyConstant.apiUrl + "/api/v1/time_table_classes.json";
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, loginURL, new JSONObject(), new Response.Listener<JSONObject>() {
+    public boolean validate_fields() {
+        if (title.getText().toString().equals("") || body_message.getText().toString().equals("")) {
+            Toast.makeText(getBaseContext(), "Title and message are required!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    public void send_feedback_user() {
+        final ProgressDialog mDialog;
+
+        if (!validate_fields()) {
+            return;
+        }
+        send_feedback.setEnabled(false);
+        mDialog = ProgressDialog.show(FeedbackActivity.this, "In Progress", "Loading...");
+
+        /*
+        //get to, subject and content from the user input and store as string.
+        String emailTo 		= RECIPIENT;
+        String emailSubject = "From: " + from_cust.getText() + " Title: " + title.getText();
+        String emailContent = body_message.getText().toString();
+
+        Intent send = new Intent(Intent.ACTION_SENDTO);
+        String uriText = "mailto:" + Uri.encode(emailTo) +
+                "?subject=" + Uri.encode(emailSubject) +
+                "&body=" + Uri.encode(emailContent);
+        Uri uri = Uri.parse(uriText);
+        send.setType("message/rfc822");
+        send.setData(uri);
+        startActivity(Intent.createChooser(send, "Send feedback using"));
+        */
+
+        JSONObject userObj = new JSONObject();
+        JSONObject feed_back = new JSONObject();
+
+        try {
+            userObj.put("email", from_cust.getText().toString());
+            userObj.put("title", title.getText().toString());
+            userObj.put("message", body_message.getText().toString());
+            feed_back.put("feed_back", userObj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String feedbackURL = ApiKeyConstant.apiUrl + "/api/v1/feedbacks";
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, feedbackURL, feed_back, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                data = new ArrayList<ClassData>();
                 try {
                     boolean success = response.getBoolean("success");
                     if (success) {
-                        Log.e("ssss","class data");
-                        swipeRefreshLayout.setRefreshing(false);
-                        JSONArray jsonArray = response.getJSONArray("time_table_classes");
-                        if (jsonArray.length() != 0) {
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject orgObj = jsonArray.getJSONObject(i);
-                                ClassData classData = new ClassData();
-                                classData.name = orgObj.getString("class_name");
-                                classData.subject = orgObj.getString("subject");
-                                if(orgObj.getString("division") != null && !orgObj.getString("division").isEmpty() && orgObj.getString("division") != "null") {
-                                    classData.division = orgObj.getString("division");
-                                }
-                                classData.image = R.drawable.class_circle;
-                                String id = orgObj.getString("id");
-                                classData.id = Integer.parseInt(id);
-                                data.add(classData);
-                                Log.e("class data is", String.valueOf(data));
-                            }
-                        } else {
-                            dataAvailability.setVisibility(View.VISIBLE);
-                        }
+                        //ApiKeyConstant.authToken = response.getString("token");
+                        Toast.makeText(getBaseContext(), "Feedback mailed successfully !!!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(FeedbackActivity.this, ClassActivity.class);
+                        startActivity(intent);
+                        send_feedback.setEnabled(true);
+                        mDialog.dismiss();
                     }
-                    recyclerView = (RecyclerView) findViewById(R.id.st_recycler_view);
-                    recyclerView.setHasFixedSize(true);
-                    adapter = new ClassAdapter(ClassActivity.this, data);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ClassActivity.this));
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
                 } catch (JSONException e) {
+                    send_feedback.setEnabled(true);
+                    mDialog.dismiss();
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                     Log.e("sdcard-err2:", err);
                 }
+
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.statusCode == 401) {
-                            Intent intent = new Intent(ClassActivity.this, AndroidSpinnerExampleActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Log.e("Volley", "Error");
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
+                        send_feedback.setEnabled(true);
+                        mDialog.dismiss();
+                        Toast.makeText(getBaseContext(), "Mail sending failed !!!", Toast.LENGTH_LONG).show();
                     }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", ApiKeyConstant.authToken);
-                return headers;
-            }
-        };
+                }
+        );
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
     }
 

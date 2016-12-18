@@ -60,7 +60,7 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
     TextView date_selected;
     int day, month, year;
     ArrayList<String> weekDays;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes","Feedback", "Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;
@@ -155,7 +155,8 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                             Log.e("timearray is", String.valueOf(timeTableArray));
                             for (int i = 0; i < timeTableArray.length(); i++) {
                                 JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                                TimeTableData timeTable = new TimeTableData(dayDataObj.getString("name"),
+                                TimeTableData timeTable = new TimeTableData(dayDataObj.getInt("id"),
+                                                                            dayDataObj.getString("name"),
                                                                             dayDataObj.getString("subject"),
                                                                             dayDataObj.getString("class_room"),
                                                                             dayDataObj.getString("start_time"),
@@ -214,22 +215,23 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String timedayyyy = null;
+        String timeday = null;
         for (int j = position; j <= position; j++) {
-            timedayyyy = weekDays.get(j);
-            Log.e("for chap_id", String.valueOf(timedayyyy));
+            timeday = weekDays.get(j);
+            Log.e("for chap_id", String.valueOf(timeday));
         }
         try {
             timeTableDatas = new ArrayList<>();
             timetableObj = getJsonArray();
-            if (timetableObj.has(timedayyyy)) {
+            if (timetableObj.has(timeday)) {
                 timetableData.setVisibility(View.GONE);
-                timeTableArray = timetableObj.getJSONArray(timedayyyy);
+                timeTableArray = timetableObj.getJSONArray(timeday);
                 Log.e("obj", String.valueOf(timetableObj));
                 Log.e("timearray is", String.valueOf(timeTableArray));
                 for (int i = 0; i < timeTableArray.length(); i++) {
                     JSONObject dayDataObj = timeTableArray.getJSONObject(i);
-                    TimeTableData timeTable = new TimeTableData(dayDataObj.getString("class_name"),
+                    TimeTableData timeTable = new TimeTableData(dayDataObj.getInt("id"),
+                                                                dayDataObj.getString("class_name"),
                                                                 dayDataObj.getString("subject"),
                                                                 dayDataObj.getString("sub_class_name"),
                                                                 dayDataObj.getString("start_time"),

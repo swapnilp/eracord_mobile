@@ -42,7 +42,7 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
  */
 public class PresentyCatalog extends AppCompatActivity {
 
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     //String NAME = "Eracord";
     String org = null;
@@ -53,7 +53,6 @@ public class PresentyCatalog extends AppCompatActivity {
     RecyclerView.LayoutManager mLayoutManager;         // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;
-
     private GoogleApiClient client;
 
 
@@ -166,7 +165,7 @@ public class PresentyCatalog extends AppCompatActivity {
 
                     recyclerView = (RecyclerView) findViewById(R.id.pr_recycler_view);
                     recyclerView.setHasFixedSize(true);
-                    adapter = new PresentyAdapter(PresentyCatalog.this, data);
+                    adapter = new PresentyAdapter(PresentyCatalog.this, data, totalPresent, totalAbsent);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(PresentyCatalog.this));
                     recyclerView.setItemAnimator(new DefaultItemAnimator());

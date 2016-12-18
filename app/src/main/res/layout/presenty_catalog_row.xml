@@ -22,12 +22,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/chkSelected"
-        android:layout_toLeftOf="@+id/chkSelected"
+        android:layout_toStartOf="@+id/pr_chkSelected"
+        android:layout_toLeftOf="@+id/pr_chkSelected"
         android:fontFamily="serif" />
 
     <CheckBox
-            android:id="@+id/chkSelected"
+            android:id="@+id/pr_chkSelected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

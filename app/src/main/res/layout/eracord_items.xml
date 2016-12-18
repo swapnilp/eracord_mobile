@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="visible"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/menu_icon" />
+
     <TextView
-        android:id="@+id/rowText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cursorVisible="true"
-        android:fontFamily="sans-serif"
-        android:paddingBottom="10dp"
         android:paddingLeft="12dp"
         android:paddingTop="10dp"
-        android:background="@drawable/draweritem_select"
-        android:clickable="true"
-        android:text="Medium Text"
-        android:textAllCaps="false"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/rowText"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif"
         android:textColor="@drawable/left_links"
-        android:textSize="14sp" />
-
+        android:textSize="18sp"
+        android:paddingBottom="10dp"
+        android:cursorVisible="true" />
 </LinearLayout>

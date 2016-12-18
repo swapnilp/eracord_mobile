@@ -6,19 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class PresentyAdapter extends
-        RecyclerView.Adapter<PresentyAdapter.ViewHolder> {
+public class PresentyAdapter extends RecyclerView.Adapter<PresentyAdapter.ViewHolder> {
     private List<PresentyData> stList;
     Context context;
+    TextView totalpresent, totalabsent;
 
-    public PresentyAdapter(Context context, List<PresentyData> students) {
+    public PresentyAdapter(Context context, List<PresentyData> students, TextView totalPresent, TextView totalAbsent) {
         this.context = context;
         this.stList = students;
+        this.totalpresent = totalPresent;
+        this.totalabsent = totalAbsent;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class PresentyAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
         final int pos = position;
         viewHolder.tvName.setText(stList.get(position).getName());
@@ -44,6 +45,16 @@ public class PresentyAdapter extends
                 PresentyData contact = (PresentyData) cb.getTag();
                 contact.setSelected(cb.isChecked());
                 stList.get(pos).setSelected(cb.isChecked());
+
+                int present = Integer.parseInt(totalpresent.getText().toString());
+                int absent = Integer.parseInt(totalabsent.getText().toString());
+                if(cb.isChecked()) {
+                    totalpresent.setText(Integer.toString(present+1));
+                    totalabsent.setText(Integer.toString(absent-1));
+                } else {
+                    totalpresent.setText(Integer.toString(present-1));
+                    totalabsent.setText(Integer.toString(absent+1));
+                }
             }
         });
 
@@ -56,22 +67,15 @@ public class PresentyAdapter extends
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         public TextView tvName;
         public TextView tvEmailId;
         public CheckBox chkSelected;
-
         public PointsData singlestudent;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-
             tvName = (TextView) itemLayoutView.findViewById(R.id.tvName);
-
-            chkSelected = (CheckBox) itemLayoutView
-                    .findViewById(R.id.chkSelected);
-
-
+            chkSelected = (CheckBox) itemLayoutView.findViewById(R.id.pr_chkSelected);
         }
 
     }

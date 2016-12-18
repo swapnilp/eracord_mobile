@@ -5,12 +5,18 @@
     <string name="chapter">Select Chapters</string>
     <string name="org">Select Organization</string>
 
+    <!-- feedback form -->
+    <string name="from">From</string>
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="send_feedback">Send Feedback</string>
+
     <!-- activity_main -->
     <string name="email">Email</string>
     <string name="password">Password</string>
 
     <!-- activity_org -->
-    <string name="pin_label">4 digit pin</string>
+    <string name="pin_label">Enter 4 digit pin again</string>
     <string name="choose_organization">Choose organization</string>
     <string name="hint_login_user">Sign in With Different User?</string>
     <string name="login">Login</string>
@@ -47,6 +53,7 @@
     <string name="standard">Standard</string>
     <string name="dailyid">dailyid</string>
     <string name="no_more_data_to_load">No more data to load</string>
+    <string name="no_timetable">No Timetable</string>
 
-
+    <string name="timetable_label">Weekly TimeTable</string>
 </resources>

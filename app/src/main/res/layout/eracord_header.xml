@@ -15,7 +15,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleView"
@@ -25,7 +26,7 @@
             app:civ_border_width="1dp"
             app:civ_border_color="@color/colorWhite"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:text="TextView"
@@ -34,7 +35,7 @@
             android:id="@+id/org_name"
             android:inputType="textCapWords"
             android:layout_marginLeft="12dp"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textColor="@color/colorWhite"
             android:textStyle="normal|bold"
             android:layout_marginTop="15dp"
@@ -50,7 +51,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="5dp"
             android:text="abc@gmail.com"
             android:textSize="14sp"
 

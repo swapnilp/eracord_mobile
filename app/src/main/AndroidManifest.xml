@@ -76,6 +76,10 @@
             android:name=".OffClassesActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
+        <activity
+            android:name=".FeedbackActivity"
+            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
+            android:screenOrientation="unspecified"></activity>
 
         <provider
             android:name="com.example.vidhiraj.sample.User"

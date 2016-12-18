@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#337ab7</color>
     <color name="colorAccent">#337ab7</color>
-    <color name="appBgColor">#f9f9f9</color>
+    <color name="appBgColor">#cccccc</color>
     <color name="textcolor">#000000</color>
     <color name="colorWhite">#ffffff</color>
     <drawable name="pressed_color">#50337ab7</drawable> <!--custom color for pressed state -->

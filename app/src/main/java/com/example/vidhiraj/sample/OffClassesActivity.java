@@ -45,7 +45,7 @@ public class OffClassesActivity extends AppCompatActivity {
     private static OffClassesAdapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<OffClassesData> dailyTeach = null;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback","Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     int PROFILE = R.drawable.ic_photos;
@@ -146,6 +146,7 @@ public class OffClassesActivity extends AppCompatActivity {
                     recyclerView.setLayoutManager(mLayoutManager);
                     adapter = new OffClassesAdapter(getApplicationContext(), dailyTeach);
                     recyclerView.setAdapter(adapter);
+                    recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                     Log.e("sdcard-err2:", err);
@@ -236,17 +237,18 @@ public class OffClassesActivity extends AppCompatActivity {
                                     scrollview.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            //int x=0,y=30;
-                                            //scrollview.scrollTo(x, y);
-                                            counter = counter + scrollview.getBottom() + 1180;
-                                            scrollview.scrollTo(0, counter);
-                                            mRecyclerView.scrollToPosition(counter);
-                                            mRecyclerView.smoothScrollBy(0, counter);
-                                            mRecyclerView.smoothScrollToPosition(counter);
-                                            scrollview.smoothScrollTo(0, counter);
+                                            int x=0,y=1000;
+                                            scrollview.scrollTo(x, y);
                                         }
                                     });
 
+                                    if (arrayLength < 10) {
+                                        load.setVisibility(View.GONE);
+                                        mProgress.dismiss();
+                                        Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
+                                    }
+
+                                    recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
                                 }
                             } catch (JSONException e) {
                                 String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
