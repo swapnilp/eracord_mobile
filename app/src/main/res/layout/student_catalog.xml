@@ -68,7 +68,7 @@
                 android:elevation="1dp"
                 android:layout_centerHorizontal="false"
                 android:paddingTop="6dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal" />
 

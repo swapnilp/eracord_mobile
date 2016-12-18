@@ -142,8 +142,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     new ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getBaseContext(), "Login failed!", Toast.LENGTH_LONG).show();
                             mProgress.dismiss();
+                            Toast.makeText(getBaseContext(), "Login failed!", Toast.LENGTH_LONG).show();
+
                         }
                     }
             );
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onBackPressed() {
-        if (cursor.getCount() != 0 && signflag == false) {
+        if (cursor.getCount() != 0) {
             Intent intent = new Intent(MainActivity.this, AndroidSpinnerExampleActivity.class);
             startActivity(intent);
         } else {

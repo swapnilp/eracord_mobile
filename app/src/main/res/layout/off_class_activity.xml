@@ -38,6 +38,7 @@
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:visibility="gone"
                 android:id="@+id/loadmore_offclasses"
                 android:background="@drawable/round_button"
                 android:layout_marginRight="10dp"

@@ -217,6 +217,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
             //onLoginFailed();
             return;
         } else {
+            mProgress.show();
             final String user_password = editPassword.getText().toString();
             Log.e("user", user_password);
 
@@ -247,6 +248,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                     try {
                         boolean success = response.getBoolean("success");
                         if (success) {
+                            mProgress.dismiss();
                             ApiKeyConstant.authToken = response.getString("token");
                             String image_url = response.getString("logo_url");
                             MY_PREFS_NAME = "MyPrefsFile";
@@ -269,6 +271,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            mProgress.dismiss();
                             Toast.makeText(getBaseContext(), "Enter the correct pin", Toast.LENGTH_LONG).show();
                         }
                     }

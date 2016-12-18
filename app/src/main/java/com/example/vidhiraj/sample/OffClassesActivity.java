@@ -115,8 +115,10 @@ public class OffClassesActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+
                     boolean success = response.getBoolean("success");
                     if (success) {
+                        load.setVisibility(View.VISIBLE);
                         mProgress.dismiss();
                         JSONArray jsonArray = response.getJSONArray("off_classes");
                         int arrayLength = jsonArray.length();

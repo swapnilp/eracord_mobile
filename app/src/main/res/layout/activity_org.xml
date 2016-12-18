@@ -125,15 +125,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:accentType="character"
-                    app:digitBackground="@android:color/white"
-                    app:digitTextColor="@color/colorAccent"
+                    app:digitBackground="@color/pinBgColor"
+                    app:digitTextColor="@color/textcolor"
                     app:digitElevation="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     app:digitHeight="50dp"
                     app:digitWidth="60dp"
-                    app:digitSpacing="24dp" />
+                    app:digitSpacing="30dp" />
             </LinearLayout>
 
             <Button

@@ -147,9 +147,9 @@ public class LoginPinActivity extends AppCompatActivity implements View.OnClickL
                                 Intent intent = new Intent(LoginPinActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
-                                Log.e("Volley", "Error");
-                                Toast.makeText(getBaseContext(), "Try Again", Toast.LENGTH_LONG).show();
                                 mProgress.dismiss();
+                                Toast.makeText(getBaseContext(), "Please Try Again", Toast.LENGTH_LONG).show();
+
                             }
                         }
                     }

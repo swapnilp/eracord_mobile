@@ -59,13 +59,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:accentType="character"
-                    app:digitBackground="@android:color/white"
-                    app:digitTextColor="@color/colorAccent"
+                    app:digitBackground="@color/pinBgColor"
+                    app:digitTextColor="@color/textcolor"
                     app:digitElevation="5dp"
                     android:layout_marginTop="10dp"
                     app:digitHeight="60dp"
                     app:digitWidth="100dp"
-                    app:digitSpacing="60dp" />
+                    app:digitSpacing="44dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,13 +88,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:accentType="character"
-                    app:digitBackground="@android:color/white"
-                    app:digitTextColor="@color/colorAccent"
+                    app:digitBackground="@color/pinBgColor"
+                    app:digitTextColor="@color/textcolor"
                     app:digitElevation="5dp"
                     android:layout_marginTop="10dp"
                     app:digitHeight="60dp"
                     app:digitWidth="100dp"
-                    app:digitSpacing="60dp" />
+                    app:digitSpacing="44dp" />
             </LinearLayout>
 
             <Button

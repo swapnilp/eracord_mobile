@@ -144,6 +144,7 @@ public class StudentListActivity extends AppCompatActivity {
                 try {
                     boolean success = response.getBoolean("success");
                     if (success) {
+                        load.setVisibility(View.VISIBLE);
                         mProgress.dismiss();
                         Log.e("first success", "sss");
                         JSONArray jsonArray = response.getJSONArray("students");

@@ -88,6 +88,11 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.timetable_activity);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Processing...");
+        mProgress.setMessage("Please wait...");
+        mProgress.setCancelable(false);
+        mProgress.setIndeterminate(true);
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String user_email = prefs.getString("email", null);
         org = prefs.getString("specificorg", null);
@@ -138,13 +143,14 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
 
 
         String timetableURL = ApiKeyConstant.apiUrl + "/api/v1/time_tables/get_time_tables.json";
+        mProgress.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, timetableURL, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     boolean success = response.getBoolean("success");
                     if (success) {
-                        Log.e("ssss", "sss");
+                        mProgress.dismiss();
                         timetableObj = response.getJSONObject("timetable");
                         setJsonArray(timetableObj);
                         timeTableArray = timetableObj.getJSONArray(weekDay);
@@ -185,6 +191,7 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        mProgress.dismiss();
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null && networkResponse.statusCode == 401) {
                             Intent intent = new Intent(TimeTableActivity.this, AndroidSpinnerExampleActivity.class);

@@ -35,15 +35,17 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
         TextView textView;
         ImageView profile, menu_icon;
         TextView email, org_t_name;
+        LinearLayout drawer_selected;
 
         public ViewHolder(View itemView, int ViewType) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
             super(itemView);
             if (ViewType == TYPE_ITEM) {
                 textView = (TextView) itemView.findViewById(R.id.rowText); // Creating TextView object with the id of textView from item_row.xml
                 menu_icon = (ImageView) itemView.findViewById(R.id.menu_icon);
+                drawer_selected=(LinearLayout) itemView.findViewById(R.id.drawer_items);
                 Holderid = 1;
 
-                itemView.setOnClickListener(new View.OnClickListener() {
+                drawer_selected.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         int pos = getAdapterPosition();
