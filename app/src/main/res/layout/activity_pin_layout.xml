@@ -65,7 +65,7 @@
                         android:layout_marginTop="10dp"
                         app:digitHeight="50dp"
                         app:digitWidth="60dp"
-                        app:digitSpacing="30dp" />
+                        app:digitSpacing="24dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,7 +94,7 @@
                         android:layout_marginTop="10dp"
                         app:digitHeight="50dp"
                         app:digitWidth="60dp"
-                        app:digitSpacing="30dp" />
+                        app:digitSpacing="24dp" />
                 </LinearLayout>
 
                 <Button

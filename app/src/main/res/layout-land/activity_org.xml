@@ -132,7 +132,7 @@
                     android:layout_marginRight="20dp"
                     app:digitHeight="60dp"
                     app:digitWidth="100dp"
-                    app:digitSpacing="45dp" />
+                    app:digitSpacing="55dp" />
 
             </LinearLayout>
 

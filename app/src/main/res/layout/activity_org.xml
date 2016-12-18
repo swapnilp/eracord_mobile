@@ -133,7 +133,7 @@
                     android:layout_marginRight="20dp"
                     app:digitHeight="50dp"
                     app:digitWidth="60dp"
-                    app:digitSpacing="30dp" />
+                    app:digitSpacing="25dp" />
             </LinearLayout>
 
             <Button
