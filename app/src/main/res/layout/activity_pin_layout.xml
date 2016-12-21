@@ -65,7 +65,7 @@
                         android:layout_marginTop="10dp"
                         app:digitHeight="50dp"
                         app:digitWidth="60dp"
-                        app:digitSpacing="24dp" />
+                        app:digitSpacing="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,7 +94,7 @@
                         android:layout_marginTop="10dp"
                         app:digitHeight="50dp"
                         app:digitWidth="60dp"
-                        app:digitSpacing="24dp" />
+                        app:digitSpacing="20dp" />
                 </LinearLayout>
 
                 <Button
@@ -117,5 +117,5 @@
             </LinearLayout>
         </ScrollView>
 
-</LinearLayout>
+    </LinearLayout>
 
