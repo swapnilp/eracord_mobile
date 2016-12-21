@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -13,18 +14,18 @@
             android:elevation="2dp"
             android:background="@color/colorWhite">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:tag="image_tag"
-                android:layout_height="55dp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/studentImg"
+                android:layout_width="60dp"
+                android:layout_height="45dp"
                 android:src="@drawable/student"
-                android:layout_weight="0.15"
-                android:layout_width="70dp"
-                android:layout_marginTop="10dp"
-                android:elevation="1dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/colorWhite"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:contentDescription="logo"/>
+                android:elevation="1dp"
+                android:contentDescription="logo"
+                android:layout_marginTop="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

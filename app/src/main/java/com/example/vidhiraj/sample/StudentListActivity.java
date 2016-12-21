@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,6 +144,7 @@ public class StudentListActivity extends AppCompatActivity {
                                     StudentData dailyData = new StudentData();
                                     dailyData.stud_name = orgObj.getString("name");
                                     dailyData.stud_class_name = orgObj.getString("class_names");
+                                    dailyData.image_url = orgObj.getString("image_url");
                                     try {
                                         dailyData.stud_hostel = orgObj.getInt("hostel_id");
                                     } catch (Exception e) {
@@ -277,6 +281,7 @@ public class StudentListActivity extends AppCompatActivity {
                                         StudentData dailyData = new StudentData();
                                         dailyData.stud_name = orgObj.getString("name");
                                         dailyData.stud_class_name = orgObj.getString("class_names");
+                                        dailyData.image_url = orgObj.getString("image_url");
                                         try {
                                             dailyData.stud_hostel = orgObj.getInt("hostel_id");
                                         } catch (Exception e) {

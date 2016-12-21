@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,7 +17,6 @@ import java.util.List;
 public class StudentCatalogAdapter extends RecyclerView.Adapter {
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-
     private List<StudentData> studentList;
 
     // The minimum amount of items to have below your current scroll position
@@ -26,7 +26,6 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
     private boolean loading;
     private OnLoadMoreListener onLoadMoreListener;
     Context context;
-
 
     public StudentCatalogAdapter(List<StudentData> students, Context context) {
         studentList = students;
@@ -78,7 +77,9 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
                 ((StudentViewHolder) holder).textViewHostel.setText("No hostel allocated");
             }
 
-
+            //Add image URL
+            String url = singleStudent.getImageUrl().toString();
+            //new ImageLoadTask(url, ((StudentViewHolder) holder).studentImg).execute();
         } else {
             ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);
         }
@@ -101,6 +102,7 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
         TextView textViewName;
         TextView textViewClass;
         TextView textViewHostel;
+        ImageView studentImg;
         private Context context = null;
         public StudentData student;
 
@@ -110,6 +112,7 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
             this.textViewName = (TextView) itemView.findViewById(R.id.stud_name);
             this.textViewClass = (TextView) itemView.findViewById(R.id.stud_class);
             this.textViewHostel = (TextView) itemView.findViewById(R.id.stud_hostel);
+            this.studentImg = (ImageView) itemView.findViewById(R.id.studentImg);
 
             v.setOnClickListener(new View.OnClickListener() {
 
