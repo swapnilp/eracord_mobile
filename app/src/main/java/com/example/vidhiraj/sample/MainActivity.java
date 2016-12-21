@@ -3,7 +3,6 @@ package com.example.vidhiraj.sample;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -12,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -40,9 +38,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     EditText editTextEmail, editPassword;
     private ProgressDialog mProgress;
     private GoogleApiClient client;
-    SQLiteOpenHelper dbHelper;
-    UserDB userDB;
-    Button next;
     boolean signflag;
 
     @Override
@@ -50,9 +45,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         Intent intent1 = getIntent();
         signflag = intent1.getBooleanExtra("diffflag", false);
-        Log.e("flag is", String.valueOf(signflag));
         cursor = getContentResolver().query(User.CONTENT_URI, null, null, null, null);
-        Log.e("record is", String.valueOf(cursor.getCount()));
         if (cursor.getCount() != 0 && signflag == false) {
             Intent intent = new Intent(MainActivity.this, AndroidSpinnerExampleActivity.class);
             startActivity(intent);
@@ -92,69 +85,64 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        Log.e("on loadfinished called", String.valueOf(loader.getId()));
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> arg0) {
-        //mAdapter.swapCursor(null);
     }
 
     public void login() throws JSONException {
-        Log.d(TAG, "Login");
-        if (!validate()) {
-            Log.e("if cond", "inside");
-            onLoginFailed();
-            return;
-        } else {
-            Log.e("else part", "done");
-            final String user_email = editTextEmail.getText().toString();
-            String user_password = editPassword.getText().toString();
-            Log.e("email", user_email);
-            Log.e("password", user_password);
-            JSONObject jo = new JSONObject();
-            jo.put("email", user_email);
-            jo.put("password", user_password);
-            JSONObject userObj = new JSONObject();
-            userObj.put("user", jo);
-            Log.e("user is", String.valueOf(userObj));
-            String loginURL = ApiKeyConstant.apiUrl + "/users/mobile_sign_in";
-            mProgress.show();
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, userObj, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        boolean success = response.getBoolean("success");
-                        ApiKeyConstant.authToken = response.getString("token");
-                        if (success) {
-                            mProgress.dismiss();
-                            Intent intent = new Intent(MainActivity.this, LoginPinActivity.class);
-                            intent.putExtra("email", user_email);
-                            intent.putExtra("authorization_token", ApiKeyConstant.authToken);
-                            finish();
-                            startActivity(intent);
+        if (Utils.isConnected(getApplicationContext())) {
+            if (!validate()) {
+                onLoginFailed();
+                return;
+            } else {
+                final String user_email = editTextEmail.getText().toString();
+                String user_password = editPassword.getText().toString();
+                JSONObject jo = new JSONObject();
+                jo.put("email", user_email);
+                jo.put("password", user_password);
+                JSONObject userObj = new JSONObject();
+                userObj.put("user", jo);
+                String loginURL = ApiKeyConstant.apiUrl + "/users/mobile_sign_in";
+                mProgress.show();
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, userObj, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            boolean success = response.getBoolean("success");
+                            ApiKeyConstant.authToken = response.getString("token");
+                            if (success) {
+                                mProgress.dismiss();
+                                Intent intent = new Intent(MainActivity.this, LoginPinActivity.class);
+                                intent.putExtra("email", user_email);
+                                intent.putExtra("authorization_token", ApiKeyConstant.authToken);
+                                finish();
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
-            },
-                    new ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            mProgress.dismiss();
-                            Toast.makeText(getBaseContext(), "Login failed!", Toast.LENGTH_LONG).show();
+                },
+                        new ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                mProgress.dismiss();
+                                Toast.makeText(getBaseContext(), "Login failed!", Toast.LENGTH_LONG).show();
 
+                            }
                         }
-                    }
-            );
-            VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+                );
+                VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+            }
+        } else {
+            Toast.makeText(getBaseContext(), "Check internet Connection", Toast.LENGTH_LONG).show();
         }
     }
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Invalid User", Toast.LENGTH_LONG).show();
-        //  _loginButton.setEnabled(true);
     }
 
     public boolean validate() {

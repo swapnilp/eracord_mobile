@@ -47,7 +47,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
     private Button spinBtn;
-    RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     TextView signDiffUser;
@@ -65,7 +64,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
     String orgNameText = null;
     String specific_org = null;
     List<String> organisation = new ArrayList<String>();
-    // Declaring Action Bar Drawer Toggle
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,7 +80,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
         mProgress.setIndeterminate(true);
         device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        Log.e("id is", device_id);
         Cursor cursor = null;
         String email = "";
         try {
@@ -98,7 +95,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
         }
         useremail.setText(email);
         String loginURL = ApiKeyConstant.apiUrl + "/users/get_organisations.json?email=" + email + "&device_id=" + device_id;
-        Log.e("url", loginURL);
         mProgress.show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, loginURL, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
@@ -118,7 +114,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                         }
                         if (multiple_organisations) {
                             multiorg = true;
-                            Log.e("flag org is", String.valueOf(multiorg));
                             spinner.setVisibility(View.VISIBLE);
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, organisation);
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -127,29 +122,20 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                         } else {
                             TextView org_name = (TextView) findViewById(R.id.org_id);
                             multiorg = false;
-                            Log.e("flag org is", String.valueOf(multiorg));
                             spinner.setVisibility(View.VISIBLE);
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, organisation);
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinner.setAdapter(dataAdapter);
                             spinner.setEnabled(false);
                             spinner.setClickable(false);
-
-                            //org_name.setVisibility(View.VISIBLE);
-                            //org_name.setText(orgNameText);
-                            //spinner.setVisibility(View.GONE);
                         }
                     } else {
                         mProgress.dismiss();
                         Cursor cursor = getContentResolver().query(User.CONTENT_URI, null, null, null, null);
-                        Log.e("record is", String.valueOf(cursor.getCount()));
                         if (cursor.getCount() != 0) {
                             UserDB userDB = new UserDB(getApplicationContext());
                             SQLiteDatabase db = userDB.getWritableDatabase();
                             db.execSQL("DELETE FROM " + UserDB.DATABASE_TABLE);
-                            cursor = getContentResolver().query(User.CONTENT_URI, null, null, null, null);
-                            Log.e("delete count", String.valueOf(cursor.getCount()));
-
                             Toast.makeText(getBaseContext(), "Something went wrong,Please Register Again", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(AndroidSpinnerExampleActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -157,7 +143,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                     }
                 } catch (JSONException e) {
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                    Log.e("sdcard-err2:", err);
                 }
 
             }
@@ -165,7 +150,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley", error.getMessage());
                         mProgress.dismiss();
 
                     }
@@ -213,78 +197,74 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
 
 
     public void validateCheck() throws JSONException {
-        if (!validate()) {
-            //onLoginFailed();
-            return;
-        } else {
-            mProgress.show();
-            final String user_password = editPassword.getText().toString();
-            Log.e("user", user_password);
+        if (Utils.isConnected(getApplicationContext())) {
+            if (!validate()) {
+                return;
+            } else {
+                mProgress.show();
+                final String user_password = editPassword.getText().toString();
 
-            JSONObject userObj = new JSONObject();
-            JSONObject user = new JSONObject();
+                JSONObject userObj = new JSONObject();
+                JSONObject user = new JSONObject();
 
-            try {
-                userObj.put("email", finalEmail);
-                userObj.put("device_id", device_id);
-                userObj.put("mpin", user_password);
-                Log.e("flag org is", String.valueOf(multiorg));
-                if (multiorg) {
-                    userObj.put("organisation_id", org_id);
-                    Log.e("org_id is", String.valueOf(org_id));
+                try {
+                    userObj.put("email", finalEmail);
+                    userObj.put("device_id", device_id);
+                    userObj.put("mpin", user_password);
+                    if (multiorg) {
+                        userObj.put("organisation_id", org_id);
+                    }
+
+                    user.put("user", userObj);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+                String loginURL = ApiKeyConstant.apiUrl + "/users/mpin_sign_in";
 
-                user.put("user", userObj);
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, user, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            boolean success = response.getBoolean("success");
+                            if (success) {
+                                mProgress.dismiss();
+                                ApiKeyConstant.authToken = response.getString("token");
+                                String image_url = response.getString("logo_url");
+                                MY_PREFS_NAME = "MyPrefsFile";
+                                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                editor.putString("email", finalEmail);
+                                editor.putString("specificorg", specific_org);
+                                editor.putString("org_icon", image_url);
+                                editor.commit();
+                                Intent intent = new Intent(AndroidSpinnerExampleActivity.this, ClassActivity.class);
+                                startActivity(intent);
+                            }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                        } catch (JSONException e) {
+                            String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
+                        }
+
+                    }
+                },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                mProgress.dismiss();
+                                Toast.makeText(getBaseContext(), "Enter the correct pin", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
             }
-            Log.e("user", String.valueOf(user));
-            String loginURL = ApiKeyConstant.apiUrl + "/users/mpin_sign_in";
-
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, user, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        boolean success = response.getBoolean("success");
-                        if (success) {
-                            mProgress.dismiss();
-                            ApiKeyConstant.authToken = response.getString("token");
-                            String image_url = response.getString("logo_url");
-                            MY_PREFS_NAME = "MyPrefsFile";
-                            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                            editor.putString("email", finalEmail);
-                            editor.putString("specificorg", specific_org);
-                            editor.putString("org_icon", image_url);
-                            editor.commit();
-                            Intent intent = new Intent(AndroidSpinnerExampleActivity.this, ClassActivity.class);
-                            startActivity(intent);
-                        }
-
-                    } catch (JSONException e) {
-                        String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                        Log.e("sdcard-err2:", err);
-                    }
-
-                }
-            },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            mProgress.dismiss();
-                            Toast.makeText(getBaseContext(), "Enter the correct pin", Toast.LENGTH_LONG).show();
-                        }
-                    }
-            );
-            VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
-
-
+        } else {
+            mProgress.dismiss();
+            Toast.makeText(getBaseContext(), "Checked Internet Connection", Toast.LENGTH_LONG).show();
         }
     }
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-        //  _loginButton.setEnabled(true);
     }
 
     public boolean validate() {
@@ -292,7 +272,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
         String userpin = editPassword.getText().toString();
         if (userpin.length() != 4) {
             Toast.makeText(getBaseContext(), "Enter only 4 digit pin", Toast.LENGTH_LONG).show();
-            //editPassword.setError("enter only 4 digit pin");
             valid = false;
         }
 
@@ -319,13 +298,10 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("in orgid", "done");
         for (int j = position; j <= position; j++) {
             org_id = organisationId.get(j);
             specific_org = organisation.get(j);
-            Log.e("for org_id", String.valueOf(org_id));
         }
-        Log.e(" out org_id", String.valueOf(org_id));
 
     }
 

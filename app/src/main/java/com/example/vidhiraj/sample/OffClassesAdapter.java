@@ -45,8 +45,6 @@ public class OffClassesAdapter extends RecyclerView.Adapter<OffClassesAdapter.Vi
         viewHolder.teacher_name.setText(timeTableDatas.get(position).getTeacher_name());
 
     }
-
-    // Return the size arraylist
     @Override
     public int getItemCount(){
         return timeTableDatas.size();
@@ -64,13 +62,9 @@ public class OffClassesAdapter extends RecyclerView.Adapter<OffClassesAdapter.Vi
             name = (TextView) itemLayoutView.findViewById(R.id.name);
             off_date = (TextView) itemLayoutView.findViewById(R.id.date);
             teacher_name = (TextView) itemLayoutView.findViewById(R.id.teacher_name);
-
-
         }
 
     }
-
-    // method to access in activity after updating selection
     public List<OffClassesData> getStudentist() {
         return timeTableDatas;
     }
