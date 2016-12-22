@@ -34,7 +34,7 @@
         android:id="@+id/rowText"
         android:textAllCaps="false"
         android:fontFamily="sans-serif"
-        android:textColor="@drawable/left_links"
+        android:textColor="@color/textcolor"
         android:textSize="18sp"
         android:paddingBottom="10dp"
         android:cursorVisible="true" />

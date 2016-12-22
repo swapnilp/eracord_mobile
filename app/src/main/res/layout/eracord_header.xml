@@ -16,7 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleView"

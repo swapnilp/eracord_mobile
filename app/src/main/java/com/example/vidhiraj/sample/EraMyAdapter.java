@@ -131,6 +131,10 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(EraMyAdapter.ViewHolder holder, int position) {
+        String colorWhite = "#ffffff";
+        String textcolor = "#000000";
+        String colorAccent = "#2b977c";
+
         if (holder.Holderid == 1) {                              // as the list view is going to be called after the header view so we decrement the
             try {
                 String menu = mNavTitles[position - 1];
@@ -144,12 +148,16 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                 //Catch here
             }
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
+            holder.textView.setTextColor(Color.parseColor(textcolor));
             if((drawer_selected_menu_pos != mNavTitles.length) && (drawer_selected_menu_pos == position)) {
-                holder.drawer_selected.setBackgroundColor(Color.parseColor("#dedfdf")); // normal flow except boundry condition
+                holder.drawer_selected.setBackgroundColor(Color.parseColor(colorAccent)); // normal flow except boundry condition
+                holder.textView.setTextColor(Color.parseColor(colorWhite));
             } else if ((drawer_selected_menu_pos == mNavTitles.length) && (position == 1)) {
-                holder.drawer_selected.setBackgroundColor(Color.parseColor("#dedfdf")); // after logout and then login, this condition will trigger
+                holder.drawer_selected.setBackgroundColor(Color.parseColor(colorAccent)); // after logout and then login, this condition will trigger
+                holder.textView.setTextColor(Color.parseColor(colorWhite));
             } else if ((drawer_selected_menu_pos == 0) && position == 1) {
-                holder.drawer_selected.setBackgroundColor(Color.parseColor("#dedfdf")); // First time selected item will be 0;
+                holder.drawer_selected.setBackgroundColor(Color.parseColor(colorAccent)); // First time selected item will be 0;
+                holder.textView.setTextColor(Color.parseColor(colorWhite));
             }
         } else {
             Glide.with(context).load(url_icon)
