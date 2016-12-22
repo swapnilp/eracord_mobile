@@ -133,7 +133,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
     public void onBindViewHolder(EraMyAdapter.ViewHolder holder, int position) {
         String colorWhite = "#ffffff";
         String textcolor = "#000000";
-        String colorAccent = "#2b977c";
+        String colorAccent = "#337ab7";
 
         if (holder.Holderid == 1) {                              // as the list view is going to be called after the header view so we decrement the
             try {

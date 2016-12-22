@@ -123,8 +123,8 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                             TextView org_name = (TextView) findViewById(R.id.org_id);
                             multiorg = false;
                             spinner.setVisibility(View.VISIBLE);
-                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, organisation);
-                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getBaseContext(), R.layout.spinner_item, organisation);
+                            dataAdapter.setDropDownViewResource(R.layout.spinner_item);
                             spinner.setAdapter(dataAdapter);
                             spinner.setEnabled(false);
                             spinner.setClickable(false);
