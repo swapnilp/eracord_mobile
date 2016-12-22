@@ -8,6 +8,7 @@
     <color name="colorWhite">#ffffff</color>
     <drawable name="pressed_color">#50337ab7</drawable> <!--custom color for pressed state -->
     <drawable name="normal_color">#00FFFFFF</drawable>
+    <color name="pressed_bg_color">#D7DCDE</color>
     <color name="bottomLine">#dcdcdc</color>
     <color name="stripBgColor">#F0F8FF</color>
     <color name="pinBgColor">#bccddc</color>

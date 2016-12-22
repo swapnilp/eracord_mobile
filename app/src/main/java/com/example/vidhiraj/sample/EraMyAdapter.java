@@ -2,6 +2,7 @@ package com.example.vidhiraj.sample;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +28,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
     private String email, org_t_name;
     String url_icon;
     static Context context;
+    static int drawer_selected_menu_pos = 0;
 
 
 
@@ -49,6 +51,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                     @Override
                     public void onClick(View v) {
                         int pos = getAdapterPosition();
+                        drawer_selected_menu_pos = pos;
                         Intent intent1;
                         if (pos == 1) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
@@ -140,8 +143,14 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
             } catch (Exception e) {
                 //Catch here
             }
-            //holder.imageView3.setBackground();
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
+            if((drawer_selected_menu_pos != mNavTitles.length) && (drawer_selected_menu_pos == position)) {
+                holder.drawer_selected.setBackgroundColor(R.color.pressed_bg_color); // normal flow except boundry condition
+            } else if ((drawer_selected_menu_pos == mNavTitles.length) && (position == 1)) {
+                holder.drawer_selected.setBackgroundColor(R.color.pressed_bg_color); // after logout and then login, this condition will trigger
+            } else if ((drawer_selected_menu_pos == 0) && position == 1) {
+                holder.drawer_selected.setBackgroundColor(R.color.pressed_bg_color); // First time selected item will be 0;
+            }
         } else {
             Glide.with(context).load(url_icon)
                     .thumbnail(0.5f)
