@@ -145,11 +145,11 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
             }
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
             if((drawer_selected_menu_pos != mNavTitles.length) && (drawer_selected_menu_pos == position)) {
-                holder.drawer_selected.setBackgroundColor(R.color.pressed_bg_color); // normal flow except boundry condition
+                holder.drawer_selected.setBackgroundColor(R.color.selected_menu_bg_color); // normal flow except boundry condition
             } else if ((drawer_selected_menu_pos == mNavTitles.length) && (position == 1)) {
-                holder.drawer_selected.setBackgroundColor(R.color.pressed_bg_color); // after logout and then login, this condition will trigger
+                holder.drawer_selected.setBackgroundColor(R.color.selected_menu_bg_color); // after logout and then login, this condition will trigger
             } else if ((drawer_selected_menu_pos == 0) && position == 1) {
-                holder.drawer_selected.setBackgroundColor(R.color.pressed_bg_color); // First time selected item will be 0;
+                holder.drawer_selected.setBackgroundColor(R.color.selected_menu_bg_color); // First time selected item will be 0;
             }
         } else {
             Glide.with(context).load(url_icon)
