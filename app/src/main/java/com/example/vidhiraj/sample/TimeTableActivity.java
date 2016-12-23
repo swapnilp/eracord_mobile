@@ -2,14 +2,9 @@ package com.example.vidhiraj.sample;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,9 +19,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,37 +30,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
 
 /**
  * Created by Lenovo on 11/30/2016.
  */
 
-public class TimeTableActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class TimeTableActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
     RecyclerView.Adapter mAdapter;
     RecyclerView mRecyclerView;
     ProgressDialog mProgress;
     ArrayList<String> weekDays;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
-    int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
-    String org = null;
-    private Toolbar toolbar;
-    private LinearLayoutManager mLayoutManager;
-    DrawerLayout Drawer;
-    ActionBarDrawerToggle mDrawerToggle;
-    String url_icon;
     String weekDay;
-    private GoogleApiClient client;
     List<TimeTableData> timeTableDatas = new ArrayList<>();
     static JSONObject timetableObj = null;
     JSONArray timeTableArray;
-    JSONObject arrrrr = new JSONObject();
+    JSONObject jsonArr = new JSONObject();
     TextView timetableData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.timetable_activity);
+        super.onCreate(savedInstanceState);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         mProgress = new ProgressDialog(this);
@@ -76,35 +58,11 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        String user_email = prefs.getString("email", null);
-        org = prefs.getString("specificorg", null);
-        url_icon = prefs.getString("org_icon", null);
         timetableData = (TextView) findViewById(R.id.time_nodata);
-        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(org);
-        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new EraMyAdapter(TimeTableActivity.this, TITLES, ICONS, org, user_email, url_icon);
-        mRecyclerView.setAdapter(mAdapter);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        };
-        Drawer.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        // Setting adapter
+        setmRAdapter(TimeTableActivity.this, "TimeTable Page");
+
         weekDays = new ArrayList<>();
         weekDays.add("Monday");
         weekDays.add("Tuesday");
@@ -196,11 +154,11 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void setJsonArray(JSONObject jsonObject) {
-        arrrrr = jsonObject;
+        jsonArr = jsonObject;
     }
 
     public JSONObject getJsonArray() {
-        return arrrrr;
+        return jsonArr;
     }
 
     @Override
@@ -241,6 +199,14 @@ public class TimeTableActivity extends AppCompatActivity implements AdapterView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(TimeTableActivity.this, ClassActivity.class));
+        finish();
+
     }
 
     @Override

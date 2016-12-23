@@ -2,16 +2,10 @@ package com.example.vidhiraj.sample;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,9 +17,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,29 +26,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
-
 /**
  * Created by lenovo on 31/08/2016.
  */
-public class PresentyCatalog extends AppCompatActivity {
-
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
-    int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
-    String org = null;
-    private Toolbar toolbar;                              // Declaring the Toolbar Object
-    RecyclerView mDrawerRecyclerView;                           // Declaring RecyclerView
-    RecyclerView.Adapter mDrawerAdapter;                        // Declaring Adapter For Recycler View
-    RecyclerView.LayoutManager mLayoutManager;         // Declaring Layout Manager as a linear layout manager
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
-    ActionBarDrawerToggle mDrawerToggle;
-    private GoogleApiClient client;
+public class PresentyCatalog extends BaseActivity {
     private static RecyclerView.Adapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<PresentyData> data = null;
     Button savePresenty;
     TextView dataAvailabiliy, totalPresent, totalAbsent;
-    String url_icon = null;
     int countPresent = 0;
     int countAbsent = 0;
     ProgressDialog mProgress;
@@ -65,8 +42,8 @@ public class PresentyCatalog extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.presenty_catalog);
+        super.onCreate(savedInstanceState);
         final Intent intent = getIntent();
         final String id = intent.getStringExtra("dtp_id");
         mProgress = new ProgressDialog(this);
@@ -78,35 +55,10 @@ public class PresentyCatalog extends AppCompatActivity {
         dataAvailabiliy = (TextView) findViewById(R.id.noPrData);
         totalPresent = (TextView) findViewById(R.id.totalpresent);
         totalAbsent = (TextView) findViewById(R.id.totalabsent);
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        String user_email = prefs.getString("email", null);
-        org = prefs.getString("specificorg", null);
-        url_icon = prefs.getString("org_icon", null);
-        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(org);
-        mDrawerRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-        mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mDrawerAdapter = new EraMyAdapter(PresentyCatalog.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        mDrawerRecyclerView.setAdapter(mDrawerAdapter);                              // Setting the adapter to RecyclerView
-        mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
-        mDrawerRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
-        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
+        // Setting adapter
+        setmRAdapter(PresentyCatalog.this, "PresentyCatalog Page");
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        }; // Drawer Toggle Object Made
-        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         String url = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs/" + id + "/get_catlogs";
         mProgress.show();
         if (Utils.isConnected(getApplicationContext())) {

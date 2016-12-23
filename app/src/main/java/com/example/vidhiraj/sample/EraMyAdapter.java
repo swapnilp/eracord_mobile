@@ -23,14 +23,16 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> {
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
     private static final int TYPE_ITEM = 1;
-    private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
+    private static String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
     private String email, org_t_name;
     String url_icon;
     static Context context;
     static int drawer_selected_menu_pos = 0;
 
-
+    static String colorWhite = "#ffffff";
+    static String textcolor = "#000000";
+    static String colorAccent = "#337ab7";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         int Holderid;
@@ -131,10 +133,6 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(EraMyAdapter.ViewHolder holder, int position) {
-        String colorWhite = "#ffffff";
-        String textcolor = "#000000";
-        String colorAccent = "#337ab7";
-
         if (holder.Holderid == 1) {                              // as the list view is going to be called after the header view so we decrement the
             try {
                 String menu = mNavTitles[position - 1];

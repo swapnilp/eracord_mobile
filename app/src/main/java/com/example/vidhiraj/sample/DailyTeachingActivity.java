@@ -2,15 +2,10 @@ package com.example.vidhiraj.sample;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,21 +21,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
 
 import java.util.Calendar;
 
@@ -49,11 +37,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.util.Calendar;
-
-public class DailyTeachingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DailyTeachingActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     List<Integer> chapter_array = new ArrayList<Integer>();
     String classid;
@@ -63,17 +48,7 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     RecyclerView m_points_RecyclerView;
     ProgressDialog mProgress;
     int day, month, year;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
-    int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
-    String org = null;
-    private Toolbar toolbar;                              // Declaring the Toolbar Object
-    RecyclerView mDrawerRecyclerView;                           // Declaring RecyclerView
-    RecyclerView.Adapter mDrawerAdapter;                        // Declaring Adapter For Recycler View
-    RecyclerView.LayoutManager mLayoutManagers;         // Declaring Layout Manager as a linear layout manager
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
     ActionBarDrawerToggle mDrawerToggle;
-    String url_icon;
-    private GoogleApiClient client;
     EditText dateText;
     String selected_date;
 
@@ -96,8 +71,8 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_teaching);
+        super.onCreate(savedInstanceState);
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");
@@ -123,34 +98,10 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         createCatalog = (Button) findViewById(R.id.buttonCreate);
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        String user_email = prefs.getString("email", null);
-        org = prefs.getString("specificorg", null);
-        url_icon = prefs.getString("org_icon", null);
-        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(org);
-        mDrawerRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-        mDrawerRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mDrawerAdapter = new EraMyAdapter(DailyTeachingActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        mDrawerRecyclerView.setAdapter(mDrawerAdapter);                              // Setting the adapter to RecyclerView
-        mLayoutManagers = new LinearLayoutManager(this);                 // Creating a layout Manager
-        mDrawerRecyclerView.setLayoutManager(mLayoutManagers);                 // Setting the layout Manager
-        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        }; // Drawer Toggle Object Made
-        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        // Setting adapter
+        setmRAdapter(DailyTeachingActivity.this, "DailyTeaching Page");
+
         String loginURL = ApiKeyConstant.apiUrl + "/api/v1/time_table_classes/" + classid + "/get_chapters.json";
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, loginURL, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
@@ -267,31 +218,10 @@ public class DailyTeachingActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DailyTeaching Page", // TODO: Define a title for the content shown.
-                Uri.parse("http://host/path"),
-                Uri.parse("android-app://com.example.vidhiraj.sample/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DailyTeaching Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.vidhiraj.sample/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(DailyTeachingActivity.this, ClassActivity.class));
+        finish();
     }
 
     @Override

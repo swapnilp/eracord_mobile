@@ -2,16 +2,10 @@ package com.example.vidhiraj.sample;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -24,9 +18,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,39 +26,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS_NAME;
-
 /**
  * Created by Lenovo on 12/11/2016.
  */
 
-public class OffClassesActivity extends AppCompatActivity {
+public class OffClassesActivity extends BaseActivity {
     private static OffClassesAdapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<OffClassesData> dailyTeach = null;
-    String TITLES[] = {"Home", "Daily Catalog", "Students", "TimeTable", "Off Classes", "Feedback", "Share app", "Logout"};
-    int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
-    RecyclerView mRecyclerView;                           // Declaring RecyclerView
-    RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
-    ActionBarDrawerToggle mDrawerToggle;
     int counter = 9;
     Button load;
     ProgressDialog pDialog, mProgress;
     TextView dataAvailability;
-    String url_icon;
     int current_page = 1;
     String url = ApiKeyConstant.apiUrl + "/api/v1/off_classes.json";
     ScrollView scrollview;
-    private Toolbar toolbar;                              // Declaring the Toolbar Object
-    private GoogleApiClient client;
     private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.off_class_activity);
+        super.onCreate(savedInstanceState);
         recyclerView = (RecyclerView) findViewById(R.id.off_recycler_view);
         scrollview = ((ScrollView) findViewById(R.id.scrollView_offclass));
         load = (Button) findViewById(R.id.loadmore_offclasses);
@@ -77,34 +57,10 @@ public class OffClassesActivity extends AppCompatActivity {
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        String user_email = prefs.getString("email", null);
-        org = prefs.getString("specificorg", null);
-        url_icon = prefs.getString("org_icon", null);
-        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(org);
-        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
-        mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mAdapter = new EraMyAdapter(OffClassesActivity.this, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
-        mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
-        mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
-        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        }; // Drawer Toggle Object Made
-        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        // Setting adapter
+        setmRAdapter(OffClassesActivity.this, "Offclasses Page");
+
         dailyTeach = new ArrayList<>();
         mProgress.show();
         if (Utils.isConnected(getApplicationContext())) {
