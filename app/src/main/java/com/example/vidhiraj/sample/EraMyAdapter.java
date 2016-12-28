@@ -57,7 +57,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                         Intent intent1;
                         if (pos == 1) {
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
-                            intent1 = new Intent(context, ClassActivity.class);
+                            intent1 = new Intent(context, TimeTableActivity.class);
                             context.startActivity(intent1);
                             ((Activity)(context)).finish();
                         } else if (pos == 2) {
@@ -72,7 +72,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                             ((Activity)(context)).finish();
                          } else if(pos == 4){
                             textView.setTextColor(context.getResources().getColor(R.color.bb_darkBackgroundColor));
-                            intent1 = new Intent(context, TimeTableActivity.class);
+                            intent1 = new Intent(context, ClassActivity.class);
                             context.startActivity(intent1);
                             ((Activity)(context)).finish();
                         } else if(pos == 5) {
@@ -108,13 +108,14 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
         }
     }
 
-    EraMyAdapter(Context context, String Titles[], int Icons[], String ORG_NAME, String Email, String url) { // MyAdapter Constructor with titles and icons parameter
+    EraMyAdapter(Context context, String Titles[], int Icons[], String ORG_NAME, String Email, String url, boolean isHome) { // MyAdapter Constructor with titles and icons parameter
         mNavTitles = Titles;                //have seen earlier
         mIcons = Icons;
         email = Email;
         org_t_name = ORG_NAME;
         url_icon = url;
         EraMyAdapter.context = context;
+        if(isHome) { drawer_selected_menu_pos = 0; }
     }
 
     @Override
@@ -141,7 +142,6 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
                 int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
                 Drawable res = context.getResources().getDrawable(imageResource);
                 holder.menu_icon.setImageDrawable(res);
-
             } catch (Exception e) {
                 //Catch here
             }

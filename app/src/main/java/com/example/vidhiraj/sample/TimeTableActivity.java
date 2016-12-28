@@ -3,6 +3,7 @@ package com.example.vidhiraj.sample;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -203,10 +204,11 @@ public class TimeTableActivity extends BaseActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(TimeTableActivity.this, ClassActivity.class));
-        finish();
-
+        if (super.Drawer.isDrawerOpen(GravityCompat.START)) {
+            super.Drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.Drawer.openDrawer(GravityCompat.START);
+        }
     }
 
     @Override

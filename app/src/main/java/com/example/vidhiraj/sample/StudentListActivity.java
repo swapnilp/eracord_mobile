@@ -159,7 +159,7 @@ public class StudentListActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(StudentListActivity.this, ClassActivity.class));
+        startActivity(new Intent(StudentListActivity.this, TimeTableActivity.class));
         finish();
 
     }

@@ -237,7 +237,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                                 editor.putString("specificorg", specific_org);
                                 editor.putString("org_icon", image_url);
                                 editor.commit();
-                                Intent intent = new Intent(AndroidSpinnerExampleActivity.this, ClassActivity.class);
+                                Intent intent = new Intent(AndroidSpinnerExampleActivity.this, TimeTableActivity.class);
                                 startActivity(intent);
                             }
 

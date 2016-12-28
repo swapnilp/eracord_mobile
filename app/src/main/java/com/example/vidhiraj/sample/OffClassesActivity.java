@@ -142,7 +142,7 @@ public class OffClassesActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(OffClassesActivity.this, ClassActivity.class));
+        startActivity(new Intent(OffClassesActivity.this, TimeTableActivity.class));
         finish();
     }
 

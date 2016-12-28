@@ -220,7 +220,7 @@ public class DailyTeachingActivity extends BaseActivity implements AdapterView.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(DailyTeachingActivity.this, ClassActivity.class));
+        startActivity(new Intent(DailyTeachingActivity.this, TimeTableActivity.class));
         finish();
     }
 

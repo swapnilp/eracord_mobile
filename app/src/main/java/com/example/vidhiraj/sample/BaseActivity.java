@@ -1,6 +1,7 @@
 package com.example.vidhiraj.sample;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import static com.example.vidhiraj.sample.AndroidSpinnerExampleActivity.MY_PREFS
 
 public class BaseActivity extends AppCompatActivity {
 
-    String TITLES[] = {"Home", "Daily Catalog", "Students","TimeTable","Off Classes","Feedback","Share app","Logout"};
+    String TITLES[] = {"Home", "Daily Catalog", "Students","Subjects","Off Classes","Feedback","Share app","Logout"};
     int ICONS[] = {R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos, R.drawable.ic_photos};
     String org = null;
     private Toolbar toolbar;                              // Declaring the Toolbar Object
@@ -79,7 +80,11 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setmRAdapter(Activity activity, String page) {
         page_name = page;
-        mAdapter = new EraMyAdapter(activity, TITLES, ICONS, org, user_email, url_icon);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
+        boolean isHome = false;
+        if(page_name.toString().equals("TimeTable Page")) {
+            isHome = true;
+        }
+        mAdapter = new EraMyAdapter(activity, TITLES, ICONS, org, user_email, url_icon, isHome);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
         mRecyclerView.setAdapter(mAdapter);
     }
 

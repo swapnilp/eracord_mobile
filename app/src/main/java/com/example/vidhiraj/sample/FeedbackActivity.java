@@ -106,7 +106,7 @@ public class FeedbackActivity extends BaseActivity {
                     if (success) {
                         //ApiKeyConstant.authToken = response.getString("token");
                         Toast.makeText(getBaseContext(), "Feedback mailed successfully !!!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(FeedbackActivity.this, ClassActivity.class);
+                        Intent intent = new Intent(FeedbackActivity.this, TimeTableActivity.class);
                         startActivity(intent);
                         send_feedback.setEnabled(true);
                         mDialog.dismiss();
@@ -131,5 +131,12 @@ public class FeedbackActivity extends BaseActivity {
                 }
         );
         VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(FeedbackActivity.this, TimeTableActivity.class));
+        finish();
     }
 }

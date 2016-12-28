@@ -65,11 +65,10 @@ public class ClassActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (super.Drawer.isDrawerOpen(GravityCompat.START)) {
-            super.Drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.Drawer.openDrawer(GravityCompat.START);
-        }
+        super.onBackPressed();
+        startActivity(new Intent(ClassActivity.this, TimeTableActivity.class));
+        finish();
+
     }
 
     public void fetchClassData() {
