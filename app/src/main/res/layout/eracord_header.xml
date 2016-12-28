@@ -2,21 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:background="@color/colorWhite"
+    android:layout_height="100dp"
+    android:background="@drawable/divider"
     android:orientation="vertical"
     android:weightSum="1">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@drawable/back_pattern"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleView"
@@ -24,39 +23,55 @@
             android:layout_height="70dp"
             android:src="@android:drawable/sym_def_app_icon"
             app:civ_border_width="1dp"
-            app:civ_border_color="@color/colorWhite"
+            app:civ_border_color="@color/selected_menu_bg_color"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="15dp" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/org_name"
-            android:inputType="textCapWords"
-            android:layout_marginLeft="12dp"
-            android:textSize="17sp"
-            android:textColor="@color/colorWhite"
-            android:textStyle="normal|bold"
             android:layout_marginTop="15dp"
-            android:textColorHighlight="@null"
-            android:textColorHint="@null"
-            android:textColorLink="@null"
-            android:textCursorDrawable="@null"
-            android:autoText="true" />
+            android:layout_marginRight="15dp" />
 
-        <TextView
-            android:id="@+id/email"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginLeft="12dp"
-            android:text="abc@gmail.com"
-            android:textSize="14sp"
+            android:layout_height="match_parent">
 
-            android:textAllCaps="false"
-            android:textAlignment="textStart"
-            android:textStyle="normal|bold" />
+            <TextView
+                android:text="Welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/org_name"
+                android:inputType="textCapWords"
+                android:textSize="18dp"
+                android:textColor="@color/colorWhite"
+                android:textStyle="normal|bold"
+                android:textColorHighlight="@null"
+                android:textColorHint="@null"
+                android:textColorLink="@null"
+                android:textCursorDrawable="@null"
+                android:autoText="true"
+                android:layout_marginRight="2dp" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="abc@gmail.com"
+                android:textSize="15sp"
+
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                android:textStyle="normal|bold"
+                android:layout_marginRight="2dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!--<ImageView
