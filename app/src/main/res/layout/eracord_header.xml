@@ -34,15 +34,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="Welcome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/colorWhite"
-                android:textSize="15sp" />
-
-            <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,7 +47,8 @@
                 android:textColorLink="@null"
                 android:textCursorDrawable="@null"
                 android:autoText="true"
-                android:layout_marginRight="2dp" />
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="20dp" />
 
             <TextView
                 android:id="@+id/email"
@@ -64,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
                 android:text="abc@gmail.com"
-                android:textSize="15sp"
+                android:textSize="14sp"
 
                 android:textAllCaps="false"
                 android:textAlignment="textStart"
