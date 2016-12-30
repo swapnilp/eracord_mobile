@@ -25,26 +25,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <TextView
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/generate_mpin"
-                    android:textSize="24sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@color/colorAccent"
-                    android:textAllCaps="true"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="normal|bold" />
+                    android:layout_height="72dp"
+                    app:srcCompat="@drawable/mpin"
+                    android:id="@+id/imageView3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" />
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp">
 
@@ -74,7 +66,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp">
 
@@ -119,5 +111,5 @@
             </LinearLayout>
         </ScrollView>
 
-    </LinearLayout>
+</LinearLayout>
 
