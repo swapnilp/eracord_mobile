@@ -32,7 +32,7 @@ public class EraMyAdapter extends RecyclerView.Adapter<EraMyAdapter.ViewHolder> 
 
     static String colorWhite = "#ffffff";
     static String textcolor = "#000000";
-    static String colorAccent = "#337ab7";
+    static String colorAccent = "#3a8bd1";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         int Holderid;

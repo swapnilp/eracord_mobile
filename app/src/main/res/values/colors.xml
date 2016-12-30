@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#337ab7</color>
-    <color name="colorAccent">#337ab7</color>
+    <color name="colorPrimaryDark">#206aa9</color>
+    <color name="colorAccent">#3a8bd1</color>
     <color name="appBgColor">#f9f9f9</color>
     <color name="textcolor">#000000</color>
     <color name="colorWhite">#ffffff</color>
