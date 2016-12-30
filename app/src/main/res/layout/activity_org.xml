@@ -24,20 +24,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/org_logo"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp"
+                android:textSize="18dp"
                 android:layout_gravity="end"
                 android:id="@+id/useremail"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="30dp"
-                android:textAlignment="viewStart"
-                android:textAllCaps="true" />
+                android:layout_marginTop="5dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:layout_marginBottom="5dp" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -45,9 +53,9 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:layout_width="353dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:text="@string/choose_organization"
                     android:layout_marginRight="20dp"
@@ -120,8 +128,7 @@
                     android:layout_marginRight="20dp"
                     android:textColor="@color/textcolor"
                     android:textAllCaps="false"
-                    android:textSize="18sp"
-                    android:layout_marginTop="10dp" />
+                    android:textSize="18sp" />
 
                 <com.example.vidhiraj.sample.PinEntryView
                     android:id="@+id/editTextPassword"

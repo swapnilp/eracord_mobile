@@ -13,24 +13,24 @@ android {
     }
 
     signingConfigs {
-        release {
+        /*release {
             storeFile file("F:\\Sample-14_Nov_bug_fixing\\app\\release_apk.jks")
             storePassword "eracord"
             keyAlias "eracord"
             keyPassword "eracord"
-        }
+        }*/
     }
 
     dexOptions {
         javaMaxHeapSize "4g"
     }
-    buildTypes {
+    /*buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
-    }
+    }*/
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
