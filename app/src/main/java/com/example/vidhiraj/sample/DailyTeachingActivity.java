@@ -251,7 +251,7 @@ public class DailyTeachingActivity extends BaseActivity implements AdapterView.O
                             }
                         }
                         m_points_RecyclerView = (RecyclerView) findViewById(R.id.point_recycler_view);
-                        m_points_RecyclerView.setHasFixedSize(true);
+                        m_points_RecyclerView.setHasFixedSize(false);
                         m_points_RecyclerView.setLayoutManager(new LinearLayoutManager(DailyTeachingActivity.this));
                         mAdapter = new PointsAdapter(pointsList);
                         m_points_RecyclerView.setAdapter(mAdapter);

@@ -93,7 +93,7 @@ public class OffClassesActivity extends BaseActivity {
                         if (getResources().getConfiguration().orientation == 2) {
                             counter = 2;
                         }
-                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setHasFixedSize(false);
                         mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView.setLayoutManager(mLayoutManager);
                         adapter = new OffClassesAdapter(getApplicationContext(), dailyTeach);

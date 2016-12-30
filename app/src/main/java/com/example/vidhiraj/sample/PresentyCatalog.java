@@ -97,7 +97,7 @@ public class PresentyCatalog extends BaseActivity {
                         }
 
                         recyclerView = (RecyclerView) findViewById(R.id.pr_recycler_view);
-                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setHasFixedSize(false);
                         adapter = new PresentyAdapter(PresentyCatalog.this, data, totalPresent, totalAbsent);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(PresentyCatalog.this));

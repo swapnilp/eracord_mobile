@@ -101,7 +101,7 @@ public class ClassActivity extends BaseActivity {
                         }
                     }
                     recyclerView = (RecyclerView) findViewById(R.id.st_recycler_view);
-                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setHasFixedSize(false);
                     adapter = new ClassAdapter(ClassActivity.this, data);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ClassActivity.this));
