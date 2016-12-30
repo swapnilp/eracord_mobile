@@ -31,33 +31,6 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
     public DailyCatalogAdapter(List<DailyTeachData> data, Context mcontext) {
         this.dataSet = data;
         this.mcontext = mcontext;
-
-
-        //final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView
-        //        .getLayoutManager();
-
-
-        /*recyclerView
-                .addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView,
-                                           int dx, int dy) {
-                        super.onScrolled(recyclerView, dx, dy);
-
-                        totalItemCount = linearLayoutManager.getItemCount();
-                        lastVisibleItem = linearLayoutManager
-                                .findLastVisibleItemPosition();
-                        if (!loading
-                                && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-                            // End has been reached
-                            // Do something
-                            if (onLoadMoreListener != null) {
-                                onLoadMoreListener.onLoadMore();
-                            }
-                            loading = true;
-                        }
-                    }
-                });*/
     }
 
     @Override
@@ -94,7 +67,9 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
             ((DailyCatalogViewHolder) holder).textViewDate.setText(singleStudent.getDate());
             ((DailyCatalogViewHolder) holder).textViewPoints.setText(singleStudent.getPoints());
             ((DailyCatalogViewHolder) holder).textViewId.setText(Integer.toString(singleStudent.getId()));
-
+            if(singleStudent.getSubclassname() != null) {
+                ((DailyCatalogViewHolder) holder).textViewSubclassname.setText(" ( " + singleStudent.getSubclassname() + " )");
+            }
         } else {
             ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);
         }
@@ -119,6 +94,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
         TextView textViewDate;
         TextView textViewPoints;
         TextView textViewId;
+        TextView textViewSubclassname;
         LinearLayout dailyitem_click;
         private Context context = null;
         public StudentData student;
@@ -132,6 +108,7 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
             this.textViewDate = (TextView) itemView.findViewById(R.id.date);
             this.textViewPoints = (TextView) itemView.findViewById(R.id.points);
             this.textViewId = (TextView) itemView.findViewById(R.id.dailyid);
+            this.textViewSubclassname = (TextView) itemView.findViewById(R.id.sub_class_name);
             this.dailyitem_click=(LinearLayout)itemView.findViewById(R.id.dailyitem_click);
             dailyitem_click.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,14 +119,6 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
                     context.startActivity(intent);
                 }
             });
-
-//            v.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//            });
         }
     }
 

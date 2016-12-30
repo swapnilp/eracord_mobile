@@ -46,6 +46,7 @@
 
     <!-- Daily_fill_catalog -->
     <string name="daily_teaches">Daily Teaches</string>
+    <string name="SubClassName">SubClassName</string>
 
     <!-- Daily_fill_catalog -->
     <string name="date">Date</string>
