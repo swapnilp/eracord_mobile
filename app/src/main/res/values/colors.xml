@@ -12,4 +12,5 @@
     <color name="bottomLine">#dcdcdc</color>
     <color name="stripBgColor">#F0F8FF</color>
     <color name="pinBgColor">#bccddc</color>
+    <color name="toolbarColor">#287cc3</color>
 </resources>
