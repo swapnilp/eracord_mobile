@@ -6,31 +6,22 @@
     android:orientation="vertical">
 
 
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
         <ImageView
             android:id="@+id/eracord_pic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
             android:src="@drawable/eracord"
-            android:contentDescription="eracord_logo"/>
+            android:contentDescription="eracord_logo"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp" />
+
         <TextView
             android:id="@+id/era_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Loading...."/>
+            android:text="Loading...."
+            android:gravity="center" />
 </LinearLayout>

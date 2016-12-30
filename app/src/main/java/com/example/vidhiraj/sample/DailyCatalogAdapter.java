@@ -67,7 +67,8 @@ public class DailyCatalogAdapter extends RecyclerView.Adapter {
             ((DailyCatalogViewHolder) holder).textViewDate.setText(singleStudent.getDate());
             ((DailyCatalogViewHolder) holder).textViewPoints.setText(singleStudent.getPoints());
             ((DailyCatalogViewHolder) holder).textViewId.setText(Integer.toString(singleStudent.getId()));
-            if(singleStudent.getSubclassname() != null) {
+
+            if (singleStudent.getSubclassname() != null) {
                 ((DailyCatalogViewHolder) holder).textViewSubclassname.setText(" ( " + singleStudent.getSubclassname() + " )");
             }
         } else {
