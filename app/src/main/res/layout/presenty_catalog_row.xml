@@ -17,14 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="name"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/pr_chkSelected"
         android:layout_toLeftOf="@+id/pr_chkSelected"
-        android:fontFamily="serif" />
+        android:paddingTop="2dp"
+        android:textColor="@color/textcolor"
+        android:textSize="16dp" />
 
     <CheckBox
             android:id="@+id/pr_chkSelected"

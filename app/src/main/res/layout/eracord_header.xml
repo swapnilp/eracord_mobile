@@ -39,7 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/org_name"
-                android:inputType="textCapWords"
                 android:textSize="18dp"
                 android:textColor="@color/colorWhite"
                 android:textStyle="normal|bold"
@@ -47,9 +46,9 @@
                 android:textColorHint="@null"
                 android:textColorLink="@null"
                 android:textCursorDrawable="@null"
-                android:autoText="true"
                 android:layout_marginRight="2dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:autoText="false" />
 
             <TextView
                 android:id="@+id/email"
