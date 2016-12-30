@@ -109,7 +109,7 @@ public class StudentListActivity extends BaseActivity {
                                 load.setVisibility(View.GONE);
                             }
                         }
-                        mRecyclerView.setHasFixedSize(true);
+                        mRecyclerView.setHasFixedSize(false);
                         mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         mRecyclerView.setLayoutManager(mLayoutManager);
                         mAdapter = new StudentCatalogAdapter(dailyTeach, getApplicationContext());
@@ -188,7 +188,7 @@ public class StudentListActivity extends BaseActivity {
                         filteredList.add(dailyTeach.get(i));
                     }
                 }
-                mRecyclerView.setHasFixedSize(true);
+                mRecyclerView.setHasFixedSize(false);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(StudentListActivity.this));
                 mAdapter = new StudentCatalogAdapter(filteredList, StudentListActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
