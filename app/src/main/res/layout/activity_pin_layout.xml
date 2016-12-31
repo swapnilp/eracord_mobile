@@ -30,8 +30,8 @@
                     android:layout_height="72dp"
                     app:srcCompat="@drawable/mpin"
                     android:id="@+id/imageView3"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp" />
 
                 <LinearLayout
                     android:orientation="vertical"
