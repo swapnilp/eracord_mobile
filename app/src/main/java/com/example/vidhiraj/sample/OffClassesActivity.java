@@ -192,6 +192,7 @@ public class OffClassesActivity extends BaseActivity {
                                         public void run() {
                                             int x = 0, y = 1000;
                                             scrollview.scrollTo(x, y);
+                                            scrollview.fullScroll(ScrollView.FOCUS_DOWN);
                                         }
                                     });
 
