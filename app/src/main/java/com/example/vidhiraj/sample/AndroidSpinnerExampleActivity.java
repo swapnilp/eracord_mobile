@@ -120,7 +120,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                             spinner.setAdapter(dataAdapter);
 
                         } else {
-                            TextView org_name = (TextView) findViewById(R.id.org_id);
                             multiorg = false;
                             spinner.setVisibility(View.VISIBLE);
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getBaseContext(), R.layout.spinner_item, organisation);

@@ -246,7 +246,8 @@ public class PinEntryView extends ViewGroup {
     /**
      * Add a TextWatcher to the EditText
      *
-     * @param watcher
+     * @param watcher used for Textwatcher
+     * @
      */
     public void addTextChangedListener(TextWatcher watcher) {
         editText.addTextChangedListener(watcher);
@@ -255,7 +256,7 @@ public class PinEntryView extends ViewGroup {
     /**
      * Remove a TextWatcher from the EditText
      *
-     * @param watcher
+     * @param watcher Using for TextWatcher
      */
     public void removeTextChangedListener(TextWatcher watcher) {
         editText.removeTextChangedListener(watcher);
@@ -264,7 +265,7 @@ public class PinEntryView extends ViewGroup {
     /**
      * Get the {@link Editable} from the EditText
      *
-     * @return
+     * @return textString
      */
     public Editable getText() {
         return editText.getText();
@@ -273,7 +274,7 @@ public class PinEntryView extends ViewGroup {
     /**
      * Set text to the EditText
      *
-     * @param text
+     * @param text set text
      */
     public void setText(CharSequence text) {
         if (text.length() > digits) {

@@ -82,7 +82,7 @@ public class BaseActivity extends AppCompatActivity {
     public void setmRAdapter(Activity activity, String page) {
         page_name = page;
         boolean isHome = false;
-        if(page_name.toString().equals("TimeTable Page")) {
+        if(page_name.equals("TimeTable Page")) {
             isHome = true;
         }
         mAdapter = new EraMyAdapter(activity, TITLES, ICONS, org, user_email, url_icon, isHome);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)

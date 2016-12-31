@@ -77,8 +77,8 @@ public class StudentCatalogAdapter extends RecyclerView.Adapter {
             }
 
             //Add image URL
-            String url = singleStudent.getImageUrl().toString();
-            //new ImageLoadTask(url, ((StudentViewHolder) holder).studentImg).execute();
+            String url = singleStudent.getImageUrl();
+            new ImageLoadTask(url, ((StudentViewHolder) holder).studentImg).execute();
         } else {
             ((ProgressViewHolder) holder).progressBar.setIndeterminate(true);
         }
