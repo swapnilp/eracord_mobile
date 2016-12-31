@@ -94,6 +94,7 @@ public class OffClassesActivity extends BaseActivity {
                             counter = 2;
                         }
                         recyclerView.setHasFixedSize(false);
+                        recyclerView.setNestedScrollingEnabled(false);
                         mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         recyclerView.setLayoutManager(mLayoutManager);
                         adapter = new OffClassesAdapter(getApplicationContext(), dailyTeach);

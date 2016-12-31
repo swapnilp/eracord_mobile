@@ -110,6 +110,7 @@ public class TimeTableActivity extends BaseActivity implements AdapterView.OnIte
 
                                 mRecyclerView = (RecyclerView) findViewById(R.id.tt_recycler_view);
                                 mRecyclerView.setHasFixedSize(false);
+                                mRecyclerView.setNestedScrollingEnabled(false);
                                 mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
                                 mAdapter = new TimeTableAdapter(timeTableDatas);
                                 mRecyclerView.setAdapter(mAdapter);
@@ -192,6 +193,7 @@ public class TimeTableActivity extends BaseActivity implements AdapterView.OnIte
             }
             mRecyclerView = (RecyclerView) findViewById(R.id.tt_recycler_view);
             mRecyclerView.setHasFixedSize(false);
+            mRecyclerView.setNestedScrollingEnabled(false);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(TimeTableActivity.this));
             mAdapter = new TimeTableAdapter(timeTableDatas);
             mRecyclerView.setAdapter(mAdapter);

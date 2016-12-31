@@ -110,6 +110,7 @@ public class StudentListActivity extends BaseActivity {
                             }
                         }
                         mRecyclerView.setHasFixedSize(false);
+                        mRecyclerView.setNestedScrollingEnabled(false);
                         mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         mRecyclerView.setLayoutManager(mLayoutManager);
                         mAdapter = new StudentCatalogAdapter(dailyTeach, getApplicationContext());
@@ -189,6 +190,7 @@ public class StudentListActivity extends BaseActivity {
                     }
                 }
                 mRecyclerView.setHasFixedSize(false);
+                mRecyclerView.setNestedScrollingEnabled(false);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(StudentListActivity.this));
                 mAdapter = new StudentCatalogAdapter(filteredList, StudentListActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
@@ -277,6 +279,7 @@ public class StudentListActivity extends BaseActivity {
                                         load.setVisibility(View.GONE);
                                         mProgress.dismiss();
                                         mRecyclerView.setHasFixedSize(false);
+                                        mRecyclerView.setNestedScrollingEnabled(false);
                                         Toast.makeText(getApplicationContext(), "No more data to load", Toast.LENGTH_LONG).show();
                                     }
                                 }
