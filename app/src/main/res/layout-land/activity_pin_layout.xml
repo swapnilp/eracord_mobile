@@ -47,7 +47,7 @@
                     android:textColor="@color/textcolor"
                     android:textSize="18sp" />
 
-                <com.eracordapp.vidhiraj.sample.PinEntryView
+                <com.eracordapp.teacher.sample.PinEntryView
                     android:id="@+id/userpin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/textcolor" />
 
-                <com.eracordapp.vidhiraj.sample.PinEntryView
+                <com.eracordapp.teacher.sample.PinEntryView
                     android:id="@+id/confirmuserpin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-    package="com.eracordapp.vidhiraj.sample">
+    package="com.eracordapp.teacher.sample">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -8,21 +8,21 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.eracordapp.vidhiraj.sample.VolleyControl"
+        android:name="com.eracordapp.teacher.sample.VolleyControl"
         android:allowBackup="true"
         android:icon="@drawable/eracord_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name="com.eracordapp.vidhiraj.sample.SplashScreen">
+        <activity android:name="com.eracordapp.teacher.sample.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.MainActivity"
+            android:name="com.eracordapp.teacher.sample.MainActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified">
             <intent-filter>
@@ -32,58 +32,58 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.LoginPinActivity"
+            android:name="com.eracordapp.teacher.sample.LoginPinActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.DailyTeachingActivity"
+            android:name="com.eracordapp.teacher.sample.DailyTeachingActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.AndroidSpinnerExampleActivity"
+            android:name="com.eracordapp.teacher.sample.AndroidSpinnerExampleActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-        android:name="com.eracordapp.vidhiraj.sample.ClassActivity"
+        android:name="com.eracordapp.teacher.sample.ClassActivity"
         android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
         android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.DailyCatalogActivity"
+            android:name="com.eracordapp.teacher.sample.DailyCatalogActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.HistoryCatalogActivity"
+            android:name="com.eracordapp.teacher.sample.HistoryCatalogActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.CatalogSchedule"
+            android:name="com.eracordapp.teacher.sample.CatalogSchedule"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.StudentListActivity"
+            android:name="com.eracordapp.teacher.sample.StudentListActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
        <!--<activity android:name=".TabsMainActivity"></activity>-->
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.PresentyCatalog"
+            android:name="com.eracordapp.teacher.sample.PresentyCatalog"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.TimeTableActivity"
+            android:name="com.eracordapp.teacher.sample.TimeTableActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.OffClassesActivity"
+            android:name="com.eracordapp.teacher.sample.OffClassesActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
         <activity
-            android:name="com.eracordapp.vidhiraj.sample.FeedbackActivity"
+            android:name="com.eracordapp.teacher.sample.FeedbackActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation"
             android:screenOrientation="unspecified"></activity>
 
         <provider
-            android:name="com.eracordapp.vidhiraj.sample.User"
-            android:authorities="com.eracordapp.vidhiraj.sample.User"
+            android:name="com.eracordapp.teacher.sample.User"
+            android:authorities="com.eracordapp.teacher.sample.User"
             android:enabled="true"
             android:exported="true" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
