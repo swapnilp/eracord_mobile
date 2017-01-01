@@ -30,7 +30,7 @@
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
             android:textAllCaps="false"
-            android:layout_weight="0.89" />
+            android:layout_weight="0.94" />
 
         <LinearLayout
             android:orientation="horizontal"
