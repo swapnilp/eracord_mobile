@@ -139,6 +139,7 @@ public class PresentyCatalog extends BaseActivity {
         savePresenty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgress.show();
                 String sep = "";
                 List<PresentyData> stList = ((PresentyAdapter) adapter)
                         .getStudentist();
@@ -174,6 +175,7 @@ public class PresentyCatalog extends BaseActivity {
                                 }
 
                             } catch (JSONException e) {
+                                mProgress.dismiss();
                                 String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                             }
 
@@ -182,6 +184,7 @@ public class PresentyCatalog extends BaseActivity {
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
+                                    mProgress.dismiss();
                                     NetworkResponse networkResponse = error.networkResponse;
                                     if (networkResponse != null && networkResponse.statusCode == 401) {
                                         Intent intent = new Intent(PresentyCatalog.this, AndroidSpinnerExampleActivity.class);
