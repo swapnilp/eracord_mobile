@@ -78,6 +78,7 @@ public class DailyTeachingActivity extends BaseActivity implements AdapterView.O
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
+        mProgress.show();
 
         /* DateWidget */
         dateText = (EditText) findViewById(R.id.edit_date_picker);
@@ -151,6 +152,7 @@ public class DailyTeachingActivity extends BaseActivity implements AdapterView.O
         createCatalog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgress.show();
                 StringBuilder buff = new StringBuilder();
                 String sep = "";
                 List<PointsData> stList = ((PointsAdapter) mAdapter)
@@ -188,6 +190,7 @@ public class DailyTeachingActivity extends BaseActivity implements AdapterView.O
                                 startActivity(intent1);
                             }
                         } catch (JSONException e) {
+                            mProgress.dismiss();
                             String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                         }
                     }
@@ -195,6 +198,7 @@ public class DailyTeachingActivity extends BaseActivity implements AdapterView.O
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                mProgress.dismiss();
                                 NetworkResponse networkResponse = error.networkResponse;
                                 if (networkResponse != null && networkResponse.statusCode == 401) {
                                     Intent intent = new Intent(DailyTeachingActivity.this, AndroidSpinnerExampleActivity.class);
