@@ -130,7 +130,7 @@
                     android:textAllCaps="false"
                     android:textSize="18sp" />
 
-                <com.example.vidhiraj.sample.PinEntryView
+                <com.eracordapp.vidhiraj.sample.PinEntryView
                     android:id="@+id/editTextPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
