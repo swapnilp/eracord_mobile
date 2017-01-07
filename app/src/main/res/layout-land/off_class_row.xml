@@ -27,11 +27,11 @@
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
             android:textAllCaps="false"
-            android:layout_weight="0.73" />
+            android:layout_weight="0.81" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="100dp"
+            android:layout_width="64dp"
             android:textColor="@android:color/holo_red_light"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="14sp"
@@ -39,7 +39,8 @@
             android:text="@string/date"
             android:layout_gravity="center_horizontal"
             android:textAlignment="textEnd"
-            android:paddingTop="4dp" />
+            android:paddingTop="4dp"
+            android:layout_weight="0.16" />
 
     </LinearLayout>
     <LinearLayout
