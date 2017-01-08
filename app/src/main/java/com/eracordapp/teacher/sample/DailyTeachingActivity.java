@@ -1,5 +1,7 @@
 package com.eracordapp.teacher.sample;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,16 +31,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import java.util.Calendar;
-
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.widget.DatePicker;
-import android.widget.EditText;
 
 public class DailyTeachingActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
