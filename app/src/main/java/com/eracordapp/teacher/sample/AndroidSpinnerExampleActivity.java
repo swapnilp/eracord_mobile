@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -42,7 +43,8 @@ import java.util.List;
 public class AndroidSpinnerExampleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Toolbar toolbar;                              // Declaring the Toolbar Object
-    private Button spinBtn;
+    private Button spinBtn, refreshButton;
+    private Toast mToastToShow;
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     TextView signDiffUser;
@@ -89,6 +91,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
 
             cursor.close();
         }
+        spinBtn = (Button) findViewById(R.id.buttonLogin);
         useremail.setText(email);
         String loginURL = ApiKeyConstant.apiUrl + "/users/get_organisations.json?email=" + email + "&device_id=" + device_id;
         mProgress.show();
@@ -137,6 +140,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                         }
                     }
                 } catch (JSONException e) {
+                    spinBtn.setEnabled(false);
                     String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                 }
 
@@ -145,8 +149,25 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        mProgress.dismiss();
+                        int toastDurationInMilliSeconds = 10000;
+                        spinBtn.setEnabled(false);
+                        mToastToShow  = Toast.makeText(getBaseContext(), "Something went wrong. Please, refresh the page", Toast.LENGTH_LONG);
 
+                        // Set the countdown to display the toast
+                        CountDownTimer toastCountDown;
+                        toastCountDown = new CountDownTimer(toastDurationInMilliSeconds, 1000 /*Tick duration*/) {
+                            public void onTick(long millisUntilFinished) {
+                                mToastToShow.show();
+                            }
+                            public void onFinish() {
+                                mToastToShow.cancel();
+                            }
+                        };
+
+                        // Show the toast and starts the countdown
+                        mToastToShow.show();
+                        toastCountDown.start();
+                        mProgress.dismiss();
                     }
                 }
         );
@@ -170,7 +191,6 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
 
             }
         });
-        spinBtn = (Button) findViewById(R.id.buttonLogin);
         finalEmail = email;
         spinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,8 +200,16 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+        });
 
-
+        refreshButton = (Button) findViewById(R.id.RefreshButton);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
 
@@ -223,6 +251,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
+                                spinBtn.setEnabled(true);
                                 mProgress.dismiss();
                                 ApiKeyConstant.authToken = response.getString("token");
                                 String image_url = response.getString("logo_url");
@@ -237,6 +266,7 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                             }
 
                         } catch (JSONException e) {
+                            spinBtn.setEnabled(false);
                             String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                         }
 
@@ -245,8 +275,9 @@ public class AndroidSpinnerExampleActivity extends AppCompatActivity implements 
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                mProgress.dismiss();
-                                Toast.makeText(getBaseContext(), "Enter the correct pin", Toast.LENGTH_LONG).show();
+                            spinBtn.setEnabled(false);
+                            mProgress.dismiss();
+                            Toast.makeText(getBaseContext(), "Enter the correct pin", Toast.LENGTH_LONG).show();
                             }
                         }
                 );

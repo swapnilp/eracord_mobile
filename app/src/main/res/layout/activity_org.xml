@@ -47,29 +47,29 @@
                 android:textAllCaps="true"
                 android:layout_marginBottom="5dp" />
 
-            <LinearLayout
-                android:orientation="vertical"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/choose_organization"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/textcolor"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/choose_organization"
-                    android:layout_marginRight="20dp"
-                    android:textColor="@color/textcolor"
-                    android:textSize="18sp"
-                    android:fontFamily="sans-serif" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="match_parent"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:background="@drawable/divider"
                     android:layout_marginTop="10dp">
 
@@ -96,8 +96,17 @@
                         android:spinnerMode="dialog"
                         android:prompt="@string/org"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical|center_horizontal|start" />
                 </LinearLayout>
+
+                <Button
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/RefreshButton"
+                    android:background="@drawable/reload"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp" />
             </LinearLayout>
 
 
@@ -150,7 +159,7 @@
                 android:id="@+id/buttonLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@drawable/button_state"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
