@@ -34,10 +34,12 @@ public class PresentyCatalog extends BaseActivity {
     private static RecyclerView.Adapter adapter;
     private static RecyclerView recyclerView;
     private static ArrayList<PresentyData> data = null;
-    Button savePresenty;
+    Button savePresenty, backToHome;
     TextView dataAvailabiliy, totalPresent, totalAbsent;
     int countPresent = 0;
     int countAbsent = 0;
+    boolean isUpdate;
+    String msg;
     ProgressDialog mProgress;
     StringBuilder buff = new StringBuilder();
 
@@ -53,6 +55,7 @@ public class PresentyCatalog extends BaseActivity {
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
         savePresenty = (Button) findViewById(R.id.updatepresenty);
+        backToHome = (Button) findViewById(R.id.backtohome);
         dataAvailabiliy = (TextView) findViewById(R.id.noPrData);
         totalPresent = (TextView) findViewById(R.id.totalpresent);
         totalAbsent = (TextView) findViewById(R.id.totalabsent);
@@ -71,6 +74,8 @@ public class PresentyCatalog extends BaseActivity {
                         boolean success = response.getBoolean("success");
                         if (success) {
                             mProgress.dismiss();
+                            isUpdate = response.getBoolean("is_update");
+                            msg = response.getString("message");
                             savePresenty.setVisibility(View.VISIBLE);
                             JSONArray jsonArray = response.getJSONArray("class_catlogs");
                             if (jsonArray.length() != 0) {
@@ -140,73 +145,85 @@ public class PresentyCatalog extends BaseActivity {
         savePresenty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgress.show();
-                String sep = "";
-                List<PresentyData> stList = ((PresentyAdapter) adapter)
-                        .getStudentist();
-                for (int i = 0; i < stList.size(); i++) {
-                    if (stList.get(i).isSelected() == false) {
-                        buff.append(sep);
-                        buff.append(stList.get(i).getPointId());
-                        sep = ",";
+                if (isUpdate) {
+                    mProgress.show();
+                    String sep = "";
+                    List<PresentyData> stList = ((PresentyAdapter) adapter)
+                            .getStudentist();
+                    for (int i = 0; i < stList.size(); i++) {
+                        if (stList.get(i).isSelected() == false) {
+                            buff.append(sep);
+                            buff.append(stList.get(i).getPointId());
+                            sep = ",";
+                        }
                     }
-                }
-                JSONObject daily_teaching = new JSONObject();
-                JSONObject daily_teaching_point = new JSONObject();
+                    JSONObject daily_teaching = new JSONObject();
+                    JSONObject daily_teaching_point = new JSONObject();
 
-                try {
-                    daily_teaching.put("absenty_string", buff);
-                    daily_teaching_point.put("daily_teaching_point", daily_teaching);
-                } catch (JSONException e) {
+                    try {
+                        daily_teaching.put("absenty_string", buff);
+                        daily_teaching_point.put("daily_teaching_point", daily_teaching);
+                    } catch (JSONException e) {
 
-                    e.printStackTrace();
-                }
+                        e.printStackTrace();
+                    }
 
-                String loginURL = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs/" + id + "/save_catlogs";
-                if (Utils.isConnected(getApplicationContext())) {
-                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, daily_teaching_point, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                boolean success = response.getBoolean("success");
-                                if (success) {
-                                    Intent intent1 = new Intent(PresentyCatalog.this, DailyCatalogActivity.class);
-                                    startActivity(intent1);
-                                    Toast.makeText(getBaseContext(), "Student Presentee Saved", Toast.LENGTH_LONG).show();
-                                }
-
-                            } catch (JSONException e) {
-                                mProgress.dismiss();
-                                String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
-                            }
-
-                        }
-                    },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    mProgress.dismiss();
-                                    NetworkResponse networkResponse = error.networkResponse;
-                                    if (networkResponse != null && networkResponse.statusCode == 401) {
-                                        Intent intent = new Intent(PresentyCatalog.this, AndroidSpinnerExampleActivity.class);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText(getBaseContext(), "Student Presenty Not Saved", Toast.LENGTH_LONG).show();
+                    String loginURL = ApiKeyConstant.apiUrl + "/api/v1/daily_teachs/" + id + "/save_catlogs";
+                    if (Utils.isConnected(getApplicationContext())) {
+                        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, loginURL, daily_teaching_point, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    boolean success = response.getBoolean("success");
+                                    if (success) {
+                                        Intent intent1 = new Intent(PresentyCatalog.this, DailyCatalogActivity.class);
+                                        startActivity(intent1);
+                                        Toast.makeText(getBaseContext(), "Student Presentee Saved", Toast.LENGTH_LONG).show();
                                     }
+
+                                } catch (JSONException e) {
+                                    mProgress.dismiss();
+                                    String err = (e.getMessage() == null) ? "SD Card failed" : e.getMessage();
                                 }
-                            }) {
-                        @Override
-                        public Map<String, String> getHeaders() throws AuthFailureError {
-                            HashMap<String, String> headers = new HashMap<String, String>();
-                            headers.put("Content-Type", "application/json; charset=utf-8");
-                            headers.put("Authorization", ApiKeyConstant.authToken);
-                            return headers;
-                        }
-                    };
-                    VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+
+                            }
+                        },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        mProgress.dismiss();
+                                        NetworkResponse networkResponse = error.networkResponse;
+                                        if (networkResponse != null && networkResponse.statusCode == 401) {
+                                            Intent intent = new Intent(PresentyCatalog.this, AndroidSpinnerExampleActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(getBaseContext(), "Student Presenty Not Saved", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }) {
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                HashMap<String, String> headers = new HashMap<String, String>();
+                                headers.put("Content-Type", "application/json; charset=utf-8");
+                                headers.put("Authorization", ApiKeyConstant.authToken);
+                                return headers;
+                            }
+                        };
+                        VolleyControl.getInstance().addToRequestQueue(jsonObjReq);
+                    } else {
+                        Toast.makeText(getBaseContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(getBaseContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PresentyCatalog.this, TimeTableActivity.class));
+                finish();
             }
         });
     }
